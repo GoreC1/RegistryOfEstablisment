@@ -8,23 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace RegistryOfEstablisment
+namespace RegistryOfEstablisment.View
 {
-    public partial class AuthorisationForm : Form
+    public partial class EstablismentCreationForm : Form
     {
-        public AuthorisationForm()
+        public EstablismentCreationForm()
         {
             InitializeComponent();
-        }
-
-        private void AuthorisationForm_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void button1_Click(object sender, EventArgs e)

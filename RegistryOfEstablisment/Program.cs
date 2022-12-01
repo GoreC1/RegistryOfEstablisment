@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.EntityFrameworkCore;
+using RegistryOfEstablisment.Model;
+using RegistryOfEstablisment.View;
 
 namespace RegistryOfEstablisment
 {
-    static class Program
+    public static class Program
     {
         /// <summary>
         ///  The main entry point for the application.
@@ -19,5 +22,8 @@ namespace RegistryOfEstablisment
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new AuthorisationForm());
         }
+
     }
+
+
 }

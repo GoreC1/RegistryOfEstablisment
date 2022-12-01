@@ -1,4 +1,6 @@
-﻿using System;
+﻿using RegistryOfEstablisment.Model.Entities;
+using RegistryOfEstablisment.Model.Repositories;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +10,10 @@ namespace RegistryOfEstablisment.Controller
 {
     class RegistryController
     {
+        public static List<Enterprise> GetRegistriesList()
+        {
+            EnterpriseRepository.GetAccessedRegistries();
+            return null;
+        }
     }
 }

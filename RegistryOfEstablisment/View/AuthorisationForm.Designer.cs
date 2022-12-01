@@ -29,28 +29,28 @@ namespace RegistryOfEstablisment
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.LoginTextBox = new System.Windows.Forms.TextBox();
+            this.PasswordTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.AuthButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // textBox1
+            // LoginTextBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(98, 23);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(110, 23);
-            this.textBox1.TabIndex = 0;
+            this.LoginTextBox.Location = new System.Drawing.Point(98, 23);
+            this.LoginTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.LoginTextBox.Name = "LoginTextBox";
+            this.LoginTextBox.Size = new System.Drawing.Size(110, 23);
+            this.LoginTextBox.TabIndex = 0;
             // 
-            // textBox2
+            // PasswordTextBox
             // 
-            this.textBox2.Location = new System.Drawing.Point(98, 56);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(110, 23);
-            this.textBox2.TabIndex = 1;
+            this.PasswordTextBox.Location = new System.Drawing.Point(98, 56);
+            this.PasswordTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.PasswordTextBox.Name = "PasswordTextBox";
+            this.PasswordTextBox.Size = new System.Drawing.Size(110, 23);
+            this.PasswordTextBox.TabIndex = 1;
             // 
             // label1
             // 
@@ -89,8 +89,8 @@ namespace RegistryOfEstablisment
             this.Controls.Add(this.AuthButton);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.PasswordTextBox);
+            this.Controls.Add(this.LoginTextBox);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "AuthorisationForm";
             this.Text = "Авторизация";
@@ -102,8 +102,8 @@ namespace RegistryOfEstablisment
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox LoginTextBox;
+        private System.Windows.Forms.TextBox PasswordTextBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button AuthButton;

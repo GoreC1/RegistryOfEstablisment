@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RegistryOfEstablisment.Model.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,10 @@ namespace RegistryOfEstablisment.Controller
 {
     class EnterpriseController
     {
+
+        public Enterprise GetEnterprise(int enterpriseID)
+        {
+            return new Enterprise();
+        }
     }
 }

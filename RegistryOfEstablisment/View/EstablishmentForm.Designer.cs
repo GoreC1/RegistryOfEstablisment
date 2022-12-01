@@ -161,6 +161,8 @@ namespace RegistryOfEstablisment.View
             this.textBox5.ReadOnly = true;
             this.textBox5.Size = new System.Drawing.Size(179, 27);
             this.textBox5.TabIndex = 12;
+            this.textBox5.TextChanged += new System.EventHandler(this.textBox5_TextChanged);
+            this.textBox5.DoubleClick += new System.EventHandler(this.textBox5_DoubleClick);
             // 
             // textBox6
             // 
@@ -194,6 +196,7 @@ namespace RegistryOfEstablisment.View
             this.button1.TabIndex = 16;
             this.button1.Text = "Вернуться";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // EstablishmentForm
             // 

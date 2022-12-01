@@ -41,9 +41,9 @@ namespace RegistryOfEstablisment.View
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.cancelButton = new System.Windows.Forms.Button();
+            this.clearButton = new System.Windows.Forms.Button();
+            this.acceptButton = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
@@ -148,32 +148,34 @@ namespace RegistryOfEstablisment.View
             this.comboBox2.Size = new System.Drawing.Size(151, 28);
             this.comboBox2.TabIndex = 12;
             // 
-            // button1
+            // cancelButton
             // 
-            this.button1.Location = new System.Drawing.Point(195, 314);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(59, 47);
-            this.button1.TabIndex = 13;
-            this.button1.Text = "X";
-            this.button1.UseVisualStyleBackColor = true;
+            this.cancelButton.Location = new System.Drawing.Point(195, 314);
+            this.cancelButton.Name = "cancelButton";
+            this.cancelButton.Size = new System.Drawing.Size(59, 47);
+            this.cancelButton.TabIndex = 13;
+            this.cancelButton.Text = "X";
+            this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
-            // button2
+            // clearButton
             // 
-            this.button2.Location = new System.Drawing.Point(112, 314);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(77, 47);
-            this.button2.TabIndex = 14;
-            this.button2.Text = "СБРОС";
-            this.button2.UseVisualStyleBackColor = true;
+            this.clearButton.Location = new System.Drawing.Point(112, 314);
+            this.clearButton.Name = "clearButton";
+            this.clearButton.Size = new System.Drawing.Size(77, 47);
+            this.clearButton.TabIndex = 14;
+            this.clearButton.Text = "СБРОС";
+            this.clearButton.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // acceptButton
             // 
-            this.button3.Location = new System.Drawing.Point(267, 314);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(59, 47);
-            this.button3.TabIndex = 15;
-            this.button3.Text = "V";
-            this.button3.UseVisualStyleBackColor = true;
+            this.acceptButton.Location = new System.Drawing.Point(267, 314);
+            this.acceptButton.Name = "acceptButton";
+            this.acceptButton.Size = new System.Drawing.Size(59, 47);
+            this.acceptButton.TabIndex = 15;
+            this.acceptButton.Text = "V";
+            this.acceptButton.UseVisualStyleBackColor = true;
+            this.acceptButton.Click += new System.EventHandler(this.acceptButton_Click);
             // 
             // label7
             // 
@@ -198,9 +200,9 @@ namespace RegistryOfEstablisment.View
             this.ClientSize = new System.Drawing.Size(335, 373);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.acceptButton);
+            this.Controls.Add(this.clearButton);
+            this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.textBox5);
             this.Controls.Add(this.comboBox1);
@@ -235,9 +237,9 @@ namespace RegistryOfEstablisment.View
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.TextBox textBox5;
         private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button cancelButton;
+        private System.Windows.Forms.Button clearButton;
+        private System.Windows.Forms.Button acceptButton;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox textBox1;
     }

@@ -10,24 +10,14 @@ using System.Windows.Forms;
 
 namespace RegistryOfEstablisment.View
 {
-    public partial class FilterForm : Form
+    public partial class RegistrationForm : Form
     {
-        public FilterForm()
+        public RegistrationForm()
         {
             InitializeComponent();
         }
 
         private void label1_Click(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void FilterForm_Load(object sender, EventArgs e)
         {
 
         }

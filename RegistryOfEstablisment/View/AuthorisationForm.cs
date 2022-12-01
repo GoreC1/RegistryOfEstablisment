@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using RegistryOfEstablisment.View;
 
 namespace RegistryOfEstablisment
 {
@@ -22,14 +23,10 @@ namespace RegistryOfEstablisment
 
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void AuthButton_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
+            this.DialogResult = DialogResult.OK;
+            this.Close();
         }
     }
 }

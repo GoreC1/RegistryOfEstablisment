@@ -30,11 +30,11 @@ namespace RegistryOfEstablisment.View
         private void InitializeComponent()
         {
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.filterButton = new System.Windows.Forms.Button();
+            this.OpenESButton = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
+            this.changeESButton = new System.Windows.Forms.Button();
+            this.deleteButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -50,23 +50,25 @@ namespace RegistryOfEstablisment.View
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
-            // button1
+            // filterButton
             // 
-            this.button1.Location = new System.Drawing.Point(694, 12);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(94, 29);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Фильтр";
-            this.button1.UseVisualStyleBackColor = true;
+            this.filterButton.Location = new System.Drawing.Point(694, 12);
+            this.filterButton.Name = "filterButton";
+            this.filterButton.Size = new System.Drawing.Size(94, 29);
+            this.filterButton.TabIndex = 1;
+            this.filterButton.Text = "Фильтр";
+            this.filterButton.UseVisualStyleBackColor = true;
+            this.filterButton.Click += new System.EventHandler(this.filterButton_Click);
             // 
-            // button2
+            // OpenESButton
             // 
-            this.button2.Location = new System.Drawing.Point(648, 395);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(140, 43);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "Открыть";
-            this.button2.UseVisualStyleBackColor = true;
+            this.OpenESButton.Location = new System.Drawing.Point(648, 395);
+            this.OpenESButton.Name = "OpenESButton";
+            this.OpenESButton.Size = new System.Drawing.Size(140, 43);
+            this.OpenESButton.TabIndex = 2;
+            this.OpenESButton.Text = "Открыть";
+            this.OpenESButton.UseVisualStyleBackColor = true;
+            this.OpenESButton.Click += new System.EventHandler(this.openESButton_Click);
             // 
             // button3
             // 
@@ -76,24 +78,27 @@ namespace RegistryOfEstablisment.View
             this.button3.TabIndex = 3;
             this.button3.Text = "Добавить";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.addESButton_Click);
             // 
-            // button4
+            // changeESButton
             // 
-            this.button4.Location = new System.Drawing.Point(356, 394);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(140, 43);
-            this.button4.TabIndex = 4;
-            this.button4.Text = "Изменить";
-            this.button4.UseVisualStyleBackColor = true;
+            this.changeESButton.Location = new System.Drawing.Point(356, 394);
+            this.changeESButton.Name = "changeESButton";
+            this.changeESButton.Size = new System.Drawing.Size(140, 43);
+            this.changeESButton.TabIndex = 4;
+            this.changeESButton.Text = "Изменить";
+            this.changeESButton.UseVisualStyleBackColor = true;
+            this.changeESButton.Click += new System.EventHandler(this.changeESButton_Click);
             // 
-            // button5
+            // deleteButton
             // 
-            this.button5.Location = new System.Drawing.Point(502, 394);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(140, 43);
-            this.button5.TabIndex = 5;
-            this.button5.Text = "Удалить";
-            this.button5.UseVisualStyleBackColor = true;
+            this.deleteButton.Location = new System.Drawing.Point(502, 394);
+            this.deleteButton.Name = "deleteButton";
+            this.deleteButton.Size = new System.Drawing.Size(140, 43);
+            this.deleteButton.TabIndex = 5;
+            this.deleteButton.Text = "Удалить";
+            this.deleteButton.UseVisualStyleBackColor = true;
+            this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
             // 
             // label1
             // 
@@ -110,11 +115,11 @@ namespace RegistryOfEstablisment.View
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(796, 448);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.button5);
-            this.Controls.Add(this.button4);
+            this.Controls.Add(this.deleteButton);
+            this.Controls.Add(this.changeESButton);
             this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.OpenESButton);
+            this.Controls.Add(this.filterButton);
             this.Controls.Add(this.dataGridView1);
             this.Name = "RegistryForm";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
@@ -126,11 +131,11 @@ namespace RegistryOfEstablisment.View
         #endregion
 
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button filterButton;
+        private System.Windows.Forms.Button OpenESButton;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button changeESButton;
+        private System.Windows.Forms.Button deleteButton;
         private System.Windows.Forms.Label label1;
     }
 }

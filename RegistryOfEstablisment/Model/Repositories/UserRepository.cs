@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RegistryOfEstablisment.Model.Repositories
 {
-    class UserRepository
+    public class UserRepository
     {
         DataContext DC = new DataContext();
 

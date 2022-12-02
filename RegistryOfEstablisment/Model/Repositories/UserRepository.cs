@@ -11,7 +11,7 @@ namespace RegistryOfEstablisment.Model.Repositories
     {
         DataContext DC = new DataContext();
 
-        public static User GetByAuth(string login, string password)
+        public User GetByAuth(string login, string password)
         {
             //Обращается к базе данных и получает нужного пользователя
             if () //если нашёл 

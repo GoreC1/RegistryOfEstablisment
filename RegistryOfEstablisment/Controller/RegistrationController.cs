@@ -11,7 +11,7 @@ namespace RegistryOfEstablisment.Controller
 {
     class RegistrationController
     {
-        public static void AddNewRegistration(DateTime date, string petName, string petType)
+        public void AddNewRegistration(DateTime date, string petName, string petType)
         {
             Registration re = new Registration();
             RegistrationRepository.Add(re);

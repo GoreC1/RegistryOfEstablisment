@@ -9,12 +9,12 @@ namespace RegistryOfEstablisment.Model.Repositories
 {
     public class RegistrationRepository
     {
-        public static List<Registration> GetAllByID(int enterpriseID)
+        public List<Registration> GetAllByID(int enterpriseID)
         {
             return null;
         }
 
-        public static void Add(Registration registration)
+        public void Add(Registration registration)
         {
             //добавляет новую запись
         }

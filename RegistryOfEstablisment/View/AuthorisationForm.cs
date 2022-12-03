@@ -32,7 +32,7 @@ namespace RegistryOfEstablisment
             }
             else
             {
-                MessageBox().Show("Логин или пароль ввёдён неправильно!");
+                MessageBox.Show("Логин или пароль ввёдён неправильно!");
             }
             AuthController.Authentificate(LoginTextBox.Text, PasswordTextBox.Text);
             this.DialogResult = DialogResult.OK;

@@ -1,4 +1,5 @@
 ﻿using RegistryOfEstablisment.Model.Entities;
+using RegistryOfEstablisment.Model.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +10,31 @@ namespace RegistryOfEstablisment.Controller
 {
     class EnterpriseController
     {
-
-        public Enterprise GetEnterprise(int enterpriseID)
+        public void AddEnterprise(Enterprise e)
         {
-            return new Enterprise();
+            EnterpriseRepository.Add(e);
+        }
+
+        public Enterprise GetEnterpise(int enterpriseID)
+        {
+            RegistrationRepository.GetAllByID(enterpriseID);    
+            return null;
+        }
+
+        public List<Registration> GetRegistrations(int enterpriseID)
+        {
+            RegistrationRepository.GetAllByID(enterpriseID);
+            return null;
+        }
+
+        public void DeleteEnterprise(int enterpriseID) 
+        {
+            EnterpriseRepository.Remove(enterpriseID);
+        }
+
+        public void UpdateEnterprise(Enterprise enterprise)
+        {
+            EnterpriseRepository.Update(enterprise);
         }
     }
 }

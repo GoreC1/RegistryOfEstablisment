@@ -7,22 +7,13 @@ using System.Threading.Tasks;
 
 namespace RegistryOfEstablisment.Model.Repositories
 {
-    public class UserRepository
+    public class UserRepository : GenericRepository<User>
     {
-        DataContext DC = new DataContext();
+        public UserRepository(DataContext context) : base(context) { }
 
         public User GetByAuth(string login, string password)
         {
-            //Обращается к базе данных и получает нужного пользователя
-            if () //если нашёл 
-            {
-               User user = new User();
-               return user;
-            } 
-            else //если не нашёл
-            {
-                return null;
-            }
+            return _context.Users.FirstOrDefault(c => c.Login == login && c.Password == password);
         }
     }
 }

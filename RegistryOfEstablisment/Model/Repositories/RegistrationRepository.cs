@@ -7,16 +7,8 @@ using System.Threading.Tasks;
 
 namespace RegistryOfEstablisment.Model.Repositories
 {
-    public class RegistrationRepository
+    public class RegistrationRepository : GenericRepository<Registration>
     {
-        public List<Registration> GetAllByID(int enterpriseID)
-        {
-            return null;
-        }
-
-        public void Add(Registration registration)
-        {
-            //добавляет новую запись
-        }
+        public RegistrationRepository(DataContext context) : base(context) { }
     }
 }

@@ -42,19 +42,20 @@ namespace RegistryOfEstablisment.View
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 56);
+            this.dataGridView1.Location = new System.Drawing.Point(10, 42);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 29;
-            this.dataGridView1.Size = new System.Drawing.Size(776, 333);
+            this.dataGridView1.Size = new System.Drawing.Size(679, 250);
             this.dataGridView1.TabIndex = 0;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // filterButton
             // 
-            this.filterButton.Location = new System.Drawing.Point(694, 12);
+            this.filterButton.Location = new System.Drawing.Point(607, 9);
+            this.filterButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.filterButton.Name = "filterButton";
-            this.filterButton.Size = new System.Drawing.Size(94, 29);
+            this.filterButton.Size = new System.Drawing.Size(82, 22);
             this.filterButton.TabIndex = 1;
             this.filterButton.Text = "Фильтр";
             this.filterButton.UseVisualStyleBackColor = true;
@@ -62,19 +63,20 @@ namespace RegistryOfEstablisment.View
             // 
             // OpenESButton
             // 
-            this.OpenESButton.Location = new System.Drawing.Point(648, 395);
+            this.OpenESButton.Location = new System.Drawing.Point(567, 296);
+            this.OpenESButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.OpenESButton.Name = "OpenESButton";
-            this.OpenESButton.Size = new System.Drawing.Size(140, 43);
+            this.OpenESButton.Size = new System.Drawing.Size(122, 32);
             this.OpenESButton.TabIndex = 2;
             this.OpenESButton.Text = "Открыть";
             this.OpenESButton.UseVisualStyleBackColor = true;
-            this.OpenESButton.Click += new System.EventHandler(this.openESButton_Click);
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(210, 394);
+            this.button3.Location = new System.Drawing.Point(184, 296);
+            this.button3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(140, 42);
+            this.button3.Size = new System.Drawing.Size(122, 32);
             this.button3.TabIndex = 3;
             this.button3.Text = "Добавить";
             this.button3.UseVisualStyleBackColor = true;
@@ -82,9 +84,10 @@ namespace RegistryOfEstablisment.View
             // 
             // changeESButton
             // 
-            this.changeESButton.Location = new System.Drawing.Point(356, 394);
+            this.changeESButton.Location = new System.Drawing.Point(312, 296);
+            this.changeESButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.changeESButton.Name = "changeESButton";
-            this.changeESButton.Size = new System.Drawing.Size(140, 43);
+            this.changeESButton.Size = new System.Drawing.Size(122, 32);
             this.changeESButton.TabIndex = 4;
             this.changeESButton.Text = "Изменить";
             this.changeESButton.UseVisualStyleBackColor = true;
@@ -92,28 +95,28 @@ namespace RegistryOfEstablisment.View
             // 
             // deleteButton
             // 
-            this.deleteButton.Location = new System.Drawing.Point(502, 394);
+            this.deleteButton.Location = new System.Drawing.Point(439, 296);
+            this.deleteButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.deleteButton.Name = "deleteButton";
-            this.deleteButton.Size = new System.Drawing.Size(140, 43);
+            this.deleteButton.Size = new System.Drawing.Size(122, 32);
             this.deleteButton.TabIndex = 5;
             this.deleteButton.Text = "Удалить";
             this.deleteButton.UseVisualStyleBackColor = true;
-            this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 15);
+            this.label1.Location = new System.Drawing.Point(11, 11);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(151, 20);
+            this.label1.Size = new System.Drawing.Size(118, 15);
             this.label1.TabIndex = 6;
             this.label1.Text = "Реестр организаций";
             // 
             // RegistryForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(796, 448);
+            this.ClientSize = new System.Drawing.Size(696, 336);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.deleteButton);
             this.Controls.Add(this.changeESButton);
@@ -121,6 +124,7 @@ namespace RegistryOfEstablisment.View
             this.Controls.Add(this.OpenESButton);
             this.Controls.Add(this.filterButton);
             this.Controls.Add(this.dataGridView1);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "RegistryForm";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);

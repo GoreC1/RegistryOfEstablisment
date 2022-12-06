@@ -17,27 +17,27 @@ namespace RegistryOfEstablisment.View
         public RegistryForm()
         {
             InitializeComponent();
-            AuthorisationForm authForm = new AuthorisationForm();
-            authForm.ShowDialog();
-            this.Hide();
-            if (authForm.DialogResult == DialogResult.OK)
-            {
-                this.Show();
-                GetOrgsRegistry();
-            }
+            //AuthorisationForm authForm = new AuthorisationForm();
+            //authForm.ShowDialog();
+            //this.Hide();
+            //if (authForm.DialogResult == DialogResult.OK)
+            //{
+            //    this.Show();
+            //    GetOrgsRegistry();
+            //}
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
+        //private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        //{
 
-        }
+        //}
 
-        private void openESButton_Click(object sender, EventArgs e)
-        {
-            OpenEnterpriseCard(1);
-            EstablishmentForm ESform = new EstablishmentForm();
-            ESform.Show();
-        }
+        //private void openESButton_Click(object sender, EventArgs e)
+        //{
+        //    OpenEnterpriseCard(1);
+        //    EstablishmentForm ESform = new EstablishmentForm();
+        //    ESform.Show();
+        //}
 
         private void addESButton_Click(object sender, EventArgs e)
         {
@@ -57,27 +57,31 @@ namespace RegistryOfEstablisment.View
             filterForm.ShowDialog();
         }
 
-        private void deleteButton_Click(object sender, EventArgs e)
-        {
-            DialogResult dr = MessageBox.Show("Вы уверены что хотите продолжить??",
-                      "Удаление", MessageBoxButtons.YesNo);
-            DeleteEnterprise(1);
-        }
+        //private void deleteButton_Click(object sender, EventArgs e)
+        //{
+        //    DialogResult dr = MessageBox.Show("Вы уверены что хотите продолжить??",
+        //              "Удаление", MessageBoxButtons.YesNo);
+        //    DeleteEnterprise(1);
+        //}
 
-        private void GetOrgsRegistry()
-        {
-            RegistryController.GetRegistriesList();
-        }
+        //private void GetOrgsRegistry()
+        //{
+        //    RegistryController.GetRegistriesList();
+        //}
 
-        private void OpenEnterpriseCard(int id)
-        {
-            EnterpriseController.GetEnterpise(id);
-            EnterpriseController.GetRegistrations(id);
-        }
+        //private void OpenEnterpriseCard(int id)
+        //{
+        //    EnterpriseController.GetEnterpise(id);
+        //    EnterpriseController.GetRegistrations(id);
+        //}
 
-        private void DeleteEnterprise(int enterpriseid)
-        {
-            EnterpriseController.DeleteEnterprise(enterpriseid);
+        //private void DeleteEnterprise(int enterpriseid)
+        //{
+        //    EnterpriseController.DeleteEnterprise(enterpriseid);
+        //}
+
+        //private void RegistryForm_Load(object sender, EventArgs e)
+        //{
+
         }
     }
-}

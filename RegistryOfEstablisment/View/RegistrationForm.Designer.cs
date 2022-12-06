@@ -144,7 +144,6 @@ namespace RegistryOfEstablisment.View
             this.acceptButton.TabIndex = 49;
             this.acceptButton.Text = "Подтвердить";
             this.acceptButton.UseVisualStyleBackColor = true;
-            this.acceptButton.Click += new System.EventHandler(this.acceptButton_Click);
             // 
             // DateTextBox
             // 
@@ -191,7 +190,6 @@ namespace RegistryOfEstablisment.View
             this.cancelButton.TabIndex = 54;
             this.cancelButton.Text = "Отмена";
             this.cancelButton.UseVisualStyleBackColor = true;
-            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
             // RegistrationForm
             // 

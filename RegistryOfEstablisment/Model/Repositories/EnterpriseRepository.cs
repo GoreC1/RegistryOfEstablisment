@@ -7,32 +7,12 @@ using System.Threading.Tasks;
 
 namespace RegistryOfEstablisment.Model.Repositories
 {
-    public class EnterpriseRepository
+    public class EnterpriseRepository : GenericRepository<Enterprise>
     {
-        DataContext DC = new DataContext();
+        public EnterpriseRepository(DataContext context) : base(context) { }
         public List<Enterprise> GetAccessedRegistries()
         {
             return null;
-        }
-
-        public void Add(Enterprise enterprise) 
-        { 
-            //добавляет новое предприятие
-        }
-
-        public Enterprise GetByID(int enterpriseID)
-        {
-            return null;
-        }
-
-        public void Remove(int enterpriseID) 
-        { 
-            //удаляет предприятие
-        }
-
-        public void Update(Enterprise enterprise) 
-        {
-            //обновляет информацию предприятия
         }
     }
 }

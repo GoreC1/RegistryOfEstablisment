@@ -10,10 +10,10 @@ namespace RegistryOfEstablisment.Controller
 {
     class RegistryController
     {
-        public List<Enterprise> GetRegistriesList()
-        {
-            EnterpriseRepository.GetAccessedRegistries();
-            return null;
-        }
+        //public List<Enterprise> GetRegistriesList()
+        //{
+        //    EnterpriseRepository.GetAccessedRegistries();
+        //    return null;
+        //}
     }
 }

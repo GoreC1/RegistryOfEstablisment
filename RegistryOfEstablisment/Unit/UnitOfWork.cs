@@ -6,26 +6,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RegistryOfEstablisment.UnitOfWork
+namespace RegistryOfEstablisment.Unit
 {
-    class UnitOfWork
+    class UnitOfWork : IUnitOfWork
     {
         private readonly DataContext _context;
-        public EnterpriseRepository Products { get; init; }
-        public RegistrationRepository Categories { get; init; }
-
+        public EnterpriseRepository Enterprises { get; init; }
+        public RegistrationRepository Registrations { get; init; }
         public UserRepository Users { get; init; }
 
         public UnitOfWork(DataContext context)
         {
             _context = context;
-            //Products = new ProductRepository(context);
-            //Categories = new CategoriesRepository(context);
-        }
-
-        public Task<int> Complete()
-        {
-            return _context.SaveChangesAsync();
+            Enterprises = new EnterpriseRepository(context);
+            Registrations = new RegistrationRepository(context);
+            Users = new UserRepository(context);
         }
 
         public void Dispose()

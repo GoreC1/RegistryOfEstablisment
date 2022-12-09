@@ -126,6 +126,7 @@ namespace RegistryOfEstablisment.View
             this.Controls.Add(this.dataGridView1);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "RegistryForm";
+            this.Load += new System.EventHandler(this.RegistryForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

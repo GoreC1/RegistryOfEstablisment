@@ -8,7 +8,7 @@ namespace RegistryOfEstablisment.Controller
     {
         private readonly IUnitOfWork _unit;
 
-        public AuthController(IUnitOfWork unit)
+        internal AuthController(IUnitOfWork unit)
         {
             _unit = unit;
         }
@@ -19,7 +19,6 @@ namespace RegistryOfEstablisment.Controller
                 return false;
             CurrentUser.Role = authUser.Role;
             CurrentUser.ManagementTerritory = authUser.ManagementTerritory;
-            CurrentUser.OwnedEnterprise = authUser.OwnedEnterprise;
             CurrentUser.Login = authUser.Login;
             CurrentUser.Password = authUser.Password;
             CurrentUser.TelephoneNumber = authUser.TelephoneNumber;

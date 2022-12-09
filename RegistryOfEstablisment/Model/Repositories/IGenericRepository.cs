@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace RegistryOfEstablisment.Model.Repositories
 {
-    public interface IGenericRepository<T> where T : class
+    interface IGenericRepository<T> where T : class
     {
-        Task<T> GetById(int id);
-        Task<IEnumerable<T>> GetAllAsync();
+        T GetById(int id);
+        IEnumerable<T> GetAll();
         IEnumerable<T> Find(Expression<Func<T, bool>> expression);
-        void AddAsync(T entity);
-        void AddRangeAsync(IEnumerable<T> entities);
+        void Add(T entity);
+        void AddRange(IEnumerable<T> entities);
         void Remove(T entity);
         void RemoveRange(IEnumerable<T> entities);
     }

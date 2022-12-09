@@ -18,10 +18,9 @@ namespace RegistryOfEstablisment.Model
         public DbSet<Enterprise> Enterprises { get; set; }
         public DbSet<EnterpriseType> EnterpriseTypes { get; set; }
         public DbSet<ManagementTerritory> ManagementTerritories { get; set; }
-        public DbSet<Registration> Registrations { get; set; }
+        public DbSet<Registration> Registration { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<User> Users {get;set;}
-
         
     }
 

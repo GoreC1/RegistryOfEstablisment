@@ -10,7 +10,6 @@ namespace RegistryOfEstablisment.Model.Entities
     {
         public Role Role { get; set; }
         public ManagementTerritory ManagementTerritory { get; set; }
-        public Enterprise OwnedEnterprise { get; set; }
         public string Login { get; set; }
         public string Password { get; set; }
         public string TelephoneNumber { get; set; }

@@ -10,7 +10,7 @@ using RegistryOfEstablisment.Model;
 namespace RegistryOfEstablisment.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20221116075532_InitialCreate")]
+    [Migration("20221209063114_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -37,13 +37,13 @@ namespace RegistryOfEstablisment.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("text");
 
-                    b.Property<int>("ITN")
-                        .HasColumnType("integer");
+                    b.Property<long>("ITN")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("LegalEntity")
                         .HasColumnType("text");
 
-                    b.Property<int?>("ManagementTerritoriyId")
+                    b.Property<int?>("ManagementTerritoryId")
                         .HasColumnType("integer");
 
                     b.Property<string>("Name")
@@ -63,7 +63,7 @@ namespace RegistryOfEstablisment.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ManagementTerritoriyId");
+                    b.HasIndex("ManagementTerritoryId");
 
                     b.HasIndex("TypeId");
 
@@ -131,7 +131,7 @@ namespace RegistryOfEstablisment.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Registrations");
+                    b.ToTable("Registration");
                 });
 
             modelBuilder.Entity("RegistryOfEstablisment.Model.Entities.Role", b =>
@@ -168,9 +168,6 @@ namespace RegistryOfEstablisment.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
-                    b.Property<int?>("OwnedEnterpriseId")
-                        .HasColumnType("integer");
-
                     b.Property<string>("Password")
                         .HasColumnType("text");
 
@@ -184,8 +181,6 @@ namespace RegistryOfEstablisment.Migrations
 
                     b.HasIndex("ManagementTerritoryId");
 
-                    b.HasIndex("OwnedEnterpriseId");
-
                     b.HasIndex("RoleId");
 
                     b.ToTable("Users");
@@ -193,15 +188,15 @@ namespace RegistryOfEstablisment.Migrations
 
             modelBuilder.Entity("RegistryOfEstablisment.Model.Entities.Enterprise", b =>
                 {
-                    b.HasOne("RegistryOfEstablisment.Model.Entities.ManagementTerritory", "ManagementTerritoriy")
+                    b.HasOne("RegistryOfEstablisment.Model.Entities.ManagementTerritory", "ManagementTerritory")
                         .WithMany()
-                        .HasForeignKey("ManagementTerritoriyId");
+                        .HasForeignKey("ManagementTerritoryId");
 
                     b.HasOne("RegistryOfEstablisment.Model.Entities.EnterpriseType", "Type")
                         .WithMany()
                         .HasForeignKey("TypeId");
 
-                    b.Navigation("ManagementTerritoriy");
+                    b.Navigation("ManagementTerritory");
 
                     b.Navigation("Type");
                 });
@@ -227,17 +222,11 @@ namespace RegistryOfEstablisment.Migrations
                         .WithMany()
                         .HasForeignKey("ManagementTerritoryId");
 
-                    b.HasOne("RegistryOfEstablisment.Model.Entities.Enterprise", "OwnedEnterprise")
-                        .WithMany()
-                        .HasForeignKey("OwnedEnterpriseId");
-
                     b.HasOne("RegistryOfEstablisment.Model.Entities.Role", "Role")
                         .WithMany()
                         .HasForeignKey("RoleId");
 
                     b.Navigation("ManagementTerritory");
-
-                    b.Navigation("OwnedEnterprise");
 
                     b.Navigation("Role");
                 });

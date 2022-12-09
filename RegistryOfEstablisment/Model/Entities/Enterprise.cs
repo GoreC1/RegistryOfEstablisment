@@ -9,8 +9,8 @@ namespace RegistryOfEstablisment.Model.Entities
     public class Enterprise : BaseEntity 
     {
         public EnterpriseType Type { get; set; }
-        public ManagementTerritory ManagementTerritoriy { get; set; }
-        public int ITN { get; set; }
+        public ManagementTerritory ManagementTerritory { get; set; }
+        public long ITN { get; set; }
         public int Checkpoint { get; set; }
         public string Address { get; set; }
         public string RealAddress { get; set; }

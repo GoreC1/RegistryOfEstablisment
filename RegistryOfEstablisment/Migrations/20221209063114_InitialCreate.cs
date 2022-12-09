@@ -54,8 +54,8 @@ namespace RegistryOfEstablisment.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     TypeId = table.Column<int>(type: "integer", nullable: true),
-                    ManagementTerritoriyId = table.Column<int>(type: "integer", nullable: true),
-                    ITN = table.Column<int>(type: "integer", nullable: false),
+                    ManagementTerritoryId = table.Column<int>(type: "integer", nullable: true),
+                    ITN = table.Column<long>(type: "bigint", nullable: false),
                     Checkpoint = table.Column<int>(type: "integer", nullable: false),
                     Address = table.Column<string>(type: "text", nullable: true),
                     RealAddress = table.Column<string>(type: "text", nullable: true),
@@ -75,8 +75,8 @@ namespace RegistryOfEstablisment.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Enterprises_ManagementTerritories_ManagementTerritoriyId",
-                        column: x => x.ManagementTerritoriyId,
+                        name: "FK_Enterprises_ManagementTerritories_ManagementTerritoryId",
+                        column: x => x.ManagementTerritoryId,
                         principalTable: "ManagementTerritories",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -90,7 +90,6 @@ namespace RegistryOfEstablisment.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     RoleId = table.Column<int>(type: "integer", nullable: true),
                     ManagementTerritoryId = table.Column<int>(type: "integer", nullable: true),
-                    OwnedEnterpriseId = table.Column<int>(type: "integer", nullable: true),
                     Login = table.Column<string>(type: "text", nullable: true),
                     Password = table.Column<string>(type: "text", nullable: true),
                     TelephoneNumber = table.Column<string>(type: "text", nullable: true),
@@ -100,12 +99,6 @@ namespace RegistryOfEstablisment.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Users_Enterprises_OwnedEnterpriseId",
-                        column: x => x.OwnedEnterpriseId,
-                        principalTable: "Enterprises",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Users_ManagementTerritories_ManagementTerritoryId",
                         column: x => x.ManagementTerritoryId,
@@ -121,7 +114,7 @@ namespace RegistryOfEstablisment.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Registrations",
+                name: "Registration",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
@@ -135,15 +128,15 @@ namespace RegistryOfEstablisment.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Registrations", x => x.Id);
+                    table.PrimaryKey("PK_Registration", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Registrations_Enterprises_EnterpriseId",
+                        name: "FK_Registration_Enterprises_EnterpriseId",
                         column: x => x.EnterpriseId,
                         principalTable: "Enterprises",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Registrations_Users_UserId",
+                        name: "FK_Registration_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
@@ -151,9 +144,9 @@ namespace RegistryOfEstablisment.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Enterprises_ManagementTerritoriyId",
+                name: "IX_Enterprises_ManagementTerritoryId",
                 table: "Enterprises",
-                column: "ManagementTerritoriyId");
+                column: "ManagementTerritoryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Enterprises_TypeId",
@@ -161,24 +154,19 @@ namespace RegistryOfEstablisment.Migrations
                 column: "TypeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Registrations_EnterpriseId",
-                table: "Registrations",
+                name: "IX_Registration_EnterpriseId",
+                table: "Registration",
                 column: "EnterpriseId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Registrations_UserId",
-                table: "Registrations",
+                name: "IX_Registration_UserId",
+                table: "Registration",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Users_ManagementTerritoryId",
                 table: "Users",
                 column: "ManagementTerritoryId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Users_OwnedEnterpriseId",
-                table: "Users",
-                column: "OwnedEnterpriseId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Users_RoleId",
@@ -189,22 +177,22 @@ namespace RegistryOfEstablisment.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Registrations");
-
-            migrationBuilder.DropTable(
-                name: "Users");
+                name: "Registration");
 
             migrationBuilder.DropTable(
                 name: "Enterprises");
 
             migrationBuilder.DropTable(
-                name: "Roles");
+                name: "Users");
 
             migrationBuilder.DropTable(
                 name: "EnterpriseTypes");
 
             migrationBuilder.DropTable(
                 name: "ManagementTerritories");
+
+            migrationBuilder.DropTable(
+                name: "Roles");
         }
     }
 }

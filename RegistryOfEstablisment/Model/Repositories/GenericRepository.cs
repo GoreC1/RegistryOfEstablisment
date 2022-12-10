@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RegistryOfEstablisment.Model.Repositories
 {
-    class GenericRepository<T> : IGenericRepository<T> where T: class
+    public class GenericRepository<T> : IGenericRepository<T> where T: class
     {
         protected readonly DataContext _context;
 
@@ -52,6 +52,12 @@ namespace RegistryOfEstablisment.Model.Repositories
         {
             _context.Set<T>().RemoveRange(entities);
             _context.SaveChanges();
-        }   
+        }
+
+        public void Update(T entity)
+        {
+            _context.Set<T>().Update(entity);
+            _context.SaveChanges();
+        }
     }
 }

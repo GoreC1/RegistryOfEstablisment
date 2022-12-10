@@ -56,7 +56,6 @@ namespace RegistryOfEstablisment.View
             this.label1.Size = new System.Drawing.Size(77, 20);
             this.label1.TabIndex = 0;
             this.label1.Text = "Название";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
@@ -84,7 +83,6 @@ namespace RegistryOfEstablisment.View
             this.label4.Size = new System.Drawing.Size(144, 20);
             this.label4.TabIndex = 3;
             this.label4.Text = "Адрес регистрации";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // label5
             // 
@@ -217,7 +215,6 @@ namespace RegistryOfEstablisment.View
             this.Controls.Add(this.label1);
             this.Name = "FilterForm";
             this.Text = "Фильтры";
-            this.Load += new System.EventHandler(this.FilterForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

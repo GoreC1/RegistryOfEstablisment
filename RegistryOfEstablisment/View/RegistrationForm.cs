@@ -1,4 +1,5 @@
 ﻿using RegistryOfEstablisment.Controller;
+using RegistryOfEstablisment.UnitControl;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,32 +14,11 @@ namespace RegistryOfEstablisment.View
 {
     public partial class RegistrationForm : Form
     {
-        public RegistrationForm()
+        private readonly IUnitOfControl _unit;
+        public RegistrationForm(IUnitOfControl unit)
         {
             InitializeComponent();
+            _unit = unit;
         }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        //private void acceptButton_Click(object sender, EventArgs e)
-        //{
-        //    AddNewRegistr();
-        //    this.DialogResult = DialogResult.OK;
-        //    this.Close();
-        //}
-
-        //private void cancelButton_Click(object sender, EventArgs e)
-        //{
-        //    this.DialogResult = DialogResult.Cancel;
-        //    this.Close();
-        //}
-
-        //private void AddNewRegistr(DateTime date, string petName, string petType)
-        //{
-        //    RegistrationController.AddNewRegistration(date, petName, petType);
-        //}
     }
 }

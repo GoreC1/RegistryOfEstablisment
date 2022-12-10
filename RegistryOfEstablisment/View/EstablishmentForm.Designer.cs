@@ -161,7 +161,6 @@ namespace RegistryOfEstablisment.View
             this.textBox5.ReadOnly = true;
             this.textBox5.Size = new System.Drawing.Size(179, 27);
             this.textBox5.TabIndex = 12;
-            this.textBox5.TextChanged += new System.EventHandler(this.textBox5_TextChanged);
             this.textBox5.DoubleClick += new System.EventHandler(this.textBox5_DoubleClick);
             // 
             // textBox6

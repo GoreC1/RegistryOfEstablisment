@@ -7,22 +7,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using RegistryOfEstablisment.UnitControl;
 using RegistryOfEstablisment.View;
 
 namespace RegistryOfEstablisment.View
 {
     public partial class EstablishmentForm : Form
     {
-        public EstablishmentForm()
+        private readonly IUnitOfControl _unit;
+        public EstablishmentForm(IUnitOfControl unit)
         {
             InitializeComponent();
+            _unit = unit;
         }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void EstablishmentForm_Load(object sender, EventArgs e)
         {
 
@@ -33,14 +30,9 @@ namespace RegistryOfEstablisment.View
             this.Close();
         }
 
-        private void textBox5_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void textBox5_DoubleClick(object sender, EventArgs e)
         {
-            RegistrationForm registrationForm = new();
+            RegistrationForm registrationForm = new(_unit);
             registrationForm.ShowDialog();
         }
     }

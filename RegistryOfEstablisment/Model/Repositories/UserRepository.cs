@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace RegistryOfEstablisment.Model.Repositories
 {
-    class UserRepository : GenericRepository<User>
+    public class UserRepository : GenericRepository<User>
     {
         public UserRepository(DataContext context) : base(context) { }
 

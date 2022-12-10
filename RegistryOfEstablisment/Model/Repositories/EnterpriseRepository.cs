@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace RegistryOfEstablisment.Model.Repositories
 {
-    class EnterpriseRepository : GenericRepository<Enterprise>
+    public class EnterpriseRepository : GenericRepository<Enterprise>
     {
         public EnterpriseRepository(DataContext context) : base(context) { }
 

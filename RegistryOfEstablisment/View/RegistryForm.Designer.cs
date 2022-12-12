@@ -70,6 +70,7 @@ namespace RegistryOfEstablisment.View
             this.OpenESButton.TabIndex = 2;
             this.OpenESButton.Text = "Открыть";
             this.OpenESButton.UseVisualStyleBackColor = true;
+            this.OpenESButton.Click += new System.EventHandler(this.OpenESButton_Click);
             // 
             // button3
             // 

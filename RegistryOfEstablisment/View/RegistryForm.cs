@@ -9,6 +9,7 @@ namespace RegistryOfEstablisment.View
     public partial class RegistryForm : Form
     {
         private readonly IUnitOfControl _unit;
+        private List<Enterprise> enterprisesCache = new List<Enterprise>();
         public RegistryForm(IUnitOfControl unit)
         {
             InitializeComponent();
@@ -51,7 +52,7 @@ namespace RegistryOfEstablisment.View
 
         private void GetOrgsRegistry()
         {
-            List<ValueTuple<Enterprise, bool>> entList = _unit.RegistryController.GetRegistriesList();
+            List<ValueTuple<Enterprise, bool>> entList = _unit.EnterpriseController.GetRegistriesList();
             
             PopulateGridColumns();
             
@@ -61,6 +62,7 @@ namespace RegistryOfEstablisment.View
                 bool isAccessible = item.Item2;
                 dataGridView1.Rows.Add(ent.Id.ToString(), ent.Name, ent.ITN.ToString(), ent.Checkpoint.ToString(), ent.Address, ent.Type.Name,
                                        ent.LegalEntity, ent.RealAddress, ent.WebSite, ent.Email, ent.TelephoneNumber, isAccessible ? "Yes" : "No");
+                enterprisesCache.Add(ent);
             }
         }
 
@@ -72,5 +74,15 @@ namespace RegistryOfEstablisment.View
                 new DataGridViewTextBoxColumn { Name = "Telephone", Visible = false }, new DataGridViewTextBoxColumn { Name = "isAccessible", Visible = false });
         }
 
+        private void OpenESButton_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.CurrentCell == null)
+                return;
+
+            Enterprise currentEnt = enterprisesCache.Find(c => c.Id == Convert.ToInt32(dataGridView1.CurrentRow.Cells["ID"].Value));
+
+            Form entCard = new EstablishmentForm(_unit, currentEnt);
+            entCard.ShowDialog();
+        }
     }
 }

@@ -26,10 +26,10 @@ namespace RegistryOfEstablisment.View
 
         private void EstablismentCreationForm_Load(object sender, EventArgs e)
         {
-            EnterpriseType[] types = _unit.RegistryController.GetTypes().ToArray();
+            EnterpriseType[] types = _unit.EnterpriseTypeController.GetTypes().ToArray();
             typeBox.Items.AddRange(types);
             
-            ManagementTerritory[] territories = _unit.RegistryController.GetTerritories().ToArray();
+            ManagementTerritory[] territories = _unit.ManagementTerritoryController.GetTerritories().ToArray();
             territoryBox.Items.AddRange(territories);
         }
 

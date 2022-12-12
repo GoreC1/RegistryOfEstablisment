@@ -4,23 +4,18 @@ using RegistryOfEstablisment.Unit;
 
 namespace RegistryOfEstablisment.Controller
 {
-    public class AuthController
+    public class AuthController : BaseController
     {
-        private readonly IUnitOfWork _unit;
-
-        internal AuthController(IUnitOfWork unit)
-        {
-            _unit = unit;
-        }
+        public AuthController(IUnitOfWork unit) : base(unit) { }
         public bool Authentificate(string login, string password)
         {
             User authUser = _unit.Users.GetByAuth(login, password);
             if (authUser == null)
                 return false;
+            CurrentUser.Id = authUser.Id;
+            CurrentUser.Name = authUser.Name;
             CurrentUser.Role = authUser.Role;
             CurrentUser.ManagementTerritory = authUser.ManagementTerritory;
-            CurrentUser.Login = authUser.Login;
-            CurrentUser.Password = authUser.Password;
             CurrentUser.TelephoneNumber = authUser.TelephoneNumber;
             CurrentUser.Address = authUser.Address;
             return true;

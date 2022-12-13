@@ -22,6 +22,11 @@ namespace RegistryOfEstablisment.View
             InitializeComponent();
             _unit = unit;
             _enterprise = ent;
+
+            if (!_unit.EnterpriseTypeController.IsForRegistration(ent.Type)) 
+            {
+                registrationButton.Visible = false;
+            }
         }
         private void EstablishmentForm_Load(object sender, EventArgs e)
         {

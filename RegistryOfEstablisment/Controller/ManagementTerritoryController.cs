@@ -12,6 +12,10 @@ namespace RegistryOfEstablisment.Controller
     {
         public ManagementTerritoryController(IUnitOfWork unit) : base(unit) { }
 
+        public IEnumerable<ManagementTerritory> GetAccessedTerritories()
+        {
+            return _unit.ManagementTerritories.GetAccessedTerritories();
+        }
         public IEnumerable<ManagementTerritory> GetTerritories()
         {
             return _unit.ManagementTerritories.GetAll();

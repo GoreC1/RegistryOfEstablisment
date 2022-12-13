@@ -17,22 +17,26 @@ namespace RegistryOfEstablisment.View
 {
     public partial class EstablismentCreationForm : Form
     {
+        //Форма передаётся, чтобы можно было передать свежесозданную организацию
+        readonly RegistryForm _registry;
         readonly IUnitOfControl _unit;
-        public EstablismentCreationForm(IUnitOfControl unit)
+        public EstablismentCreationForm(IUnitOfControl unit, RegistryForm registry)
         {
             InitializeComponent();
             _unit = unit;
+            _registry = registry;
         }
 
         private void EstablismentCreationForm_Load(object sender, EventArgs e)
         {
-            EnterpriseType[] types = _unit.EnterpriseTypeController.GetTypes().ToArray();
+            EnterpriseType[] types = _unit.EnterpriseTypeController.GetAccessedTypes().ToArray();
             typeBox.Items.AddRange(types);
             
-            ManagementTerritory[] territories = _unit.ManagementTerritoryController.GetTerritories().ToArray();
+            ManagementTerritory[] territories = _unit.ManagementTerritoryController.GetAccessedTerritories().ToArray();
             territoryBox.Items.AddRange(territories);
         }
 
+        //Регистрация новой записи на чипирование
         private void createButton_Click(object sender, EventArgs e)
         {
             if (!CheckCompletion())
@@ -57,31 +61,37 @@ namespace RegistryOfEstablisment.View
             };
             
             _unit.EnterpriseController.AddEnterprise(ent);
+            _registry.addedEnterprise = (ent,_unit.UserController.IsAccessible(ent));
+
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
 
+        //проверка заполнения
         private bool CheckCompletion()
         {
             string regTel = @"^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$";
             string regMail = @"(\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*)";
             string regWeb = @"(https?:\/\/|ftps?:\/\/|www\.)((?![.,?!;:()]*(\s|$))[^\s]){2,}";
-            return nameBox.Text.Length > 0 && legalEntityBox.Text.Length > 0 && factAdressBox.Text.Length > 0 && regAdressBox.Text.Length > 0 && typeBox.SelectedItem != null 
+            return nameBox.Text.Length > 0 && factAdressBox.Text.Length > 0 && regAdressBox.Text.Length > 0 && typeBox.SelectedItem != null 
                 && checkpointBox.Text.Length > 0 && ITNBox.Text.Length > 0 && territoryBox.SelectedItem != null && Regex.IsMatch(telBox.Text, regTel) && Regex.IsMatch(webSiteBox.Text, regWeb) 
                 && Regex.IsMatch(mailBox.Text, regMail);
         }
+        
         private void cancelButton_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
 
+        //проверка ввода КПП
         private void checkpointBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsDigit(e.KeyChar) || checkpointBox.Text.Length==9)
                 e.Handled = true;
         }
 
+        //Проверка ввода ИНН
         private void ITNBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsDigit(e.KeyChar) || ITNBox.Text.Length == 12)

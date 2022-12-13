@@ -33,6 +33,37 @@ namespace RegistryOfEstablisment.Model.Repositories
                                              .FirstOrDefault();
         }
 
+        public bool CheckAccess(Enterprise ent)
+        {
+            switch (CurrentUser.Role.Name)
+            {
+                case "Оператор ОМСУ":
+                    {
+                        List<string> accessedTypes = new() { "Приют", "Организация по отлову", "Организация по отлову и приют", "Организация по транспортировке", "Ветеринарная клиника: муниципальная"
+                        ,"Ветеринарная клиника: частная", "Благотворительный фонд", "Организации по продаже товаров и предоставлению услуг для животных"};
+                        return accessedTypes.Contains(ent.Type.Name) && ent.ManagementTerritory.Name == CurrentUser.ManagementTerritory.Name;
+                    }
+                case "Оператор ВетСлужбы":
+                    {
+                        List<string> accessedTypes = new() { "Исполнительный орган государственной власти", "Орган местного самоуправления", "Ветеринарная клиника: государственная" };
+                        return accessedTypes.Contains(ent.Type.Name);
+                    }
+                case "Куратор ВетСлужбы":
+                case "Куратор ОМСУ":
+                case "Куратор по отлову":
+                case "Куратор приюта":
+                case "Подписант ВетСлужбы":
+                case "Подписант ОМСУ":
+                case "Подписант по отлову":
+                case "Подписант приюта":
+                    {
+                        return false;
+                    }
+                default:
+                    return false;
+            }
+        }
+
         public List<ValueTuple<Enterprise,bool>> GetAccessedRegistries()
         {
             List<Enterprise> list = GetAll().ToList();

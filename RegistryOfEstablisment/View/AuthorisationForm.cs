@@ -14,6 +14,7 @@ namespace RegistryOfEstablisment
             _unit = unit;
         }
 
+        //Подтверждает аутентификацию
         private void AuthButton_Click(object sender, EventArgs e)
         {
             if (!_unit.AuthController.Authentificate(LoginTextBox.Text, PasswordTextBox.Text))
@@ -26,6 +27,7 @@ namespace RegistryOfEstablisment
             this.Close();
         }
 
+        //Настройка поля пароля, для отображения звёздочек и максимального количество символов
         private void InitializePasswordTextBox()
         {
             PasswordTextBox.Text = "";

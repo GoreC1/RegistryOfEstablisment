@@ -17,14 +17,11 @@ namespace RegistryOfEstablisment.View
 {
     public partial class EstablismentCreationForm : Form
     {
-        //Форма передаётся, чтобы можно было передать свежесозданную организацию
-        readonly RegistryForm _registry;
         readonly IUnitOfControl _unit;
-        public EstablismentCreationForm(IUnitOfControl unit, RegistryForm registry)
+        public EstablismentCreationForm(IUnitOfControl unit)
         {
             InitializeComponent();
             _unit = unit;
-            _registry = registry;
         }
 
         private void EstablismentCreationForm_Load(object sender, EventArgs e)
@@ -61,7 +58,6 @@ namespace RegistryOfEstablisment.View
             };
             
             _unit.EnterpriseController.AddEnterprise(ent);
-            _registry.addedEnterprise = (ent,_unit.UserController.IsAccessible(ent));
 
             this.DialogResult = DialogResult.OK;
             this.Close();

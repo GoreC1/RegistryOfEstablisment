@@ -18,6 +18,48 @@ namespace RegistryOfEstablisment.Model.Repositories
             return _context.Set<Enterprise>().Where(expression);
         }
 
+        public IEnumerable<Enterprise> GetFilteredEnterprises(Expression<Func<Enterprise, bool>>[] filters, int index, int count)
+        {
+            var query = _context.Enterprises
+                                .AsQueryable()
+                                .AsNoTracking();
+
+            if (filters != null)
+            {
+                foreach (var filter in filters) query = query.Where(filter);
+            }
+
+            return query.Include(c => c.ManagementTerritory)
+                        .Include(c => c.Type)
+                        .Skip(index)
+                        .Take(count)
+                        .OrderBy(t => t.Id)
+                        .ToList();
+        }
+
+        public int GetFilteredCount(Expression<Func<Enterprise, bool>>[] filters)
+        {
+            var query = _context.Enterprises
+                    .AsQueryable()
+                    .AsNoTracking();
+
+            if (filters != null)
+            {
+                foreach (var filter in filters) query = query.Where(filter);
+            }
+            
+            return query.Count();
+        }
+
+        public IEnumerable<Enterprise> GetSome(int index, int count)
+        {
+            return _context.Set<Enterprise>().Include(c => c.ManagementTerritory)
+                                             .Include(c => c.Type)
+                                             .Skip(index)
+                                             .Take(count)
+                                             .ToList();
+        }
+
         public new IEnumerable<Enterprise> GetAll()
         {
             return _context.Set<Enterprise>().Include(c => c.ManagementTerritory)
@@ -64,9 +106,8 @@ namespace RegistryOfEstablisment.Model.Repositories
             }
         }
 
-        public List<ValueTuple<Enterprise,bool>> GetAccessedRegistries()
+        public List<ValueTuple<Enterprise,bool>> GetAccessedRegistry(List<Enterprise> list)
         {
-            List<Enterprise> list = GetAll().ToList();
             List<ValueTuple<Enterprise,bool>> result = new();
             switch (CurrentUser.Role.Name)
             {

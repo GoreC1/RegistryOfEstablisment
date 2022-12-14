@@ -139,7 +139,7 @@ namespace RegistryOfEstablisment.View
             this.paginationBox.Name = "paginationBox";
             this.paginationBox.Size = new System.Drawing.Size(92, 23);
             this.paginationBox.TabIndex = 8;
-            this.paginationBox.SelectedIndexChanged += new System.EventHandler(this.paginationBox_SelectedIndexChanged);
+            this.paginationBox.SelectionChangeCommitted += new System.EventHandler(this.paginationBox_SelectionChangeCommitted);
             // 
             // label3
             // 
@@ -157,7 +157,7 @@ namespace RegistryOfEstablisment.View
             this.pageBox.Name = "pageBox";
             this.pageBox.Size = new System.Drawing.Size(70, 23);
             this.pageBox.TabIndex = 10;
-            this.pageBox.SelectedIndexChanged += new System.EventHandler(this.pageBox_SelectedIndexChanged);
+            this.pageBox.SelectionChangeCommitted += new System.EventHandler(this.pageBox_SelectionChangeCommitted);
             // 
             // RegistryForm
             // 

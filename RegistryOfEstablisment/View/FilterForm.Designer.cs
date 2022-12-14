@@ -35,122 +35,122 @@ namespace RegistryOfEstablisment.View
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.ITNBox = new System.Windows.Forms.TextBox();
+            this.checkpointBox = new System.Windows.Forms.TextBox();
+            this.addressBox = new System.Windows.Forms.TextBox();
+            this.typeBox = new System.Windows.Forms.ComboBox();
+            this.legalEntityBox = new System.Windows.Forms.TextBox();
             this.cancelButton = new System.Windows.Forms.Button();
             this.clearButton = new System.Windows.Forms.Button();
             this.acceptButton = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.realAddressBox = new System.Windows.Forms.TextBox();
+            this.nameBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(25, 21);
+            this.label1.Location = new System.Drawing.Point(22, 16);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(77, 20);
+            this.label1.Size = new System.Drawing.Size(59, 15);
             this.label1.TabIndex = 0;
             this.label1.Text = "Название";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(25, 64);
+            this.label2.Location = new System.Drawing.Point(22, 48);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(42, 20);
+            this.label2.Size = new System.Drawing.Size(34, 15);
             this.label2.TabIndex = 1;
             this.label2.Text = "ИНН";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(25, 111);
+            this.label3.Location = new System.Drawing.Point(22, 83);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(40, 20);
+            this.label3.Size = new System.Drawing.Size(32, 15);
             this.label3.TabIndex = 2;
             this.label3.Text = "КПП";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(25, 151);
+            this.label4.Location = new System.Drawing.Point(22, 113);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(144, 20);
+            this.label4.Size = new System.Drawing.Size(113, 15);
             this.label4.TabIndex = 3;
             this.label4.Text = "Адрес регистрации";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(25, 227);
+            this.label5.Location = new System.Drawing.Point(22, 170);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(131, 20);
+            this.label5.Size = new System.Drawing.Size(101, 15);
             this.label5.TabIndex = 4;
             this.label5.Text = "Тип организации";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(25, 265);
+            this.label6.Location = new System.Drawing.Point(22, 199);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(101, 20);
+            this.label6.Size = new System.Drawing.Size(81, 15);
             this.label6.TabIndex = 5;
             this.label6.Text = "ИП/Юр.Лицо";
             // 
-            // textBox2
+            // ITNBox
             // 
-            this.textBox2.Location = new System.Drawing.Point(173, 64);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(125, 27);
-            this.textBox2.TabIndex = 7;
+            this.ITNBox.Location = new System.Drawing.Point(151, 48);
+            this.ITNBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.ITNBox.Name = "ITNBox";
+            this.ITNBox.Size = new System.Drawing.Size(133, 23);
+            this.ITNBox.TabIndex = 7;
+            this.ITNBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ITNBox_KeyPress);
             // 
-            // textBox3
+            // checkpointBox
             // 
-            this.textBox3.Location = new System.Drawing.Point(173, 108);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(125, 27);
-            this.textBox3.TabIndex = 8;
+            this.checkpointBox.Location = new System.Drawing.Point(151, 81);
+            this.checkpointBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.checkpointBox.Name = "checkpointBox";
+            this.checkpointBox.Size = new System.Drawing.Size(133, 23);
+            this.checkpointBox.TabIndex = 8;
+            this.checkpointBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkpointBox_KeyPress);
             // 
-            // textBox4
+            // addressBox
             // 
-            this.textBox4.Location = new System.Drawing.Point(173, 148);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(125, 27);
-            this.textBox4.TabIndex = 9;
+            this.addressBox.Location = new System.Drawing.Point(151, 111);
+            this.addressBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.addressBox.Name = "addressBox";
+            this.addressBox.Size = new System.Drawing.Size(133, 23);
+            this.addressBox.TabIndex = 9;
             // 
-            // comboBox1
+            // typeBox
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(173, 227);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(151, 28);
-            this.comboBox1.TabIndex = 10;
+            this.typeBox.FormattingEnabled = true;
+            this.typeBox.Location = new System.Drawing.Point(151, 170);
+            this.typeBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.typeBox.Name = "typeBox";
+            this.typeBox.Size = new System.Drawing.Size(133, 23);
+            this.typeBox.TabIndex = 10;
             // 
-            // textBox5
+            // legalEntityBox
             // 
-            this.textBox5.Location = new System.Drawing.Point(173, 265);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(125, 27);
-            this.textBox5.TabIndex = 11;
-            // 
-            // comboBox2
-            // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(173, 18);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(151, 28);
-            this.comboBox2.TabIndex = 12;
+            this.legalEntityBox.Location = new System.Drawing.Point(151, 199);
+            this.legalEntityBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.legalEntityBox.Name = "legalEntityBox";
+            this.legalEntityBox.Size = new System.Drawing.Size(133, 23);
+            this.legalEntityBox.TabIndex = 11;
             // 
             // cancelButton
             // 
-            this.cancelButton.Location = new System.Drawing.Point(195, 314);
+            this.cancelButton.Location = new System.Drawing.Point(171, 236);
+            this.cancelButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(59, 47);
+            this.cancelButton.Size = new System.Drawing.Size(52, 35);
             this.cancelButton.TabIndex = 13;
             this.cancelButton.Text = "X";
             this.cancelButton.UseVisualStyleBackColor = true;
@@ -158,18 +158,21 @@ namespace RegistryOfEstablisment.View
             // 
             // clearButton
             // 
-            this.clearButton.Location = new System.Drawing.Point(112, 314);
+            this.clearButton.Location = new System.Drawing.Point(98, 236);
+            this.clearButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.clearButton.Name = "clearButton";
-            this.clearButton.Size = new System.Drawing.Size(77, 47);
+            this.clearButton.Size = new System.Drawing.Size(67, 35);
             this.clearButton.TabIndex = 14;
             this.clearButton.Text = "СБРОС";
             this.clearButton.UseVisualStyleBackColor = true;
+            this.clearButton.Click += new System.EventHandler(this.clearButton_Click);
             // 
             // acceptButton
             // 
-            this.acceptButton.Location = new System.Drawing.Point(267, 314);
+            this.acceptButton.Location = new System.Drawing.Point(234, 236);
+            this.acceptButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.acceptButton.Name = "acceptButton";
-            this.acceptButton.Size = new System.Drawing.Size(59, 47);
+            this.acceptButton.Size = new System.Drawing.Size(52, 35);
             this.acceptButton.TabIndex = 15;
             this.acceptButton.Text = "V";
             this.acceptButton.UseVisualStyleBackColor = true;
@@ -178,43 +181,53 @@ namespace RegistryOfEstablisment.View
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(25, 190);
+            this.label7.Location = new System.Drawing.Point(22, 142);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(142, 20);
+            this.label7.Size = new System.Drawing.Size(113, 15);
             this.label7.TabIndex = 16;
             this.label7.Text = "Фактический адрес";
             // 
-            // textBox1
+            // realAddressBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(173, 187);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(125, 27);
-            this.textBox1.TabIndex = 17;
+            this.realAddressBox.Location = new System.Drawing.Point(151, 140);
+            this.realAddressBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.realAddressBox.Name = "realAddressBox";
+            this.realAddressBox.Size = new System.Drawing.Size(133, 23);
+            this.realAddressBox.TabIndex = 17;
+            // 
+            // nameBox
+            // 
+            this.nameBox.Location = new System.Drawing.Point(151, 13);
+            this.nameBox.Name = "nameBox";
+            this.nameBox.Size = new System.Drawing.Size(133, 23);
+            this.nameBox.TabIndex = 18;
             // 
             // FilterForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(335, 373);
-            this.Controls.Add(this.textBox1);
+            this.ClientSize = new System.Drawing.Size(293, 280);
+            this.Controls.Add(this.nameBox);
+            this.Controls.Add(this.realAddressBox);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.acceptButton);
             this.Controls.Add(this.clearButton);
             this.Controls.Add(this.cancelButton);
-            this.Controls.Add(this.comboBox2);
-            this.Controls.Add(this.textBox5);
-            this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.legalEntityBox);
+            this.Controls.Add(this.typeBox);
+            this.Controls.Add(this.addressBox);
+            this.Controls.Add(this.checkpointBox);
+            this.Controls.Add(this.ITNBox);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "FilterForm";
             this.Text = "Фильтры";
+            this.Load += new System.EventHandler(this.FilterForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -228,16 +241,16 @@ namespace RegistryOfEstablisment.View
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.TextBox ITNBox;
+        private System.Windows.Forms.TextBox checkpointBox;
+        private System.Windows.Forms.TextBox addressBox;
+        private System.Windows.Forms.ComboBox typeBox;
+        private System.Windows.Forms.TextBox legalEntityBox;
         private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.Button clearButton;
         private System.Windows.Forms.Button acceptButton;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox realAddressBox;
+        private System.Windows.Forms.TextBox nameBox;
     }
 }

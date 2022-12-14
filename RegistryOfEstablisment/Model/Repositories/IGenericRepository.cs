@@ -12,6 +12,7 @@ namespace RegistryOfEstablisment.Model.Repositories
         T GetById(int id);
         IEnumerable<T> GetAll();
         IEnumerable<T> Find(Expression<Func<T, bool>> expression);
+        int GetCount();
         void Update(T entity);
         void Add(T entity);
         void AddRange(IEnumerable<T> entities);

@@ -1,9 +1,4 @@
 ﻿using RegistryOfEstablisment.Controller;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RegistryOfEstablisment.UnitControl
 {
@@ -13,7 +8,7 @@ namespace RegistryOfEstablisment.UnitControl
         EnterpriseController EnterpriseController { get; }
         RegistrationController RegistrationController { get; }
         UserController UserController { get; }
-        EnterpriseTypeController EnterpriseTypeController { get; }     
+        EnterpriseTypeController EnterpriseTypeController { get; }
         ManagementTerritoryController ManagementTerritoryController { get; }
     }
 }

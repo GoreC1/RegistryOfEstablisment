@@ -4,8 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RegistryOfEstablisment.Model.Repositories
 {
@@ -47,7 +45,7 @@ namespace RegistryOfEstablisment.Model.Repositories
             {
                 foreach (var filter in filters) query = query.Where(filter);
             }
-            
+
             return query.Count();
         }
 
@@ -81,8 +79,17 @@ namespace RegistryOfEstablisment.Model.Repositories
             {
                 case "Оператор ОМСУ":
                     {
-                        List<string> accessedTypes = new() { "Приют", "Организация по отлову", "Организация по отлову и приют", "Организация по транспортировке", "Ветеринарная клиника: муниципальная"
-                        ,"Ветеринарная клиника: частная", "Благотворительный фонд", "Организации по продаже товаров и предоставлению услуг для животных"};
+                        List<string> accessedTypes = new()
+                        {
+                            "Приют",
+                            "Организация по отлову",
+                            "Организация по отлову и приют",
+                            "Организация по транспортировке",
+                            "Ветеринарная клиника: муниципальная",
+                            "Ветеринарная клиника: частная",
+                            "Благотворительный фонд",
+                            "Организации по продаже товаров и предоставлению услуг для животных"
+                        };
                         return accessedTypes.Contains(ent.Type.Name) && ent.ManagementTerritory.Name == CurrentUser.ManagementTerritory.Name;
                     }
                 case "Оператор ВетСлужбы":
@@ -106,23 +113,33 @@ namespace RegistryOfEstablisment.Model.Repositories
             }
         }
 
-        public List<ValueTuple<Enterprise,bool>> GetAccessedRegistry(List<Enterprise> list)
+        public List<ValueTuple<Enterprise, bool>> GetAccessedRegistry(List<Enterprise> list)
         {
-            List<ValueTuple<Enterprise,bool>> result = new();
+            List<ValueTuple<Enterprise, bool>> result = new();
             switch (CurrentUser.Role.Name)
             {
                 case "Оператор ОМСУ":
                     {
-                        List<string> accessedTypes = new() { "Приют", "Организация по отлову", "Организация по отлову и приют" };
+                        List<string> accessedTypes = new()
+                        {
+                            "Приют",
+                            "Организация по отлову",
+                            "Организация по отлову и приют",
+                            "Организация по транспортировке",
+                            "Ветеринарная клиника: муниципальная",
+                            "Ветеринарная клиника: частная",
+                            "Благотворительный фонд",
+                            "Организации по продаже товаров и предоставлению услуг для животных"
+                        };
                         foreach (Enterprise ent in list)
                         {
-                            result.Add((ent, ent.ManagementTerritory == CurrentUser.ManagementTerritory && accessedTypes.Contains(ent.Type.Name)));
+                            result.Add((ent, ent.ManagementTerritory.Name == CurrentUser.ManagementTerritory.Name && accessedTypes.Contains(ent.Type.Name)));
                         }
                         break;
                     }
                 case "Оператор ВетСлужбы":
                     {
-                        List<string> accessedTypes = new() { "Исполнительный орган государственной власти", "Орган местного самоуправления", "Ветеринарная клиника: государственная"};
+                        List<string> accessedTypes = new() { "Исполнительный орган государственной власти", "Орган местного самоуправления", "Ветеринарная клиника: государственная" };
                         foreach (Enterprise ent in list)
                         {
                             result.Add((ent, accessedTypes.Contains(ent.Type.Name)));
@@ -130,7 +147,7 @@ namespace RegistryOfEstablisment.Model.Repositories
                         break;
                     }
                 case "Куратор ВетСлужбы":
-                case "Куратор ОМСУ": 
+                case "Куратор ОМСУ":
                 case "Куратор по отлову":
                 case "Куратор приюта":
                 case "Подписант ВетСлужбы":

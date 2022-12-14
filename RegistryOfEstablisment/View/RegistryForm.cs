@@ -12,10 +12,13 @@ namespace RegistryOfEstablisment.View
         private readonly IUnitOfControl _unit;
         public bool isFiltersApplied;
         public Expression<Func<Enterprise, bool>>[] filters;
+        public object[] filterCache = new object[]{"","","","","",null,""};
 
         public RegistryForm(IUnitOfControl unit)
         {
             InitializeComponent();
+            changeESButton.Enabled = false;
+            deleteButton.Enabled = false;
             _unit = unit;
         }
 
@@ -30,7 +33,7 @@ namespace RegistryOfEstablisment.View
             {
                 paginationBox.SelectedIndex = 0;
                 int shownEntries = Convert.ToInt32(paginationBox.SelectedItem);
-                List<ValueTuple<Enterprise, bool>> list = GetOrgsRegistry(0,shownEntries);
+                List<ValueTuple<Enterprise, bool>> list = GetOrgsRegistry(0, shownEntries);
                 PopulatePageBox(_unit.EnterpriseController.GetCount(), shownEntries);
                 PopulateGridColumns();
                 PopulateGridRows(list);
@@ -41,7 +44,7 @@ namespace RegistryOfEstablisment.View
         }
 
         //получает список организаций
-        private List<ValueTuple<Enterprise,bool>> GetOrgsRegistry(int index, int count)
+        private List<ValueTuple<Enterprise, bool>> GetOrgsRegistry(int index, int count)
         {
             return _unit.EnterpriseController.GetRegistryList(index, count);
         }
@@ -74,7 +77,7 @@ namespace RegistryOfEstablisment.View
         {
             int maxPages = Convert.ToInt32(Math.Ceiling(entriesCount / Convert.ToDouble(shownEntries)));
             pageBox.Items.Clear();
-            
+
             for (int i = 0; i < maxPages; i++)
             {
                 pageBox.Items.Add(i + 1);
@@ -106,6 +109,12 @@ namespace RegistryOfEstablisment.View
                 int paginationCount = Convert.ToInt32(paginationBox.SelectedItem);
                 int currentPage = Convert.ToInt32(pageBox.SelectedItem) - 1;
 
+                if (isFiltersApplied == true)
+                {
+                    PopulatePageBox(_unit.EnterpriseController.GetFilteredCount(filters), paginationCount);
+                    PopulateGridRows(_unit.EnterpriseController.GetFilteredEnterprises(filters, currentPage, paginationCount));
+                    return;
+                }
                 PopulateGridRows(GetOrgsRegistry(currentPage * paginationCount, paginationCount));
             }
 
@@ -124,7 +133,7 @@ namespace RegistryOfEstablisment.View
             int currentPage = Convert.ToInt32(pageBox.SelectedItem);
             int currentPagination = Convert.ToInt32(paginationBox.SelectedItem);
 
-            FilterForm filterForm = new(_unit, this, currentPage, currentPagination);
+            FilterForm filterForm = new(_unit, this);
             filterForm.ShowDialog();
 
             if (filterForm.DialogResult == DialogResult.OK)
@@ -135,7 +144,7 @@ namespace RegistryOfEstablisment.View
             else if (isFiltersApplied == false)
             {
                 PopulatePageBox(_unit.EnterpriseController.GetCount(), currentPagination);
-                PopulateGridRows(GetOrgsRegistry((currentPage-1)*currentPagination, currentPagination));
+                PopulateGridRows(GetOrgsRegistry((currentPage - 1) * currentPagination, currentPagination));
             }
         }
 
@@ -176,7 +185,7 @@ namespace RegistryOfEstablisment.View
         private void pageBox_SelectionChangeCommitted(object sender, EventArgs e)
         {
             int paginationCount = Convert.ToInt32(paginationBox.SelectedItem);
-            int currentPage = Convert.ToInt32(pageBox.SelectedItem)-1;
+            int currentPage = Convert.ToInt32(pageBox.SelectedItem) - 1;
 
             if (isFiltersApplied == true)
             {
@@ -184,7 +193,7 @@ namespace RegistryOfEstablisment.View
                 return;
             }
 
-            PopulateGridRows(GetOrgsRegistry(currentPage*paginationCount, paginationCount));
+            PopulateGridRows(GetOrgsRegistry(currentPage * paginationCount, paginationCount));
         }
     }
 }

@@ -1,10 +1,6 @@
 ﻿using RegistryOfEstablisment.Model.Entities;
 using RegistryOfEstablisment.Unit;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RegistryOfEstablisment.Controller
 {
@@ -15,6 +11,12 @@ namespace RegistryOfEstablisment.Controller
         {
             return _unit.EnterpriseTypes.GetAccessedTypes();
         }
+
+        public IEnumerable<EnterpriseType> GetAllTypes()
+        {
+            return _unit.EnterpriseTypes.GetAll();
+        }
+
 
         public bool IsForRegistration(EnterpriseType type)
         {

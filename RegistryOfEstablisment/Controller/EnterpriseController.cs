@@ -1,11 +1,9 @@
 ﻿using RegistryOfEstablisment.Model.Entities;
-using RegistryOfEstablisment.Model.Repositories;
 using RegistryOfEstablisment.Unit;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Linq.Expressions;
 
 namespace RegistryOfEstablisment.Controller
 {
@@ -16,14 +14,29 @@ namespace RegistryOfEstablisment.Controller
         {
             _unit.Enterprises.Add(ent);
         }
-        public Enterprise GetEnterprise(int enterpriseID)
+        public Enterprise GetEnterpriseByID(int enterpriseID)
         {
             return _unit.Enterprises.GetById(enterpriseID);
         }
 
-        public List<ValueTuple<Enterprise, bool>> GetRegistriesList()
+        public List<ValueTuple<Enterprise, bool>> GetFilteredEnterprises(Expression<Func<Enterprise, bool>>[] filters, int index, int count)
         {
-            return _unit.Enterprises.GetAccessedRegistries();
+            return _unit.Enterprises.GetAccessedRegistry(_unit.Enterprises.GetFilteredEnterprises(filters, index, count).ToList()).ToList();
+        }
+
+        public int GetFilteredCount(Expression<Func<Enterprise, bool>>[] filters)
+        {
+            return _unit.Enterprises.GetFilteredCount(filters);
+        }
+
+        public int GetCount()
+        {
+            return _unit.Enterprises.GetCount();
+        }
+
+        public List<ValueTuple<Enterprise, bool>> GetRegistryList(int index, int count)
+        {
+            return _unit.Enterprises.GetAccessedRegistry(_unit.Enterprises.GetSome(index, count).ToList()).ToList();
         }
     }
 }

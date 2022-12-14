@@ -1,6 +1,6 @@
-﻿using System;
+﻿using RegistryOfEstablisment.UnitControl;
+using System;
 using System.Windows.Forms;
-using RegistryOfEstablisment.UnitControl;
 
 namespace RegistryOfEstablisment
 {
@@ -22,7 +22,7 @@ namespace RegistryOfEstablisment
                 falseAuthLabel.Visible = true;
                 return;
             }
-           
+
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
@@ -39,7 +39,7 @@ namespace RegistryOfEstablisment
         {
             if (this.DialogResult == DialogResult.OK)
                 return;
-            
+
             this.DialogResult = DialogResult.Cancel;
         }
     }

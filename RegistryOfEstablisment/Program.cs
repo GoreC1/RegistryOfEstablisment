@@ -1,14 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Microsoft.EntityFrameworkCore;
 using RegistryOfEstablisment.Model;
-using RegistryOfEstablisment.View;
 using RegistryOfEstablisment.Unit;
-using RegistryOfEstablisment.Model.Entities;
 using RegistryOfEstablisment.UnitControl;
+using RegistryOfEstablisment.View;
+using System;
+using System.Windows.Forms;
 
 namespace RegistryOfEstablisment
 {

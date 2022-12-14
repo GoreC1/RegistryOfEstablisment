@@ -1,5 +1,4 @@
 ﻿using RegistryOfEstablisment.Model.Entities;
-using RegistryOfEstablisment.Model.Repositories;
 using RegistryOfEstablisment.Unit;
 
 namespace RegistryOfEstablisment.Controller

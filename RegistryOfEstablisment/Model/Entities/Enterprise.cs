@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace RegistryOfEstablisment.Model.Entities
+﻿namespace RegistryOfEstablisment.Model.Entities
 {
-    public class Enterprise : BaseEntity 
+    public class Enterprise : BaseEntity
     {
         public EnterpriseType Type { get; set; }
         public ManagementTerritory ManagementTerritory { get; set; }

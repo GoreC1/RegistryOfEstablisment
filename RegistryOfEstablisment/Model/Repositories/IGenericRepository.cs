@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RegistryOfEstablisment.Model.Repositories
 {
@@ -12,6 +9,7 @@ namespace RegistryOfEstablisment.Model.Repositories
         T GetById(int id);
         IEnumerable<T> GetAll();
         IEnumerable<T> Find(Expression<Func<T, bool>> expression);
+        int GetCount();
         void Update(T entity);
         void Add(T entity);
         void AddRange(IEnumerable<T> entities);

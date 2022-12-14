@@ -1,15 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using RegistryOfEstablisment.Model.Entities;
+﻿using RegistryOfEstablisment.Model.Entities;
 using RegistryOfEstablisment.UnitControl;
-using RegistryOfEstablisment.View;
+using System;
+using System.Windows.Forms;
 
 namespace RegistryOfEstablisment.View
 {
@@ -23,7 +15,7 @@ namespace RegistryOfEstablisment.View
             _unit = unit;
             _enterprise = ent;
 
-            if (!_unit.EnterpriseTypeController.IsForRegistration(ent.Type)) 
+            if (!_unit.EnterpriseTypeController.IsForRegistration(ent.Type))
             {
                 registrationButton.Visible = false;
             }

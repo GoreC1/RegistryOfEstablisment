@@ -38,5 +38,10 @@ namespace RegistryOfEstablisment.Controller
         {
             return _unit.Enterprises.GetAccessedRegistry(_unit.Enterprises.GetSome(index, count).ToList()).ToList();
         }
+
+        public Enterprise GetLastEnterprise()
+        {
+            return _unit.Enterprises.GetLastEnterprise();
+        }
     }
 }

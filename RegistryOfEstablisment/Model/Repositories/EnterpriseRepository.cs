@@ -171,5 +171,24 @@ namespace RegistryOfEstablisment.Model.Repositories
             }
             return result;
         }
+
+        public void Update(Enterprise newEnterprise)
+        {
+            var newEnt = _context.Enterprises.Where(c => c.Id== newEnterprise.Id).FirstOrDefault();
+
+            newEnt.Name = newEnterprise.Name;
+            newEnt.Type = newEnterprise.Type;
+            newEnt.ITN = newEnterprise.ITN;
+            newEnt.ManagementTerritory = newEnterprise.ManagementTerritory;
+            newEnt.Address = newEnterprise.Address;
+            newEnt.RealAddress = newEnterprise.RealAddress;
+            newEnt.LegalEntity = newEnterprise.LegalEntity;
+            newEnt.Checkpoint = newEnterprise.Checkpoint;
+            newEnt.TelephoneNumber = newEnterprise.TelephoneNumber;
+            newEnt.Email = newEnterprise.Email;
+            newEnt.WebSite = newEnterprise.WebSite;
+
+            _context.SaveChanges();
+        }
     }
 }

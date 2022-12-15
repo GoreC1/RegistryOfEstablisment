@@ -123,7 +123,7 @@ namespace RegistryOfEstablisment.View
         //открывает форму изменения организации
         private void changeESButton_Click(object sender, EventArgs e)
         {
-            EstablismentCreationForm esForm = new(_unit);
+            EstablishmentChangingForm esForm = new(_unit, Convert.ToInt32(dataGridView1.CurrentRow.Cells[0].Value));
             esForm.ShowDialog();
         }
 
@@ -180,6 +180,17 @@ namespace RegistryOfEstablisment.View
             list = GetOrgsRegistry(0, paginationCount);
             PopulateGridRows(list);
         }
+        private void deleteButton_Click(object sender, EventArgs e)
+        {
+            DialogResult dr = MessageBox.Show("Вы уверены что хотите продолжить??", "Удаление", MessageBoxButtons.YesNo);
+            _unit.EnterpriseController.DeleteEnterprise(Convert.ToInt32(dataGridView1.CurrentRow.Cells[0].Value));
+        }
+
+        //private void OpenEnterpriseCard(int id)
+        //{
+        //    EnterpriseController.GetEnterpise(id);
+        //    EnterpriseController.GetRegistrations(id);
+        //}
 
         //переходит на нужную страницу DataGridView
         private void pageBox_SelectionChangeCommitted(object sender, EventArgs e)

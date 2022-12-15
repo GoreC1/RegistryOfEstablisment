@@ -1,33 +1,47 @@
 ﻿using RegistryOfEstablisment.Model.Entities;
 using RegistryOfEstablisment.UnitControl;
 using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace RegistryOfEstablisment.View
 {
-    public partial class EstablismentCreationForm : Form
+    public partial class EstablishmentChangingForm : Form
     {
         readonly IUnitOfControl _unit;
-        public EstablismentCreationForm(IUnitOfControl unit)
+        readonly int ID;
+        public EstablishmentChangingForm(IUnitOfControl unit, int enterpriseID)
         {
             InitializeComponent();
             _unit = unit;
+            ID = enterpriseID;
         }
 
-        private void EstablismentCreationForm_Load(object sender, EventArgs e)
+        private void EstablishmentChangingForm_Load(object sender, EventArgs e)
         {
             EnterpriseType[] types = _unit.EnterpriseTypeController.GetAccessedTypes().ToArray();
             typeBox.Items.AddRange(types);
 
             ManagementTerritory[] territories = _unit.ManagementTerritoryController.GetAccessedTerritories().ToArray();
             territoryBox.Items.AddRange(territories);
+
+            InsertValues();
         }
 
-        //Регистрация новой записи на чипирование
-        private void createButton_Click(object sender, EventArgs e)
+        private void cancelButton_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.Cancel;
+            Close();
+        }
+
+        private void changeButton_Click(object sender, EventArgs e)
         {
             if (!CheckCompletion())
             {
@@ -35,8 +49,9 @@ namespace RegistryOfEstablisment.View
                 return;
             }
 
-            Enterprise ent = new()
+            Enterprise newEnterprise = new()
             {
+                Id = ID,
                 Name = nameBox.Text,
                 LegalEntity = legalEntityBox.Text,
                 RealAddress = factAdressBox.Text,
@@ -50,13 +65,11 @@ namespace RegistryOfEstablisment.View
                 Email = mailBox.Text
             };
 
-            _unit.EnterpriseController.AddEnterprise(ent);
-
-            this.DialogResult = DialogResult.OK;
-            this.Close();
+            _unit.EnterpriseController.UpdateEnterprise(newEnterprise);
+            DialogResult = DialogResult.OK;
+            Close();
         }
 
-        //проверка заполнения
         private bool CheckCompletion()
         {
             string regTel = @"^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$";
@@ -75,25 +88,34 @@ namespace RegistryOfEstablisment.View
             ShowTextErrors(webSiteBox, Regex.IsMatch(webSiteBox.Text, regWeb));
             ShowTextErrors(mailBox, Regex.IsMatch(mailBox.Text, regMail));
 
-            return nameBox.Text.Length > 0 && legalEntityBox.Text.Length > 0 && factAdressBox.Text.Length > 0 && regAdressBox.Text.Length > 0 && typeBox.SelectedItem != null 
-                && checkpointBox.Text.Length > 0 && ITNBox.Text.Length > 0 && territoryBox.SelectedItem != null && Regex.IsMatch(telBox.Text, regTel) && Regex.IsMatch(webSiteBox.Text, regWeb) 
+            return nameBox.Text.Length > 0 && legalEntityBox.Text.Length > 0 && factAdressBox.Text.Length > 0 && regAdressBox.Text.Length > 0 && typeBox.SelectedItem != null
+                && checkpointBox.Text.Length > 0 && ITNBox.Text.Length > 0 && territoryBox.SelectedItem != null && Regex.IsMatch(telBox.Text, regTel) && Regex.IsMatch(webSiteBox.Text, regWeb)
                 && Regex.IsMatch(mailBox.Text, regMail);
         }
 
-        private void cancelButton_Click(object sender, EventArgs e)
+        private void InsertValues()
         {
-            this.DialogResult = DialogResult.Cancel;
-            this.Close();
+            Enterprise ent = _unit.EnterpriseController.GetEnterpriseByID(ID);
+
+            nameBox.Text = ent.Name;
+            legalEntityBox.Text = ent.LegalEntity;
+            factAdressBox.Text = ent.RealAddress;
+            regAdressBox.Text = ent.Address;
+            typeBox.SelectedItem = ent.Type;
+            checkpointBox.Text = ent.Checkpoint.ToString();
+            ITNBox.Text = ent.ITN.ToString();
+            territoryBox.SelectedItem = ent.ManagementTerritory;
+            telBox.Text = ent.TelephoneNumber;
+            webSiteBox.Text = ent.WebSite;
+            mailBox.Text = ent.Email;
         }
 
-        //проверка ввода КПП
         private void checkpointBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsDigit(e.KeyChar) || checkpointBox.Text.Length == 9)
                 e.Handled = true;
         }
 
-        //Проверка ввода ИНН
         private void ITNBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsDigit(e.KeyChar) || ITNBox.Text.Length == 12)

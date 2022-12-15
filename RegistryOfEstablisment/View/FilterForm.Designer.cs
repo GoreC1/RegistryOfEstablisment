@@ -130,6 +130,8 @@ namespace RegistryOfEstablisment.View
             // 
             // typeBox
             // 
+            this.typeBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.typeBox.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.typeBox.FormattingEnabled = true;
             this.typeBox.Location = new System.Drawing.Point(151, 170);
             this.typeBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);

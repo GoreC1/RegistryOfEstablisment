@@ -240,6 +240,8 @@ namespace RegistryOfEstablisment.View
             // 
             // territoryBox
             // 
+            this.territoryBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.territoryBox.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.territoryBox.FormattingEnabled = true;
             this.territoryBox.Location = new System.Drawing.Point(353, 147);
             this.territoryBox.Name = "territoryBox";
@@ -248,6 +250,8 @@ namespace RegistryOfEstablisment.View
             // 
             // typeBox
             // 
+            this.typeBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.typeBox.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.typeBox.FormattingEnabled = true;
             this.typeBox.Location = new System.Drawing.Point(7, 62);
             this.typeBox.Name = "typeBox";

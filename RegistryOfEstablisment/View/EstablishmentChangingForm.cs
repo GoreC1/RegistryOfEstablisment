@@ -24,6 +24,7 @@ namespace RegistryOfEstablisment.View
             ID = enterpriseID;
         }
 
+        //Заполнение всех полей данными
         private void EstablishmentChangingForm_Load(object sender, EventArgs e)
         {
             EnterpriseType[] types = _unit.EnterpriseTypeController.GetAccessedTypes().ToArray();
@@ -41,6 +42,7 @@ namespace RegistryOfEstablisment.View
             Close();
         }
 
+        //Изменение существующией записи
         private void changeButton_Click(object sender, EventArgs e)
         {
             if (!CheckCompletion())
@@ -70,6 +72,7 @@ namespace RegistryOfEstablisment.View
             Close();
         }
 
+        //проверка заполнения с указанием неверных полей
         private bool CheckCompletion()
         {
             string regTel = @"^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$";
@@ -110,18 +113,21 @@ namespace RegistryOfEstablisment.View
             mailBox.Text = ent.Email;
         }
 
+        //проверка ввода КПП
         private void checkpointBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsDigit(e.KeyChar) || checkpointBox.Text.Length == 9)
                 e.Handled = true;
         }
 
+        //Проверка ввода ИНН
         private void ITNBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsDigit(e.KeyChar) || ITNBox.Text.Length == 12)
                 e.Handled = true;
         }
 
+        //проверка и указанме на неверные поля
         private void ShowTextErrors(TextBox box, bool condition)
         {
             if (!condition)

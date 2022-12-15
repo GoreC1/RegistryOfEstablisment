@@ -65,6 +65,11 @@ namespace RegistryOfEstablisment.Model.Repositories
                                              .ToList();
         }
 
+        public Enterprise GetLastEnterprise()
+        {
+            return _context.Enterprises.LastOrDefault();
+        }
+
         public new Enterprise GetById(int id)
         {
             return _context.Set<Enterprise>().Where(c => c.Id == id)
@@ -167,9 +172,9 @@ namespace RegistryOfEstablisment.Model.Repositories
             return result;
         }
 
-        public void Update(Enterprise newEnterprise)
+        public new void Update(Enterprise newEnterprise)
         {
-            var newEnt = _context.Enterprises.Where(c => c.Id== newEnterprise.Id).FirstOrDefault();
+            var newEnt = _context.Enterprises.Where(c => c.Id == newEnterprise.Id).FirstOrDefault();
 
             newEnt.Name = newEnterprise.Name;
             newEnt.Type = newEnterprise.Type;

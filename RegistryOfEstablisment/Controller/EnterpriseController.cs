@@ -33,18 +33,25 @@ namespace RegistryOfEstablisment.Controller
         {
             return _unit.Enterprises.GetCount();
         }
-        public void DeleteEnterprise(int enterpriseID)
-        {
-            _unit.Enterprises.Remove(GetEnterpriseByID(enterpriseID));
-        }
 
         public List<ValueTuple<Enterprise, bool>> GetRegistryList(int index, int count)
         {
             return _unit.Enterprises.GetAccessedRegistry(_unit.Enterprises.GetSome(index, count).ToList()).ToList();
         }
+
         public void UpdateEnterprise(Enterprise newEnterprise)
         {
             _unit.Enterprises.Update(newEnterprise);
+        }
+
+        public Enterprise GetLastEnterprise()
+        {
+            return _unit.Enterprises.GetLastEnterprise();
+        }
+
+        public void DeleteEnterprise(int enterpriseID)
+        {
+            _unit.Enterprises.Remove(GetEnterpriseByID(enterpriseID));
         }
     }
 }

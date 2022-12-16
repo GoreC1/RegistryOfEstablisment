@@ -20,10 +20,5 @@ namespace RegistryOfEstablisment.Unit
             EnterpriseTypes = new EnterpriseTypeRepository(context);
             ManagementTerritories = new ManagementTerritoryRepository(context);
         }
-
-        public void Dispose()
-        {
-            _context.Dispose();
-        }
     }
 }

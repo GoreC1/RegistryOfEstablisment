@@ -65,6 +65,7 @@ namespace RegistryOfEstablisment.View
             this.dataGridView1.Size = new System.Drawing.Size(974, 250);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
+            this.dataGridView1.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_ColumnHeaderMouseClick);
             // 
             // filterButton
             // 
@@ -100,7 +101,7 @@ namespace RegistryOfEstablisment.View
             this.button3.TabIndex = 3;
             this.button3.Text = "Добавить";
             this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.addESButton_Click);
+            this.button3.Click += new System.EventHandler(this.AddESButton_Click);
             // 
             // changeESButton
             // 
@@ -112,7 +113,7 @@ namespace RegistryOfEstablisment.View
             this.changeESButton.TabIndex = 4;
             this.changeESButton.Text = "Изменить";
             this.changeESButton.UseVisualStyleBackColor = true;
-            this.changeESButton.Click += new System.EventHandler(this.changeESButton_Click);
+            this.changeESButton.Click += new System.EventHandler(this.ChangeESButton_Click);
             // 
             // deleteButton
             // 
@@ -189,7 +190,7 @@ namespace RegistryOfEstablisment.View
             this.pageBox.Name = "pageBox";
             this.pageBox.Size = new System.Drawing.Size(70, 23);
             this.pageBox.TabIndex = 10;
-            this.pageBox.SelectionChangeCommitted += new System.EventHandler(this.pageBox_SelectionChangeCommitted);
+            this.pageBox.SelectionChangeCommitted += new System.EventHandler(this.PageBox_SelectionChangeCommitted);
             // 
             // panel1
             // 

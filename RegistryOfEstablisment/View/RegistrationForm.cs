@@ -64,7 +64,7 @@ namespace RegistryOfEstablisment.View
             }
         }
 
-        private void acceptButton_Click(object sender, EventArgs e)
+        private void AcceptButton_Click(object sender, EventArgs e)
         {
             if (!CheckCompletion())
             {

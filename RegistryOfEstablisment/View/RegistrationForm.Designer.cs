@@ -143,7 +143,7 @@ namespace RegistryOfEstablisment.View
             this.acceptButton.TabIndex = 49;
             this.acceptButton.Text = "Подтвердить";
             this.acceptButton.UseVisualStyleBackColor = true;
-            this.acceptButton.Click += new System.EventHandler(this.acceptButton_Click);
+            this.acceptButton.Click += new System.EventHandler(this.AcceptButton_Click);
             // 
             // DateBox
             // 

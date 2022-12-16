@@ -19,7 +19,7 @@ namespace RegistryOfEstablisment.Controller
         {
             _logger.Trace($"Контроллер запрашивает создание организации у репозитория");
             _unit.Enterprises.Add(ent);
-            _logger.Info($"Организация [ID = {GetLastEnterprise().Id}] успешно создана");
+            Logger.Info($"Организация [ID = {ent.Id}] успешно создана");
         }
 
         public Enterprise GetEnterpriseByID(int enterpriseID)

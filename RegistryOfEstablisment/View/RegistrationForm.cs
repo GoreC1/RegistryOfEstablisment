@@ -1,7 +1,10 @@
-﻿using RegistryOfEstablisment.Model.Entities;
+﻿using NLog;
+using NLog.Fluent;
+using RegistryOfEstablisment.Model.Entities;
 using RegistryOfEstablisment.UnitControl;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -12,11 +15,14 @@ namespace RegistryOfEstablisment.View
     {
         private readonly IUnitOfControl _unit;
         private readonly Enterprise _enterprise;
+        private static Logger Logger = LogManager.GetCurrentClassLogger();
+
         public RegistrationForm(IUnitOfControl unit, Enterprise enterprise)
         {
             InitializeComponent();
             _unit = unit;
             _enterprise = enterprise;
+            Logger.Debug($"Открыта форма регистрации в организацию [ID - {enterprise.Id}]");
         }
 
         private void RegistrationForm_Load(object sender, EventArgs e)
@@ -37,6 +43,7 @@ namespace RegistryOfEstablisment.View
                 DateBox.Items.Add(currentDate.ToShortDateString());
                 currentDate = currentDate.AddDays(1);
             }
+            Logger.Trace($"Данные текущего пользователя подргужены");
         }
 
         //Прогрузка свободного времени для записи
@@ -62,6 +69,7 @@ namespace RegistryOfEstablisment.View
             if (!CheckCompletion())
             {
                 MessageBox.Show("Данные заполнены некорректно!");
+                Logger.Warn($"Запись невозможна - данные заполнены некорректно");
                 return;
             }
 
@@ -78,7 +86,10 @@ namespace RegistryOfEstablisment.View
                                                     MessageBoxDefaultButton.Button1,
                                                     MessageBoxOptions.DefaultDesktopOnly);
             if (!(confirmation == DialogResult.Yes))
+            {
+                Logger.Info("Регистрация отменена");
                 return;
+            }
 
             Registration newReg = new()
             {
@@ -88,19 +99,52 @@ namespace RegistryOfEstablisment.View
                 PetType = PetTypeTextBox.Text,
                 AppointmentTime = actualAppointmentTime
             };
+            Logger.Trace($"Создан новый экземпляр класса Registration");
 
             _unit.RegistrationController.AddNewRegistration(newReg);
             MessageBox.Show($"Вы были записаны на {appointmentDate.ToLongDateString()} {appointmentTime.ToShortTimeString()}");
             this.Close();
         }
 
-        //Проверка заполнения формы
+        //Проверка заполнения формы с указанием неверных полей
         private bool CheckCompletion()
         {
             string regTel = @"^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$";
 
+            ShowTextErrors(OwnerTextBox, OwnerTextBox.Text.Length > 0);
+            ShowTextErrors(AdressTextBox, AdressTextBox.Text.Length > 0);
+            ShowTextErrors(TelephoneNumberTextBox, Regex.IsMatch(TelephoneNumberTextBox.Text, regTel));
+            ShowTextErrors(PetNameTextBox, PetNameTextBox.Text.Length > 0);
+            ShowTextErrors(PetTypeTextBox, PetTypeTextBox.Text.Length > 0);
+            ShowComboErrors(DateBox, DateBox.SelectedItem != null);
+            ShowComboErrors(TimeBox, TimeBox.SelectedItem != null);
+
             return OwnerTextBox.Text.Length > 0 && AdressTextBox.Text.Length > 0 && Regex.IsMatch(TelephoneNumberTextBox.Text, regTel) && PetNameTextBox.Text.Length > 0
                    && PetTypeTextBox.Text.Length > 0 && DateBox.SelectedItem != null && TimeBox.SelectedItem != null;
+        }
+
+        //проверка и указанме на неверные поля
+        private void ShowTextErrors(TextBox box, bool condition)
+        {
+            if (!condition)
+                box.BackColor = Color.IndianRed;
+            else
+                box.BackColor = SystemColors.Window;
+        }
+
+        private void ShowComboErrors(ComboBox box, bool condition)
+        {
+            if (!condition)
+                box.BackColor = Color.IndianRed;
+            else
+                box.BackColor = SystemColors.Window;
+        }
+
+        private void cancelButton_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.Cancel;
+            Close();
+            Logger.Debug("Форма регистрации закрыта");
         }
     }
 }

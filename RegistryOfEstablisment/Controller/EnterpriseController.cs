@@ -15,12 +15,14 @@ namespace RegistryOfEstablisment.Controller
         private static Logger Logger = LogManager.GetCurrentClassLogger();
 
         public EnterpriseController(IUnitOfWork unit) : base(unit) { }
+        
         public void AddEnterprise(Enterprise ent)
         {
             Logger.Trace($"Контроллер запрашивает создание организации у репозитория");
             _unit.Enterprises.Add(ent);
             Logger.Info($"Организация [ID = {GetLastEnterprise().Id}] успешно создана");
         }
+
         public Enterprise GetEnterpriseByID(int enterpriseID)
         {
             return _unit.Enterprises.GetById(enterpriseID);

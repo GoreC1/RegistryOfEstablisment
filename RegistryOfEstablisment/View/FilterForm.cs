@@ -29,31 +29,31 @@ namespace RegistryOfEstablisment.View
 
             if (nameBox.Text != "")
             {
-                expressions.Add((c => c.Name.StartsWith(nameBox.Text)));
+                expressions.Add((c => c.Name.ToLower().Contains(nameBox.Text.ToLower())));
                 Logger.Trace($"Фильтр имени изменён");
             }
 
             if (ITNBox.Text != "")
             {
-                expressions.Add((c => c.ITN.ToString().StartsWith(ITNBox.Text)));
+                expressions.Add((c => c.ITN.ToString().ToLower().StartsWith(ITNBox.Text.ToLower())));
                 Logger.Trace($"Фильтр ИИН изменён");
             }
 
             if (checkpointBox.Text != "")
             {
-                expressions.Add((c => c.Checkpoint.ToString().StartsWith(checkpointBox.Text)));
+                expressions.Add((c => c.Checkpoint.ToString().ToLower().StartsWith(checkpointBox.Text.ToLower())));
                 Logger.Trace($"Фильтр КПП изменён");
             }
 
             if (addressBox.Text != "")
             {
-                expressions.Add((c => c.Address.StartsWith(addressBox.Text)));
+                expressions.Add((c => c.Address.ToLower().Contains(addressBox.Text.ToLower())));
                 Logger.Trace($"Фильтр адреса регистрации изменён");
             }
 
             if (realAddressBox.Text != "")
             {
-                expressions.Add((c => c.RealAddress.StartsWith(realAddressBox.Text)));
+                expressions.Add((c => c.RealAddress.ToLower().Contains(realAddressBox.Text.ToLower())));
                 Logger.Trace($"Фильтр фактического адреса изменён");
             }
 
@@ -65,7 +65,7 @@ namespace RegistryOfEstablisment.View
 
             if (legalEntityBox.Text != "")
             {
-                expressions.Add((c => c.LegalEntity.StartsWith(legalEntityBox.Text)));
+                expressions.Add((c => c.LegalEntity.ToLower().Contains(legalEntityBox.Text.ToLower())));
                 Logger.Trace($"Фильтр юр. лица изменён");
             }
 
@@ -114,14 +114,14 @@ namespace RegistryOfEstablisment.View
         //проверка ввода КПП
         private void checkpointBox_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsDigit(e.KeyChar) || checkpointBox.Text.Length == 9)
+            if ((!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar)) || (checkpointBox.Text.Length == 9 && !char.IsControl(e.KeyChar)))
                 e.Handled = true;
         }
 
         //Проверка ввода ИНН
         private void ITNBox_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsDigit(e.KeyChar) || ITNBox.Text.Length == 12)
+            if ((!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar)) || (ITNBox.Text.Length == 12 && !char.IsControl(e.KeyChar)))
                 e.Handled = true;
         }
 

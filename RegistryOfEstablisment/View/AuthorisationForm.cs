@@ -23,7 +23,7 @@ namespace RegistryOfEstablisment
         {
             if (!_unit.AuthController.Authentificate(LoginTextBox.Text, PasswordTextBox.Text))
             {
-                Logger.Warn("Авторизация не выполнена - данные введены некорректно");
+                Logger.Warn($"Авторизация не выполнена - данные введены некорректно");
                 falseAuthLabel.Visible = true;
                 return;
             }
@@ -72,6 +72,11 @@ namespace RegistryOfEstablisment
             {
                 AuthButton_Click(sender, e);
             }
+        }
+
+        private void AuthorisationForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

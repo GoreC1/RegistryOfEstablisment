@@ -111,6 +111,7 @@ namespace RegistryOfEstablisment
             this.Name = "AuthorisationForm";
             this.Text = "Авторизация";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AuthorisationForm_FormClosing);
+            this.Load += new System.EventHandler(this.AuthorisationForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

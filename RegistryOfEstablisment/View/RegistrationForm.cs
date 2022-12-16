@@ -22,7 +22,7 @@ namespace RegistryOfEstablisment.View
             InitializeComponent();
             _unit = unit;
             _enterprise = enterprise;
-            Logger.Debug($"Открыта форма регистрации в организацию [ID - {enterprise.Id}]{enterprise.Name}");
+            Logger.Debug($"Открыта форма регистрации в организацию [ID - {enterprise.Id}]");
         }
 
         private void RegistrationForm_Load(object sender, EventArgs e)
@@ -99,7 +99,7 @@ namespace RegistryOfEstablisment.View
                 PetType = PetTypeTextBox.Text,
                 AppointmentTime = actualAppointmentTime
             };
-            Logger.Trace($"Создан новый экземпляр класса Registration {newReg.User} - {newReg.Enterprise}");
+            Logger.Trace($"Создан новый экземпляр класса Registration");
 
             _unit.RegistrationController.AddNewRegistration(newReg);
             MessageBox.Show($"Вы были записаны на {appointmentDate.ToLongDateString()} {appointmentTime.ToShortTimeString()}");

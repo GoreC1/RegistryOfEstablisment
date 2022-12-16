@@ -120,7 +120,7 @@ namespace RegistryOfEstablisment.View
             webSiteBox.Text = ent.WebSite;
             mailBox.Text = ent.Email;
 
-            Logger.Trace($"Данные организации [ID - {ent.Id}]{ent.Name} подгружены");
+            Logger.Trace($"Данные организации [ID - {ent.Id}] подгружены");
         }
 
         //проверка ввода КПП

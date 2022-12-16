@@ -17,7 +17,7 @@ namespace RegistryOfEstablisment.View
             InitializeComponent();
             _unit = unit;
             _enterprise = ent;
-            Logger.Debug($"Открыта форма организации [ID - {ent.Id}]{ent.Name}");
+            Logger.Debug($"Открыта форма организации [ID - {ent.Id}]");
 
             if (!_unit.EnterpriseTypeController.IsForRegistration(ent.Type))
             {
@@ -35,7 +35,7 @@ namespace RegistryOfEstablisment.View
             webSiteBox.Text = _enterprise.WebSite;
             mailBox.Text = _enterprise.Email;
 
-            Logger.Trace($"Данные организации [ID - {_enterprise.Id}]{_enterprise.Name} подгружены");
+            Logger.Trace($"Данные организации [ID - {_enterprise.Id}] подгружены");
         }
 
         private void returnButton_Click(object sender, EventArgs e)

@@ -30,43 +30,43 @@ namespace RegistryOfEstablisment.View
             if (nameBox.Text != "")
             {
                 expressions.Add((c => c.Name.StartsWith(nameBox.Text)));
-                Logger.Trace($"Фильтр имени изменён на {nameBox.Text}");
+                Logger.Trace($"Фильтр имени изменён");
             }
 
             if (ITNBox.Text != "")
             {
                 expressions.Add((c => c.ITN.ToString().StartsWith(ITNBox.Text)));
-                Logger.Trace($"Фильтр ИИН изменён на {ITNBox.Text}");
+                Logger.Trace($"Фильтр ИИН изменён");
             }
 
             if (checkpointBox.Text != "")
             {
                 expressions.Add((c => c.Checkpoint.ToString().StartsWith(checkpointBox.Text)));
-                Logger.Trace($"Фильтр КПП изменён на {checkpointBox.Text}");
+                Logger.Trace($"Фильтр КПП изменён");
             }
 
             if (addressBox.Text != "")
             {
                 expressions.Add((c => c.Address.StartsWith(addressBox.Text)));
-                Logger.Trace($"Фильтр адреса регистрации изменён на {addressBox.Text}");
+                Logger.Trace($"Фильтр адреса регистрации изменён");
             }
 
             if (realAddressBox.Text != "")
             {
                 expressions.Add((c => c.RealAddress.StartsWith(realAddressBox.Text)));
-                Logger.Trace($"Фильтр фактического адреса изменён на {realAddressBox.Text}");
+                Logger.Trace($"Фильтр фактического адреса изменён");
             }
 
             if (typeBox.SelectedItem != null)
             {
                 expressions.Add((c => c.Type == typeBox.SelectedItem));
-                Logger.Trace($"Фильтр типа организации изменён на {typeBox.SelectedItem}");
+                Logger.Trace($"Фильтр типа организации изменён");
             }
 
             if (legalEntityBox.Text != "")
             {
                 expressions.Add((c => c.LegalEntity.StartsWith(legalEntityBox.Text)));
-                Logger.Trace($"Фильтр юр. лица изменён на {legalEntityBox.Text}");
+                Logger.Trace($"Фильтр юр. лица изменён");
             }
 
             _registry.filterCache[0] = nameBox.Text;

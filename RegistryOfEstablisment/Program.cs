@@ -1,14 +1,17 @@
+using NLog;
 using RegistryOfEstablisment.Model;
 using RegistryOfEstablisment.Unit;
 using RegistryOfEstablisment.UnitControl;
 using RegistryOfEstablisment.View;
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace RegistryOfEstablisment
 {
     public static class Program
     {
+        private static Logger Logger = LogManager.GetCurrentClassLogger();
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>
@@ -39,7 +42,15 @@ namespace RegistryOfEstablisment
             //User user = new User { Name = "TestAdmin", Role = role, ManagementTerritory = territory, Address = "Тюмень, Одесская 55, 142", TelephoneNumber = "89087563241", Login = "admin", Password = "admin" };
             //dataContext.Set<User>().Add(user);
             //dataContext.SaveChanges();
-            Application.Run(new RegistryForm(unitOfControl));
+            Logger.Info("Приложение запущено");
+            try
+            {
+                Application.Run(new RegistryForm(unitOfControl));
+            }
+            catch(Exception ex)
+            {
+                Logger.Fatal($"Приложение не запущено - {ex.Message}");
+            }
         }
 
     }

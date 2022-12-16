@@ -1,4 +1,5 @@
-﻿using RegistryOfEstablisment.Model.Entities;
+﻿using NLog;
+using RegistryOfEstablisment.Model.Entities;
 using RegistryOfEstablisment.UnitControl;
 using System;
 using System.Collections.Generic;
@@ -12,12 +13,14 @@ namespace RegistryOfEstablisment.View
     {
         private readonly IUnitOfControl _unit;
         private RegistryForm _registry;
+        private static Logger Logger = LogManager.GetCurrentClassLogger();
 
         public FilterForm(IUnitOfControl unit, RegistryForm registry)
         {
             InitializeComponent();
             _registry = registry;
             _unit = unit;
+            Logger.Debug("Открыта форма фильтров реестра");
         }
 
         public Expression<Func<Enterprise, bool>>[] GetFilters()
@@ -27,36 +30,43 @@ namespace RegistryOfEstablisment.View
             if (nameBox.Text != "")
             {
                 expressions.Add((c => c.Name.StartsWith(nameBox.Text)));
-            }    
+                Logger.Trace($"Фильтр имени изменён");
+            }
 
             if (ITNBox.Text != "")
             {
                 expressions.Add((c => c.ITN.ToString().StartsWith(ITNBox.Text)));
+                Logger.Trace($"Фильтр ИИН изменён");
             }
 
             if (checkpointBox.Text != "")
             {
                 expressions.Add((c => c.Checkpoint.ToString().StartsWith(checkpointBox.Text)));
+                Logger.Trace($"Фильтр КПП изменён");
             }
 
             if (addressBox.Text != "")
             {
                 expressions.Add((c => c.Address.StartsWith(addressBox.Text)));
+                Logger.Trace($"Фильтр адреса регистрации изменён");
             }
 
             if (realAddressBox.Text != "")
             {
                 expressions.Add((c => c.RealAddress.StartsWith(realAddressBox.Text)));
+                Logger.Trace($"Фильтр фактического адреса изменён");
             }
 
             if (typeBox.SelectedItem != null)
             {
                 expressions.Add((c => c.Type == typeBox.SelectedItem));
+                Logger.Trace($"Фильтр типа организации изменён");
             }
 
             if (legalEntityBox.Text != "")
             {
                 expressions.Add((c => c.LegalEntity.StartsWith(legalEntityBox.Text)));
+                Logger.Trace($"Фильтр юр. лица изменён");
             }
 
             _registry.filterCache[0] = nameBox.Text;
@@ -80,21 +90,25 @@ namespace RegistryOfEstablisment.View
             realAddressBox.Text = "";
             typeBox.SelectedItem = null;
             legalEntityBox.Text = "";
+            Logger.Debug("Фильтры очищены");
         }
 
         private void acceptButton_Click(object sender, EventArgs e)
         {
             _registry.filters = GetFilters();
             _registry.isFiltersApplied = true;
+            Logger.Debug("Фильтры применены");
 
             this.DialogResult = DialogResult.OK;
             this.Close();
+            Logger.Debug("Форма фильтров закрыта");
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
             this.Close();
+            Logger.Debug("Форма фильтров закрыта");
         }
 
         //проверка ввода КПП
@@ -121,7 +135,8 @@ namespace RegistryOfEstablisment.View
             realAddressBox.Text = _registry.filterCache[4].ToString();
             typeBox.SelectedItem = _registry.filterCache[5];
             legalEntityBox.Text = _registry.filterCache[6].ToString();
-            
+
+            Logger.Debug("Значения фильтров подгружены");
         }
 
         private void clearButton_Click(object sender, EventArgs e)

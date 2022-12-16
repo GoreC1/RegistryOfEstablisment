@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq.Expressions;
 using System.Windows.Forms;
+using NLog;
 
 namespace RegistryOfEstablisment.View
 {
@@ -16,6 +17,8 @@ namespace RegistryOfEstablisment.View
         public bool isFiltersApplied;
         public Expression<Func<Enterprise, bool>>[] filters;
         public object[] filterCache = new object[]{"","","","","",null,""};
+
+        private static Logger Logger = LogManager.GetCurrentClassLogger();
 
         public RegistryForm(IUnitOfControl unit)
         {
@@ -27,6 +30,7 @@ namespace RegistryOfEstablisment.View
 
         private void RegistryForm_Load(object sender, EventArgs e)
         {
+            Logger.Info("Приложение запущено");
             this.Hide();
 
             Form auth = new AuthorisationForm(_unit);
@@ -40,6 +44,7 @@ namespace RegistryOfEstablisment.View
                 PopulatePageBox(_unit.EnterpriseController.GetCount(), shownEntries);
                 PopulateGridColumns();
                 PopulateGridRows(list);
+                Logger.Info($"Реестр загружен, всего доступных организаций - {list.Count}");
                 return;
             }
 
@@ -127,9 +132,12 @@ namespace RegistryOfEstablisment.View
                 {
                     PopulatePageBox(_unit.EnterpriseController.GetFilteredCount(filters), paginationCount);
                     PopulateGridRows(_unit.EnterpriseController.GetFilteredEnterprises(filters, currentPage, paginationCount));
+                    Logger.Debug("Фильтры реестра применены");
                     return;
                 }
                 PopulateGridRows(GetOrgsRegistry(currentPage * paginationCount, paginationCount));
+
+                Logger.Debug("Реестр обновлён");
             }
 
         }
@@ -149,10 +157,12 @@ namespace RegistryOfEstablisment.View
                 {
                     PopulatePageBox(_unit.EnterpriseController.GetFilteredCount(filters), paginationCount);
                     PopulateGridRows(_unit.EnterpriseController.GetFilteredEnterprises(filters, currentPage, paginationCount));
+                    Logger.Debug("Фильтры реестра применены");
                     return;
                 }
 
                 PopulateGridRows(GetOrgsRegistry(currentPage * paginationCount, paginationCount));
+                Logger.Debug("Реестр обновлён");
             }
         }
 
@@ -169,11 +179,13 @@ namespace RegistryOfEstablisment.View
             {
                 PopulatePageBox(_unit.EnterpriseController.GetFilteredCount(filters), currentPagination);
                 PopulateGridRows(_unit.EnterpriseController.GetFilteredEnterprises(filters, 0, currentPagination));
+                Logger.Debug("Фильтры реестра применены");
             }
             else if (isFiltersApplied == false)
             {
                 PopulatePageBox(_unit.EnterpriseController.GetCount(), currentPagination);
                 PopulateGridRows(GetOrgsRegistry((currentPage - 1) * currentPagination, currentPagination));
+                Logger.Debug("Фильтры реестра не применены");
             }
         }
 
@@ -217,6 +229,7 @@ namespace RegistryOfEstablisment.View
             DialogResult dr = MessageBox.Show("Вы уверены что хотите продолжить??", "Удаление", MessageBoxButtons.YesNo);
             if (dr == DialogResult.Yes) 
             {
+                Logger.Debug($"Начато удаление организации [ID - {dataGridView1.CurrentRow.Cells[0].Value}]{dataGridView1.CurrentRow.Cells[1].Value}");
                 _unit.EnterpriseController.DeleteEnterprise(Convert.ToInt32(dataGridView1.CurrentRow.Cells[0].Value));
                 int paginationCount = Convert.ToInt32(paginationBox.SelectedItem);
                 int currentPage = Convert.ToInt32(pageBox.SelectedItem) - 1;
@@ -225,12 +238,16 @@ namespace RegistryOfEstablisment.View
                 {
                     PopulatePageBox(_unit.EnterpriseController.GetFilteredCount(filters), paginationCount);
                     PopulateGridRows(_unit.EnterpriseController.GetFilteredEnterprises(filters, currentPage, paginationCount));
+                    Logger.Debug("Фильтры реестра применены");
                     return;
                 }
                 PopulateGridRows(GetOrgsRegistry(currentPage * paginationCount, paginationCount));
+                Logger.Debug("Реестр обновлён");
+            } 
+            else
+            {
+                Logger.Info($"Удаление организации [ID - {dataGridView1.CurrentRow.Cells[0].Value}]{dataGridView1.CurrentRow.Cells[1].Value} отменено");
             }
-
-
         }
 
         //переходит на нужную страницу DataGridView
@@ -242,10 +259,12 @@ namespace RegistryOfEstablisment.View
             if (isFiltersApplied == true)
             {
                 PopulateGridRows(GetFilteredOrgsRegistry(filters, currentPage * paginationCount, paginationCount));
+                Logger.Debug("Фильтры реестра применены");
                 return;
             }
 
             PopulateGridRows(GetOrgsRegistry(currentPage * paginationCount, paginationCount));
+            Logger.Debug($"Выполнен переход на {pageBox.SelectedItem} страницу");
         }
 
         //экспорт в эксель
@@ -254,6 +273,7 @@ namespace RegistryOfEstablisment.View
             if (dataGridView1.Rows.Count == 0)
             {
                 MessageBox.Show("В таблице отсутствуют данные");
+                Logger.Warn("Таблица в экселе не может быть создана: dataGridView1.Rows.Count == 0");
                 return;
             }
 
@@ -300,6 +320,7 @@ namespace RegistryOfEstablisment.View
                     worksheet.Cells[i + 2, j + 1] = dataGridView1.Rows[i].Cells[j].Value.ToString();
                 }
             }
+            Logger.Info($"Реестр из {dataGridView1.Columns.Count} записей экспортирован в эксель пользователем [{CurrentUser.Id}]{CurrentUser.Name}");
         }
 
         ////Сортировка столбцов

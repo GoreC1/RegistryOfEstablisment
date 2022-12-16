@@ -1,4 +1,6 @@
-﻿using RegistryOfEstablisment.Model.Entities;
+﻿using NLog;
+using NLog.Fluent;
+using RegistryOfEstablisment.Model.Entities;
 using RegistryOfEstablisment.UnitControl;
 using System;
 using System.Collections.Generic;
@@ -13,11 +15,14 @@ namespace RegistryOfEstablisment.View
     {
         private readonly IUnitOfControl _unit;
         private readonly Enterprise _enterprise;
+        private static Logger Logger = LogManager.GetCurrentClassLogger();
+
         public RegistrationForm(IUnitOfControl unit, Enterprise enterprise)
         {
             InitializeComponent();
             _unit = unit;
             _enterprise = enterprise;
+            Logger.Debug($"Открыта форма регистрации в организацию [ID - {enterprise.Id}]{enterprise.Name}");
         }
 
         private void RegistrationForm_Load(object sender, EventArgs e)
@@ -38,6 +43,7 @@ namespace RegistryOfEstablisment.View
                 DateBox.Items.Add(currentDate.ToShortDateString());
                 currentDate = currentDate.AddDays(1);
             }
+            Logger.Trace($"Данные текущего пользователя подргужены");
         }
 
         //Прогрузка свободного времени для записи
@@ -63,6 +69,7 @@ namespace RegistryOfEstablisment.View
             if (!CheckCompletion())
             {
                 MessageBox.Show("Данные заполнены некорректно!");
+                Logger.Warn($"Запись невозможна - данные заполнены некорректно");
                 return;
             }
 
@@ -79,7 +86,10 @@ namespace RegistryOfEstablisment.View
                                                     MessageBoxDefaultButton.Button1,
                                                     MessageBoxOptions.DefaultDesktopOnly);
             if (!(confirmation == DialogResult.Yes))
+            {
+                Logger.Info("Регистрация отменена");
                 return;
+            }
 
             Registration newReg = new()
             {
@@ -89,6 +99,7 @@ namespace RegistryOfEstablisment.View
                 PetType = PetTypeTextBox.Text,
                 AppointmentTime = actualAppointmentTime
             };
+            Logger.Trace($"Создан новый экземпляр класса Registration {newReg.User} - {newReg.Enterprise}");
 
             _unit.RegistrationController.AddNewRegistration(newReg);
             MessageBox.Show($"Вы были записаны на {appointmentDate.ToLongDateString()} {appointmentTime.ToShortTimeString()}");
@@ -133,6 +144,7 @@ namespace RegistryOfEstablisment.View
         {
             DialogResult = DialogResult.Cancel;
             Close();
+            Logger.Debug("Форма регистрации закрыта");
         }
     }
 }

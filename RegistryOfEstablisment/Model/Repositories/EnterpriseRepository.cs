@@ -172,7 +172,7 @@ namespace RegistryOfEstablisment.Model.Repositories
             return result;
         }
 
-        public void Update(Enterprise newEnterprise)
+        public new void Update(Enterprise newEnterprise)
         {
             var newEnt = _context.Enterprises.Where(c => c.Id== newEnterprise.Id).FirstOrDefault();
 

@@ -11,11 +11,6 @@ namespace RegistryOfEstablisment.Model.Repositories
     {
         public EnterpriseRepository(DataContext context) : base(context) { }
 
-        public new IEnumerable<Enterprise> Find(Expression<Func<Enterprise, bool>> expression)
-        {
-            return _context.Set<Enterprise>().Where(expression);
-        }
-
         public IEnumerable<Enterprise> GetFilteredEnterprises(Expression<Func<Enterprise, bool>>[] filters, int index, int count)
         {
             var query = _context.Enterprises

@@ -65,7 +65,7 @@ namespace RegistryOfEstablisment.Controller
         {
             Logger.Trace($"Контроллер запрашивает удаление организации [ID = {enterpriseID}] у репозитория");
             _unit.Enterprises.Remove(GetEnterpriseByID(enterpriseID));
-            Logger.Info($"Организация успешно удаление");
+            Logger.Info($"Организация успешно удалена");
         }
     }
 }

@@ -42,7 +42,6 @@ namespace RegistryOfEstablisment
             //User user = new User { Name = "TestAdmin", Role = role, ManagementTerritory = territory, Address = "Тюмень, Одесская 55, 142", TelephoneNumber = "89087563241", Login = "admin", Password = "admin" };
             //dataContext.Set<User>().Add(user);
             //dataContext.SaveChanges();
-            Logger.Info("Приложение запущено");
             try
             {
                 Application.Run(new RegistryForm(unitOfControl));

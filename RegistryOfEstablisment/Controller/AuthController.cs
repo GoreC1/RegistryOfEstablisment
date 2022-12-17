@@ -6,7 +6,6 @@ namespace RegistryOfEstablisment.Controller
 {
     public class AuthController : BaseController
     {
-        private static Logger Logger = LogManager.GetCurrentClassLogger();
         public AuthController(IUnitOfWork unit) : base(unit) { }
         public bool Authentificate(string login, string password)
         {
@@ -19,7 +18,7 @@ namespace RegistryOfEstablisment.Controller
             CurrentUser.ManagementTerritory = authUser.ManagementTerritory;
             CurrentUser.TelephoneNumber = authUser.TelephoneNumber;
             CurrentUser.Address = authUser.Address;
-            Logger.Trace("Поля CurrentUser обновлены");
+            _logger.Trace("Поля CurrentUser обновлены");
 
             return true;
         }

@@ -1,9 +1,12 @@
-﻿using RegistryOfEstablisment.Unit;
+﻿using NLog;
+using RegistryOfEstablisment.Unit;
 
 namespace RegistryOfEstablisment.Controller
 {
-    public class BaseController : IBaseController
+    public class BaseController
     {
+        protected static Logger _logger = LogManager.GetCurrentClassLogger();
+        
         protected readonly IUnitOfWork _unit;
 
         public BaseController(IUnitOfWork unit)

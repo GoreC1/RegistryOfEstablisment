@@ -9,8 +9,6 @@ namespace RegistryOfEstablisment.Controller
 {
     public class RegistrationController : BaseController
     {
-        private static Logger Logger = LogManager.GetCurrentClassLogger();
-
         public RegistrationController(IUnitOfWork unit) : base(unit) { }
 
         public IEnumerable<Registration> GetRegistrationsByDayAndEnterprise(DateTime date, Enterprise ent)
@@ -20,9 +18,9 @@ namespace RegistryOfEstablisment.Controller
 
         public void AddNewRegistration(Registration reg)
         {
-            Logger.Trace($"Контроллер запрашивает создание регистрации {reg.User} - {reg.Enterprise} у репозитория");
+            _logger.Trace($"Контроллер запрашивает создание регистрации {reg.User} - {reg.Enterprise} у репозитория");
             _unit.Registrations.Add(reg);
-            Logger.Info($"Регистрация успешно создана. ID пользователя - {reg.User.Id}, ID организации - {reg.Enterprise.Id}, Питомец - {reg.PetName}, Время - {reg.AppointmentTime}");
+            _logger.Info($"Регистрация успешно создана. ID пользователя - {reg.User.Id}, ID организации - {reg.Enterprise.Id}, Питомец - {reg.PetName}, Время - {reg.AppointmentTime}");
         }
     }
 }

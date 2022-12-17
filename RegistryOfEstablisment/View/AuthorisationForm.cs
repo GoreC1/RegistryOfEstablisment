@@ -3,6 +3,9 @@ using System;
 using System.Windows.Forms;
 using NLog;
 using RegistryOfEstablisment.Model.Entities;
+using System.Drawing;
+using RegistryOfEstablisment.Properties;
+using System.Collections.ObjectModel;
 
 namespace RegistryOfEstablisment
 {
@@ -38,7 +41,7 @@ namespace RegistryOfEstablisment
         private void InitializePasswordTextBox()
         {
             PasswordTextBox.Text = "";
-            PasswordTextBox.PasswordChar = '*';
+            PasswordTextBox.UseSystemPasswordChar = true;
             PasswordTextBox.MaxLength = 21;
         }
 
@@ -77,6 +80,28 @@ namespace RegistryOfEstablisment
         private void AuthorisationForm_Load(object sender, EventArgs e)
         {
 
+        }
+
+        /// <summary>
+        /// Обрабатывает нажатие на изображение с раскрытием пароля
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
+        {
+            pictureBox1.Image = Resources.free_icon_eye_158746;
+            PasswordTextBox.UseSystemPasswordChar = false;
+        }
+
+        /// <summary>
+        /// Обрабатывает отпускание мыши с изображения с скрытием пароля
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
+        {
+            pictureBox1.Image = Resources.free_icon_hide_2767146;
+            PasswordTextBox.UseSystemPasswordChar = true;
         }
     }
 }

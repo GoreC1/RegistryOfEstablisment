@@ -57,6 +57,7 @@ namespace RegistryOfEstablisment.View
             }
 
             this.Close();
+            Logger.Info("Приложение закрыто");
         }
 
         //получает список организаций
@@ -382,6 +383,11 @@ namespace RegistryOfEstablisment.View
             {
                 dataGridView1.Columns[i].SortMode = DataGridViewColumnSortMode.Programmatic;
             }
+        }
+
+        private void dataGridView1_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            OpenESButton_Click(sender, e);
         }
     }
 }

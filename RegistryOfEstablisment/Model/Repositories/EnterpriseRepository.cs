@@ -105,6 +105,7 @@ namespace RegistryOfEstablisment.Model.Repositories
                 case "Подписант ОМСУ":
                 case "Подписант по отлову":
                 case "Подписант приюта":
+                case "Гость":
                     {
                         return false;
                     }
@@ -154,6 +155,7 @@ namespace RegistryOfEstablisment.Model.Repositories
                 case "Подписант ОМСУ":
                 case "Подписант по отлову":
                 case "Подписант приюта":
+                case "Гость":
                     {
                         foreach (Enterprise ent in list)
                         {

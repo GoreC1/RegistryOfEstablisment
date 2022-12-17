@@ -1,10 +1,12 @@
 using NLog;
 using RegistryOfEstablisment.Model;
+using RegistryOfEstablisment.Model.Entities;
 using RegistryOfEstablisment.Unit;
 using RegistryOfEstablisment.UnitControl;
 using RegistryOfEstablisment.View;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace RegistryOfEstablisment
@@ -37,9 +39,9 @@ namespace RegistryOfEstablisment
             //new Role() { Name="Оператор ОМСУ" } };
             //dataContext.Set<Role>().AddRange(roles);
             //dataContext.SaveChanges();
-            //Role role = dataContext.Set<Role>().FirstOrDefault(c => c.Name == "Оператор ОМСУ");
-            //ManagementTerritory territory = dataContext.Set<ManagementTerritory>().FirstOrDefault(c => c.Name == "Тюмень");
-            //User user = new User { Name = "TestAdmin", Role = role, ManagementTerritory = territory, Address = "Тюмень, Одесская 55, 142", TelephoneNumber = "89087563241", Login = "admin", Password = "admin" };
+            //Role role = dataContext.Set<Role>().FirstOrDefault(c => c.Name == "Гость");
+            //ManagementTerritory territory = dataContext.Set<ManagementTerritory>().FirstOrDefault(c => c.Name == "Рязань");
+            //User user = new User { Name = "Антонов Сергей Юрьевич", Role = role, ManagementTerritory = territory, Address = "Рязань, ул. Ленина 44, 161", TelephoneNumber = "89221937831", Login = "user3", Password = "user3" };
             //dataContext.Set<User>().Add(user);
             //dataContext.SaveChanges();
             Logger.Info("Приложение запущено");

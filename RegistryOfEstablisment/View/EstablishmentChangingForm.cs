@@ -88,7 +88,6 @@ namespace RegistryOfEstablisment.View
             string regWeb = @"(https?:\/\/|ftps?:\/\/|www\.)((?![.,?!;:()]*(\s|$))[^\s]){2,}";
 
             ShowTextErrors(nameBox, nameBox.Text.Length > 0);
-            ShowTextErrors(legalEntityBox, legalEntityBox.Text.Length > 0);
             ShowTextErrors(factAdressBox, factAdressBox.Text.Length > 0);
             ShowTextErrors(regAdressBox, regAdressBox.Text.Length > 0);
             ShowComboErrors(typeBox, typeBox.SelectedItem != null);
@@ -99,7 +98,7 @@ namespace RegistryOfEstablisment.View
             ShowTextErrors(webSiteBox, Regex.IsMatch(webSiteBox.Text, regWeb));
             ShowTextErrors(mailBox, Regex.IsMatch(mailBox.Text, regMail));
 
-            return nameBox.Text.Length > 0 && legalEntityBox.Text.Length > 0 && factAdressBox.Text.Length > 0 && regAdressBox.Text.Length > 0 && typeBox.SelectedItem != null
+            return nameBox.Text.Length > 0 && factAdressBox.Text.Length > 0 && regAdressBox.Text.Length > 0 && typeBox.SelectedItem != null
                 && checkpointBox.Text.Length > 0 && ITNBox.Text.Length > 0 && territoryBox.SelectedItem != null && Regex.IsMatch(telBox.Text, regTel) && Regex.IsMatch(webSiteBox.Text, regWeb)
                 && Regex.IsMatch(mailBox.Text, regMail);
         }

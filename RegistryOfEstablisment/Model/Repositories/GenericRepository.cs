@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RegistryOfEstablisment.Model.Repositories
 {
-    public class GenericRepository<T> : IGenericRepository<T> where T: class
+    class GenericRepository<T> : IGenericRepository<T> where T: class
     {
         protected readonly DataContext _context;
 
@@ -15,16 +15,16 @@ namespace RegistryOfEstablisment.Model.Repositories
         {
             _context = context;
         }
-        public async void AddAsync(T entity)
+        public void Add(T entity)
         {
-            await _context.Set<T>().AddAsync(entity);
-            await _context.SaveChangesAsync();
+            _context.Set<T>().Add(entity);
+            _context.SaveChanges();
         }
 
-        public async void AddRangeAsync(IEnumerable<T> entities)
+        public void AddRange(IEnumerable<T> entities)
         {
-            await _context.Set<T>().AddRangeAsync(entities);
-            await _context.SaveChangesAsync();
+            _context.Set<T>().AddRange(entities);
+            _context.SaveChanges();
         }
 
         public IEnumerable<T> Find(Expression<Func<T, bool>> expression)
@@ -32,26 +32,26 @@ namespace RegistryOfEstablisment.Model.Repositories
             return _context.Set<T>().Where(expression);
         }
 
-        public Task<IEnumerable<T>> GetAllAsync()
+        public IEnumerable<T> GetAll()
         {
-            return Task.Run<IEnumerable<T>>(() => _context.Set<T>().ToList());
+            return _context.Set<T>().ToList();
         }
 
-        public Task<T> GetById(int id)
+        public T GetById(int id)
         {
-            return Task.Run(() => _context.Set<T>().Find(id));
+            return _context.Set<T>().Find(id);
         }
 
-        public async void Remove(T entity)
+        public void Remove(T entity)
         {
             _context.Set<T>().Remove(entity);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
         }
 
-        public async void RemoveRange(IEnumerable<T> entities)
+        public void RemoveRange(IEnumerable<T> entities)
         {
             _context.Set<T>().RemoveRange(entities);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
         }   
     }
 }

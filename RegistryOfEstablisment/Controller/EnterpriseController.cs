@@ -1,5 +1,6 @@
 ﻿using RegistryOfEstablisment.Model.Entities;
 using RegistryOfEstablisment.Model.Repositories;
+using RegistryOfEstablisment.Unit;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,18 +9,22 @@ using System.Threading.Tasks;
 
 namespace RegistryOfEstablisment.Controller
 {
-    class EnterpriseController
+    public class EnterpriseController
     {
-        //public void AddEnterprise(Enterprise e)
-        //{
-        //    EnterpriseRepository.Add(e);
-        //}
+        readonly IUnitOfWork _unit;
 
-        //public Enterprise GetEnterpiseCard(int enterpriseID)
-        //{
-        //    RegistrationRepository.GetAllByID(enterpriseID);    
-        //    return null;
-        //}
+        internal EnterpriseController(IUnitOfWork unit)
+        {
+            _unit = unit;
+        }
+        public void AddEnterprise(Enterprise ent)
+        {
+            _unit.Enterprises.Add(ent);
+        }
+        public Enterprise GetEnterprise(int enterpriseID)
+        {
+            return _unit.Enterprises.GetById(enterpriseID);
+        }
 
         //public List<Registration> GetRegistrations(int enterpriseID)
         //{

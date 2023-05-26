@@ -9,14 +9,15 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using RegistryOfEstablisment.Controller;
 using RegistryOfEstablisment.Unit;
+using RegistryOfEstablisment.UnitControl;
 using RegistryOfEstablisment.View;
 
 namespace RegistryOfEstablisment
 {
     public partial class AuthorisationForm : Form
     {
-        private readonly IUnitOfWork _unit;
-        public AuthorisationForm(IUnitOfWork unit)
+        private readonly IUnitOfControl _unit;
+        public AuthorisationForm(IUnitOfControl unit)
         {
             InitializeComponent();
             InitializePasswordTextBox();
@@ -30,13 +31,14 @@ namespace RegistryOfEstablisment
 
         private void AuthButton_Click(object sender, EventArgs e)
         {
-            AuthController auth = new AuthController(_unit);
-            if (!auth.Authentificate(LoginTextBox.Text, PasswordTextBox.Text))
+            if (!_unit.AuthController.Authentificate(LoginTextBox.Text, PasswordTextBox.Text))
             {
                 falseAuthLabel.Visible = true;
                 return;
             }
-            return;
+           
+            this.DialogResult = DialogResult.OK;
+            this.Close();
         }
 
         private void InitializePasswordTextBox()
@@ -44,6 +46,14 @@ namespace RegistryOfEstablisment
             PasswordTextBox.Text = "";
             PasswordTextBox.PasswordChar = '*';
             PasswordTextBox.MaxLength = 21;
+        }
+
+        private void AuthorisationForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (this.DialogResult == DialogResult.OK)
+                return;
+            
+            this.DialogResult = DialogResult.Cancel;
         }
     }
 }

@@ -7,10 +7,12 @@ using System.Threading.Tasks;
 
 namespace RegistryOfEstablisment.Unit
 {
-    public interface IUnitOfWork : IDisposable
+    internal interface IUnitOfWork : IDisposable
     {
-        EnterpriseRepository Enterprises { get; }
-        RegistrationRepository Registrations { get; }
-        UserRepository Users { get; }
+        public EnterpriseRepository Enterprises { get; }
+        public RegistrationRepository Registrations { get; }
+        public UserRepository Users { get; }
+        public EnterpriseTypeRepository EnterpriseTypes { get; }
+        public ManagementTerritoryRepository ManagementTerritories { get; }
     }
 }

@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace RegistryOfEstablisment.Model.Repositories
 {
-    class RegistrationRepository : GenericRepository<Registration>
+    class ManagementTerritoryRepository : GenericRepository<ManagementTerritory>
     {
-        public RegistrationRepository(DataContext context) : base(context) { }
+        public ManagementTerritoryRepository(DataContext context) : base(context) { }
     }
 }

@@ -326,6 +326,10 @@ namespace RegistryOfEstablisment.View
             Logger.Info($"Реестр из {dataGridView1.Columns.Count} записей экспортирован в Microsoft Excel пользователем [{CurrentUser.Id}]{CurrentUser.Name}");
         }
 
+        /// <summary>
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dataGridView1_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             var column = dataGridView1.Columns[e.ColumnIndex];

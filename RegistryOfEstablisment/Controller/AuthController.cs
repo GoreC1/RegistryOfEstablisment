@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace RegistryOfEstablisment.Controller
 {
-    static class AuthController
+    class AuthController
     {
-        public static bool Authentificate (string login, string password)
+        public bool Authentificate (string login, string password)
         {
             if (UserRepository.GetByAuth(login, password) == null) 
             {

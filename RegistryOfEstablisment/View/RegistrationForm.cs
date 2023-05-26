@@ -39,6 +39,7 @@ namespace RegistryOfEstablisment.View
             }
         }
 
+        //Прогрузка свободного времени для записи
         private void DateBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             List<Registration> regs = _unit.RegistrationController.GetRegistrationsByDayAndEnterprise(Convert.ToDateTime(DateBox.SelectedItem), _enterprise).ToList();
@@ -93,6 +94,7 @@ namespace RegistryOfEstablisment.View
             this.Close();
         }
 
+        //Проверка заполнения формы
         private bool CheckCompletion()
         {
             string regTel = @"^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$";

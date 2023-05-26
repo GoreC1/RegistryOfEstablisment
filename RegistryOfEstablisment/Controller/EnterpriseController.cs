@@ -12,15 +12,14 @@ namespace RegistryOfEstablisment.Controller
 {
     public class EnterpriseController : BaseController
     {
-        private static Logger Logger = LogManager.GetCurrentClassLogger();
 
         public EnterpriseController(IUnitOfWork unit) : base(unit) { }
         
         public void AddEnterprise(Enterprise ent)
         {
-            Logger.Trace($"Контроллер запрашивает создание организации у репозитория");
+            _logger.Trace($"Контроллер запрашивает создание организации у репозитория");
             _unit.Enterprises.Add(ent);
-            Logger.Info($"Организация [ID = {GetLastEnterprise().Id}] успешно создана");
+            _logger.Info($"Организация [ID = {GetLastEnterprise().Id}] успешно создана");
         }
 
         public Enterprise GetEnterpriseByID(int enterpriseID)
@@ -55,9 +54,9 @@ namespace RegistryOfEstablisment.Controller
         public void UpdateEnterprise(Enterprise newEnterprise)
         {
             var oldEnt = GetEnterpriseByID(newEnterprise.Id);
-            Logger.Trace($"{TypeDescriptor.GetClassName(this)} запрашивает изменение организации {oldEnt.Name} у EnterpriseRepository");
+            Logger.Trace($"Контроллер запрашивает изменение организации [ID = {newEnterprise.Id}] у репозитория");
             _unit.Enterprises.Update(newEnterprise);
-            Logger.Info($"Организация {oldEnt.Name} успешно изменена");
+            Logger.Info($"Организация успешно изменена");
         }
 
         public Enterprise GetLastEnterprise()
@@ -67,9 +66,9 @@ namespace RegistryOfEstablisment.Controller
 
         public void DeleteEnterprise(int enterpriseID)
         {
-            Logger.Trace($"Контроллер запрашивает удаление организации [ID = {enterpriseID}] у репозитория");
+            _logger.Trace($"Контроллер запрашивает удаление организации [ID = {enterpriseID}] у репозитория");
             _unit.Enterprises.Remove(GetEnterpriseByID(enterpriseID));
-            Logger.Info($"Организация успешно удаление");
+            _logger.Info($"Организация успешно удаление");
         }
     }
 }

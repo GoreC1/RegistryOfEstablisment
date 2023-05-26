@@ -273,7 +273,7 @@ namespace RegistryOfEstablisment.View
             if (dataGridView1.Rows.Count == 0)
             {
                 MessageBox.Show("В таблице отсутствуют данные");
-                Logger.Warn("Таблица в экселе не может быть создана: dataGridView1.Rows.Count == 0");
+                Logger.Warn("Таблица в экселе не может быть создана - реестр пуст");
                 return;
             }
 

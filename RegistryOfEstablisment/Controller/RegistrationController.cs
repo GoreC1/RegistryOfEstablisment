@@ -20,9 +20,9 @@ namespace RegistryOfEstablisment.Controller
 
         public void AddNewRegistration(Registration reg)
         {
-            Logger.Trace($"{TypeDescriptor.GetClassName(this)} запрашивает создание регистрации {reg.User} - {reg.Enterprise} у RegistrationRepository");
+            Logger.Trace($"Контроллер запрашивает создание регистрации {reg.User} - {reg.Enterprise} у репозитория");
             _unit.Registrations.Add(reg);
-            Logger.Info($"Регистрация {reg.User} - {reg.Enterprise} успешно создана");
+            Logger.Info($"Регистрация успешно создана. ID пользователя - {reg.User.Id}, ID организации - {reg.Enterprise.Id}, Питомец - {reg.PetName}, Время - {reg.AppointmentTime}");
         }
     }
 }

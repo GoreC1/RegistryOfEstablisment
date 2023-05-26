@@ -65,6 +65,11 @@ namespace RegistryOfEstablisment.Model.Repositories
                                              .ToList();
         }
 
+        public Enterprise GetLastEnterprise()
+        {
+            return _context.Enterprises.LastOrDefault();
+        }
+
         public new Enterprise GetById(int id)
         {
             return _context.Set<Enterprise>().Where(c => c.Id == id)

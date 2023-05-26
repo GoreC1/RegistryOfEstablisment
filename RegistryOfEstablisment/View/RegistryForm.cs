@@ -1,7 +1,10 @@
-﻿using RegistryOfEstablisment.Model.Entities;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.Office.Interop.Excel;
+using RegistryOfEstablisment.Model.Entities;
 using RegistryOfEstablisment.UnitControl;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq.Expressions;
 using System.Windows.Forms;
 
@@ -49,6 +52,12 @@ namespace RegistryOfEstablisment.View
             return _unit.EnterpriseController.GetRegistryList(index, count);
         }
 
+        //получает фильтрованный список организаций
+        private List<ValueTuple<Enterprise, bool>> GetFilteredOrgsRegistry(Expression<Func<Enterprise, bool>>[] filters, int index, int count)
+        {
+            return _unit.EnterpriseController.GetFilteredEnterprises(filters, index, count);
+        }
+
         //заполняет столбцы DataGridView
         private void PopulateGridColumns()
         {
@@ -81,6 +90,11 @@ namespace RegistryOfEstablisment.View
             for (int i = 0; i < maxPages; i++)
             {
                 pageBox.Items.Add(i + 1);
+            }
+
+            if (pageBox.Items.Count == 0)
+            {
+                pageBox.Items.Add(1);
             }
 
             pageBox.SelectedIndex = 0;
@@ -125,6 +139,21 @@ namespace RegistryOfEstablisment.View
         {
             EstablishmentChangingForm esForm = new(_unit, Convert.ToInt32(dataGridView1.CurrentRow.Cells[0].Value));
             esForm.ShowDialog();
+
+            if (esForm.DialogResult == DialogResult.OK)
+            {
+                int paginationCount = Convert.ToInt32(paginationBox.SelectedItem);
+                int currentPage = Convert.ToInt32(pageBox.SelectedItem) - 1;
+
+                if (isFiltersApplied == true)
+                {
+                    PopulatePageBox(_unit.EnterpriseController.GetFilteredCount(filters), paginationCount);
+                    PopulateGridRows(_unit.EnterpriseController.GetFilteredEnterprises(filters, currentPage, paginationCount));
+                    return;
+                }
+
+                PopulateGridRows(GetOrgsRegistry(currentPage * paginationCount, paginationCount));
+            }
         }
 
         //открывает форму фильтров
@@ -148,6 +177,7 @@ namespace RegistryOfEstablisment.View
             }
         }
 
+        //Проверят доступность редактирования/удаления организации
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (dataGridView1.CurrentRow.Cells["IsAccessible"].Value.ToString() == "Yes")
@@ -171,7 +201,7 @@ namespace RegistryOfEstablisment.View
             if (isFiltersApplied == true)
             {
                 PopulatePageBox(_unit.EnterpriseController.GetFilteredCount(filters), paginationCount);
-                list = _unit.EnterpriseController.GetFilteredEnterprises(filters, 0, paginationCount);
+                list = GetFilteredOrgsRegistry(filters, 0, paginationCount);
                 PopulateGridRows(list);
                 return;
             }
@@ -180,17 +210,28 @@ namespace RegistryOfEstablisment.View
             list = GetOrgsRegistry(0, paginationCount);
             PopulateGridRows(list);
         }
+
+        //Удаление организции
         private void deleteButton_Click(object sender, EventArgs e)
         {
             DialogResult dr = MessageBox.Show("Вы уверены что хотите продолжить??", "Удаление", MessageBoxButtons.YesNo);
-            _unit.EnterpriseController.DeleteEnterprise(Convert.ToInt32(dataGridView1.CurrentRow.Cells[0].Value));
-        }
+            if (dr == DialogResult.Yes) 
+            {
+                _unit.EnterpriseController.DeleteEnterprise(Convert.ToInt32(dataGridView1.CurrentRow.Cells[0].Value));
+                int paginationCount = Convert.ToInt32(paginationBox.SelectedItem);
+                int currentPage = Convert.ToInt32(pageBox.SelectedItem) - 1;
 
-        //private void OpenEnterpriseCard(int id)
-        //{
-        //    EnterpriseController.GetEnterpise(id);
-        //    EnterpriseController.GetRegistrations(id);
-        //}
+                if (isFiltersApplied == true)
+                {
+                    PopulatePageBox(_unit.EnterpriseController.GetFilteredCount(filters), paginationCount);
+                    PopulateGridRows(_unit.EnterpriseController.GetFilteredEnterprises(filters, currentPage, paginationCount));
+                    return;
+                }
+                PopulateGridRows(GetOrgsRegistry(currentPage * paginationCount, paginationCount));
+            }
+
+
+        }
 
         //переходит на нужную страницу DataGridView
         private void pageBox_SelectionChangeCommitted(object sender, EventArgs e)
@@ -200,11 +241,84 @@ namespace RegistryOfEstablisment.View
 
             if (isFiltersApplied == true)
             {
-                PopulateGridRows(_unit.EnterpriseController.GetFilteredEnterprises(filters, currentPage * paginationCount, paginationCount));
+                PopulateGridRows(GetFilteredOrgsRegistry(filters, currentPage * paginationCount, paginationCount));
                 return;
             }
 
             PopulateGridRows(GetOrgsRegistry(currentPage * paginationCount, paginationCount));
         }
+
+        //экспорт в эксель
+        private void ExportButton_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.Rows.Count == 0)
+            {
+                MessageBox.Show("В таблице отсутствуют данные");
+                return;
+            }
+
+            Microsoft.Office.Interop.Excel._Application app = new Microsoft.Office.Interop.Excel.Application();
+            // creating new WorkBook within Excel application  
+            Microsoft.Office.Interop.Excel._Workbook workbook = app.Workbooks.Add(Type.Missing);
+            // creating new Excelsheet in workbook  
+            Microsoft.Office.Interop.Excel._Worksheet worksheet = null;
+            // see the excel sheet behind the program  
+            app.Visible = true;
+            // get the reference of first sheet. By default its name is Sheet1.  
+            // store its reference to worksheet  
+            worksheet = (Microsoft.Office.Interop.Excel._Worksheet)workbook.Sheets["Лист1"];
+            worksheet = (Microsoft.Office.Interop.Excel._Worksheet)workbook.ActiveSheet;
+            // changing the name of active sheet  
+            worksheet.Name = $"Exported by {CurrentUser.Name}";
+            // storing header part in Excel  
+
+            List<DataGridViewColumn> columns = new();
+            for (int i = 0; i < dataGridView1.Columns.Count; i++)
+            {
+                if (dataGridView1.Columns[i].Visible == true)
+                {
+                    columns.Add(dataGridView1.Columns[i]);
+                }
+            }
+
+            for (int i = 0; i < columns.Count; i++)
+            {
+                worksheet.Cells[1, i+2] = columns[i].HeaderText;
+            }
+
+            // storing Each row and column value to excel sheet  
+            for (int i = 0; i < dataGridView1.Rows.Count - 1; i++)
+            {
+                for (int j = 0; j < columns.Count+1; j++)
+                {
+                    if (j==2 || j==3)
+                    {
+                        worksheet.Cells[i + 2, j + 1] =  $"\"{dataGridView1.Rows[i].Cells[j].Value.ToString()}\"";
+                        continue;
+                    }
+
+                    worksheet.Cells[i + 2, j + 1] = dataGridView1.Rows[i].Cells[j].Value.ToString();
+                }
+            }
+        }
+
+        ////Сортировка столбцов
+        //private void dataGridView1_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        //{
+        //    var column = dataGridView1.Columns[e.ColumnIndex];
+
+        //    switch (column.HeaderCell.SortGlyphDirection)
+        //    {
+        //        case SortOrder.Ascending:
+        //            //dataGridView1.Sort(column, ListSortDirection.Descending);
+        //            column.HeaderCell.SortGlyphDirection = SortOrder.Descending;
+        //            break;
+
+        //        case SortOrder.Descending:
+        //            //dataGridView1.Sort(dataGridView1.Columns[0], ListSortDirection.Ascending);
+        //            dataGridView1.Columns[0].HeaderCell.SortGlyphDirection = SortOrder.Ascending;
+        //            break;
+        //    }
+        //}
     }
 }

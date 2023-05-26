@@ -42,5 +42,29 @@ namespace RegistryOfEstablisment
 
             this.DialogResult = DialogResult.Cancel;
         }
+
+        //Вход без нажатия кнопки
+        private void LoginTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if(PasswordTextBox.Text.Length > 0)
+                {
+                    AuthButton_Click(sender, e);
+                }
+                else
+                {
+                    PasswordTextBox.Focus();
+                }
+            }
+        }
+
+        private void PasswordTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                AuthButton_Click(sender, e);
+            }
+        }
     }
 }

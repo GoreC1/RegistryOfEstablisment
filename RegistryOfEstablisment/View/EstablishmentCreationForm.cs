@@ -56,7 +56,7 @@ namespace RegistryOfEstablisment.View
             this.Close();
         }
 
-        //проверка заполнения
+        //проверка заполнения с указанием неверных полей
         private bool CheckCompletion()
         {
             string regTel = @"^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$";
@@ -100,6 +100,7 @@ namespace RegistryOfEstablisment.View
                 e.Handled = true;
         }
 
+        //проверка и указанме на неверные поля
         private void ShowTextErrors(TextBox box, bool condition)
         {
             if (!condition)

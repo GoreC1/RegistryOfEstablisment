@@ -42,6 +42,7 @@ namespace RegistryOfEstablisment.View
             this.pageBox = new System.Windows.Forms.ComboBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.ExportButton = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -152,6 +153,8 @@ namespace RegistryOfEstablisment.View
             // paginationBox
             // 
             this.paginationBox.Dock = System.Windows.Forms.DockStyle.Left;
+            this.paginationBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.paginationBox.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.paginationBox.FormattingEnabled = true;
             this.paginationBox.Items.AddRange(new object[] {
             "5",
@@ -179,6 +182,8 @@ namespace RegistryOfEstablisment.View
             // pageBox
             // 
             this.pageBox.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pageBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.pageBox.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.pageBox.FormattingEnabled = true;
             this.pageBox.Location = new System.Drawing.Point(364, 0);
             this.pageBox.Name = "pageBox";
@@ -204,6 +209,7 @@ namespace RegistryOfEstablisment.View
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.ExportButton);
             this.panel2.Controls.Add(this.filterButton);
             this.panel2.Controls.Add(this.label1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
@@ -211,6 +217,17 @@ namespace RegistryOfEstablisment.View
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(974, 37);
             this.panel2.TabIndex = 12;
+            // 
+            // ExportButton
+            // 
+            this.ExportButton.Dock = System.Windows.Forms.DockStyle.Right;
+            this.ExportButton.Location = new System.Drawing.Point(817, 0);
+            this.ExportButton.Name = "ExportButton";
+            this.ExportButton.Size = new System.Drawing.Size(75, 37);
+            this.ExportButton.TabIndex = 7;
+            this.ExportButton.Text = "Экспорт";
+            this.ExportButton.UseVisualStyleBackColor = true;
+            this.ExportButton.Click += new System.EventHandler(this.ExportButton_Click);
             // 
             // panel3
             // 
@@ -258,5 +275,6 @@ namespace RegistryOfEstablisment.View
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Button ExportButton;
     }
 }

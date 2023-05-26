@@ -42,9 +42,15 @@ namespace RegistryOfEstablisment.Controller
         {
             return _unit.Enterprises.GetAccessedRegistry(_unit.Enterprises.GetSome(index, count).ToList()).ToList();
         }
-        public void UpdateEnterprise(Enterprise newEnterprise)
+
+        public Enterprise GetLastEnterprise()
         {
-            _unit.Enterprises.Update(newEnterprise);
+            return _unit.Enterprises.GetLastEnterprise();
+        }
+
+        public void DeleteEnterprise(int enterpriseID)
+        {
+            _unit.Enterprises.Remove(GetEnterpriseByID(enterpriseID));
         }
     }
 }

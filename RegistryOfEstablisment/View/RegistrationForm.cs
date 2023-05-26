@@ -2,6 +2,7 @@
 using RegistryOfEstablisment.UnitControl;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -94,13 +95,44 @@ namespace RegistryOfEstablisment.View
             this.Close();
         }
 
-        //Проверка заполнения формы
+        //Проверка заполнения формы с указанием неверных полей
         private bool CheckCompletion()
         {
             string regTel = @"^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$";
 
+            ShowTextErrors(OwnerTextBox, OwnerTextBox.Text.Length > 0);
+            ShowTextErrors(AdressTextBox, AdressTextBox.Text.Length > 0);
+            ShowTextErrors(TelephoneNumberTextBox, Regex.IsMatch(TelephoneNumberTextBox.Text, regTel));
+            ShowTextErrors(PetNameTextBox, PetNameTextBox.Text.Length > 0);
+            ShowTextErrors(PetTypeTextBox, PetTypeTextBox.Text.Length > 0);
+            ShowComboErrors(DateBox, DateBox.SelectedItem != null);
+            ShowComboErrors(TimeBox, TimeBox.SelectedItem != null);
+
             return OwnerTextBox.Text.Length > 0 && AdressTextBox.Text.Length > 0 && Regex.IsMatch(TelephoneNumberTextBox.Text, regTel) && PetNameTextBox.Text.Length > 0
                    && PetTypeTextBox.Text.Length > 0 && DateBox.SelectedItem != null && TimeBox.SelectedItem != null;
+        }
+
+        //проверка и указанме на неверные поля
+        private void ShowTextErrors(TextBox box, bool condition)
+        {
+            if (!condition)
+                box.BackColor = Color.IndianRed;
+            else
+                box.BackColor = SystemColors.Window;
+        }
+
+        private void ShowComboErrors(ComboBox box, bool condition)
+        {
+            if (!condition)
+                box.BackColor = Color.IndianRed;
+            else
+                box.BackColor = SystemColors.Window;
+        }
+
+        private void cancelButton_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.Cancel;
+            Close();
         }
     }
 }

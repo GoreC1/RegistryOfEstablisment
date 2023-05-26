@@ -147,6 +147,8 @@ namespace RegistryOfEstablisment.View
             // 
             // DateBox
             // 
+            this.DateBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.DateBox.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.DateBox.FormattingEnabled = true;
             this.DateBox.Location = new System.Drawing.Point(14, 146);
             this.DateBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -173,6 +175,7 @@ namespace RegistryOfEstablisment.View
             this.cancelButton.TabIndex = 54;
             this.cancelButton.Text = "Отмена";
             this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
             // label7
             // 
@@ -185,6 +188,8 @@ namespace RegistryOfEstablisment.View
             // 
             // TimeBox
             // 
+            this.TimeBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.TimeBox.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.TimeBox.FormattingEnabled = true;
             this.TimeBox.Location = new System.Drawing.Point(186, 146);
             this.TimeBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);

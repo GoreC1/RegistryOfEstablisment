@@ -44,6 +44,7 @@ namespace RegistryOfEstablisment
             this.LoginTextBox.Name = "LoginTextBox";
             this.LoginTextBox.Size = new System.Drawing.Size(110, 23);
             this.LoginTextBox.TabIndex = 0;
+            this.LoginTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LoginTextBox_KeyDown);
             // 
             // PasswordTextBox
             // 
@@ -52,6 +53,7 @@ namespace RegistryOfEstablisment
             this.PasswordTextBox.Name = "PasswordTextBox";
             this.PasswordTextBox.Size = new System.Drawing.Size(110, 23);
             this.PasswordTextBox.TabIndex = 1;
+            this.PasswordTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.PasswordTextBox_KeyDown);
             // 
             // label1
             // 
@@ -85,7 +87,8 @@ namespace RegistryOfEstablisment
             // falseAuthLabel
             // 
             this.falseAuthLabel.AutoSize = true;
-            this.falseAuthLabel.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.falseAuthLabel.BackColor = System.Drawing.SystemColors.Control;
+            this.falseAuthLabel.ForeColor = System.Drawing.Color.IndianRed;
             this.falseAuthLabel.Location = new System.Drawing.Point(31, 9);
             this.falseAuthLabel.Name = "falseAuthLabel";
             this.falseAuthLabel.Size = new System.Drawing.Size(194, 15);

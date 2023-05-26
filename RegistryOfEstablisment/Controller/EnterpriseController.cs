@@ -47,5 +47,10 @@ namespace RegistryOfEstablisment.Controller
         {
             return _unit.Enterprises.GetLastEnterprise();
         }
+
+        public void DeleteEnterprise(int enterpriseID)
+        {
+            _unit.Enterprises.Remove(GetEnterpriseByID(enterpriseID));
+        }
     }
 }

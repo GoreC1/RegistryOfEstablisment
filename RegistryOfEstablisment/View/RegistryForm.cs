@@ -1,7 +1,10 @@
-﻿using RegistryOfEstablisment.Model.Entities;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.Office.Interop.Excel;
+using RegistryOfEstablisment.Model.Entities;
 using RegistryOfEstablisment.UnitControl;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq.Expressions;
 using System.Windows.Forms;
 
@@ -136,6 +139,21 @@ namespace RegistryOfEstablisment.View
         {
             EstablishmentChangingForm esForm = new(_unit, Convert.ToInt32(dataGridView1.CurrentRow.Cells[0].Value));
             esForm.ShowDialog();
+
+            if (esForm.DialogResult == DialogResult.OK)
+            {
+                int paginationCount = Convert.ToInt32(paginationBox.SelectedItem);
+                int currentPage = Convert.ToInt32(pageBox.SelectedItem) - 1;
+
+                if (isFiltersApplied == true)
+                {
+                    PopulatePageBox(_unit.EnterpriseController.GetFilteredCount(filters), paginationCount);
+                    PopulateGridRows(_unit.EnterpriseController.GetFilteredEnterprises(filters, currentPage, paginationCount));
+                    return;
+                }
+
+                PopulateGridRows(GetOrgsRegistry(currentPage * paginationCount, paginationCount));
+            }
         }
 
         //открывает форму фильтров
@@ -192,17 +210,28 @@ namespace RegistryOfEstablisment.View
             list = GetOrgsRegistry(0, paginationCount);
             PopulateGridRows(list);
         }
+
+        //Удаление организции
         private void deleteButton_Click(object sender, EventArgs e)
         {
             DialogResult dr = MessageBox.Show("Вы уверены что хотите продолжить??", "Удаление", MessageBoxButtons.YesNo);
-            _unit.EnterpriseController.DeleteEnterprise(Convert.ToInt32(dataGridView1.CurrentRow.Cells[0].Value));
-        }
+            if (dr == DialogResult.Yes) 
+            {
+                _unit.EnterpriseController.DeleteEnterprise(Convert.ToInt32(dataGridView1.CurrentRow.Cells[0].Value));
+                int paginationCount = Convert.ToInt32(paginationBox.SelectedItem);
+                int currentPage = Convert.ToInt32(pageBox.SelectedItem) - 1;
 
-        //private void OpenEnterpriseCard(int id)
-        //{
-        //    EnterpriseController.GetEnterpise(id);
-        //    EnterpriseController.GetRegistrations(id);
-        //}
+                if (isFiltersApplied == true)
+                {
+                    PopulatePageBox(_unit.EnterpriseController.GetFilteredCount(filters), paginationCount);
+                    PopulateGridRows(_unit.EnterpriseController.GetFilteredEnterprises(filters, currentPage, paginationCount));
+                    return;
+                }
+                PopulateGridRows(GetOrgsRegistry(currentPage * paginationCount, paginationCount));
+            }
+
+
+        }
 
         //переходит на нужную страницу DataGridView
         private void pageBox_SelectionChangeCommitted(object sender, EventArgs e)
@@ -272,5 +301,24 @@ namespace RegistryOfEstablisment.View
                 }
             }
         }
+
+        ////Сортировка столбцов
+        //private void dataGridView1_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        //{
+        //    var column = dataGridView1.Columns[e.ColumnIndex];
+
+        //    switch (column.HeaderCell.SortGlyphDirection)
+        //    {
+        //        case SortOrder.Ascending:
+        //            //dataGridView1.Sort(column, ListSortDirection.Descending);
+        //            column.HeaderCell.SortGlyphDirection = SortOrder.Descending;
+        //            break;
+
+        //        case SortOrder.Descending:
+        //            //dataGridView1.Sort(dataGridView1.Columns[0], ListSortDirection.Ascending);
+        //            dataGridView1.Columns[0].HeaderCell.SortGlyphDirection = SortOrder.Ascending;
+        //            break;
+        //    }
+        //}
     }
 }

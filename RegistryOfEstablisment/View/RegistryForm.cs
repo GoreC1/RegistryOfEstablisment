@@ -25,8 +25,8 @@ namespace RegistryOfEstablisment.View
         public RegistryForm(IUnitOfControl unit)
         {
             InitializeComponent();
-            changeESButton.Enabled = false;
-            deleteButton.Enabled = false;
+            changeESButton.Visible = false;
+            deleteButton.Visible = false;
             _unit = unit;
         }
 
@@ -92,6 +92,8 @@ namespace RegistryOfEstablisment.View
                 dataGridView1.Rows.Add(ent.Id.ToString(), ent.Name, ent.ITN.ToString(), ent.Checkpoint.ToString(), ent.Address, ent.Type.Name,
                                        ent.LegalEntity, ent.RealAddress, ent.WebSite, ent.Email, ent.TelephoneNumber, isAccessible ? "Yes" : "No");
             }
+
+            CheckCurrentAccess();
         }
 
         //заполняет comboBox с количеством страниц, в зависимости от размера пагинации
@@ -197,19 +199,24 @@ namespace RegistryOfEstablisment.View
             }
         }
 
-        //Проверят доступность редактирования/удаления организации
-        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void CheckCurrentAccess()
         {
             if (dataGridView1.CurrentRow.Cells["IsAccessible"].Value.ToString() == "Yes")
             {
-                changeESButton.Enabled = true;
-                deleteButton.Enabled = true;
+                changeESButton.Visible = true;
+                deleteButton.Visible = true;
             }
             else
             {
-                changeESButton.Enabled = false;
-                deleteButton.Enabled = false;
+                changeESButton.Visible = false;
+                deleteButton.Visible = false;
             }
+        }
+
+        //Проверят доступность редактирования/удаления организации
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            CheckCurrentAccess();
         }
 
         //меняет количество строк в DataGridView 
@@ -292,7 +299,7 @@ namespace RegistryOfEstablisment.View
             
             worksheet = (Microsoft.Office.Interop.Excel._Worksheet)workbook.Sheets["Лист1"];
             worksheet = (Microsoft.Office.Interop.Excel._Worksheet)workbook.ActiveSheet;
-            worksheet.Name = $"Exported by {CurrentUser.Name}";
+            worksheet.Name = $"Exported from Registry";
 
             List<DataGridViewColumn> columns = new();
             for (int i = 0; i < dataGridView1.Columns.Count; i++)

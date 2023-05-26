@@ -35,30 +35,32 @@ namespace RegistryOfEstablisment
             this.label2 = new System.Windows.Forms.Label();
             this.AuthButton = new System.Windows.Forms.Button();
             this.falseAuthLabel = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // LoginTextBox
             // 
-            this.LoginTextBox.Location = new System.Drawing.Point(100, 33);
+            this.LoginTextBox.Location = new System.Drawing.Point(89, 39);
             this.LoginTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.LoginTextBox.Name = "LoginTextBox";
-            this.LoginTextBox.Size = new System.Drawing.Size(110, 23);
+            this.LoginTextBox.Size = new System.Drawing.Size(133, 23);
             this.LoginTextBox.TabIndex = 0;
             this.LoginTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LoginTextBox_KeyDown);
             // 
             // PasswordTextBox
             // 
-            this.PasswordTextBox.Location = new System.Drawing.Point(100, 66);
+            this.PasswordTextBox.Location = new System.Drawing.Point(89, 74);
             this.PasswordTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.PasswordTextBox.Name = "PasswordTextBox";
-            this.PasswordTextBox.Size = new System.Drawing.Size(110, 23);
+            this.PasswordTextBox.Size = new System.Drawing.Size(133, 23);
             this.PasswordTextBox.TabIndex = 1;
             this.PasswordTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.PasswordTextBox_KeyDown);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(42, 36);
+            this.label1.Location = new System.Drawing.Point(31, 42);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(41, 15);
             this.label1.TabIndex = 2;
@@ -67,7 +69,7 @@ namespace RegistryOfEstablisment
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(42, 68);
+            this.label2.Location = new System.Drawing.Point(31, 76);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(49, 15);
             this.label2.TabIndex = 3;
@@ -75,7 +77,7 @@ namespace RegistryOfEstablisment
             // 
             // AuthButton
             // 
-            this.AuthButton.Location = new System.Drawing.Point(70, 96);
+            this.AuthButton.Location = new System.Drawing.Point(83, 111);
             this.AuthButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.AuthButton.Name = "AuthButton";
             this.AuthButton.Size = new System.Drawing.Size(112, 30);
@@ -88,19 +90,35 @@ namespace RegistryOfEstablisment
             // 
             this.falseAuthLabel.AutoSize = true;
             this.falseAuthLabel.BackColor = System.Drawing.SystemColors.Control;
+            this.falseAuthLabel.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.falseAuthLabel.ForeColor = System.Drawing.Color.IndianRed;
-            this.falseAuthLabel.Location = new System.Drawing.Point(31, 9);
+            this.falseAuthLabel.Location = new System.Drawing.Point(30, 10);
             this.falseAuthLabel.Name = "falseAuthLabel";
-            this.falseAuthLabel.Size = new System.Drawing.Size(194, 15);
+            this.falseAuthLabel.Size = new System.Drawing.Size(220, 19);
             this.falseAuthLabel.TabIndex = 5;
             this.falseAuthLabel.Text = "Неправильный логин или пароль";
             this.falseAuthLabel.Visible = false;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.SystemColors.Control;
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.pictureBox1.Image = global::RegistryOfEstablisment.Properties.Resources.free_icon_hide_2767146;
+            this.pictureBox1.Location = new System.Drawing.Point(230, 71);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(29, 29);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 6;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseDown);
+            this.pictureBox1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseUp);
             // 
             // AuthorisationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(250, 134);
+            this.ClientSize = new System.Drawing.Size(271, 152);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.falseAuthLabel);
             this.Controls.Add(this.AuthButton);
             this.Controls.Add(this.label2);
@@ -112,6 +130,7 @@ namespace RegistryOfEstablisment
             this.Text = "Авторизация";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AuthorisationForm_FormClosing);
             this.Load += new System.EventHandler(this.AuthorisationForm_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -125,6 +144,7 @@ namespace RegistryOfEstablisment
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button AuthButton;
         private System.Windows.Forms.Label falseAuthLabel;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 

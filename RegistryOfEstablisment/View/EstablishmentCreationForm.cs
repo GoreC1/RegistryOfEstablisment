@@ -1,4 +1,6 @@
-﻿using System;
+﻿using RegistryOfEstablisment.Controller;
+using RegistryOfEstablisment.Model.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -37,6 +39,17 @@ namespace RegistryOfEstablisment.View
         private void label1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        public void AddNewEnterprise()
+        {
+            Enterprise e = new Enterprise();
+            EnterpriseController.AddEnterprise(e);
+        }
+
+        public void UpdateEnterprise(Enterprise enterprise)
+        {
+            EnterpriseController.UpdateEnterprise(enterprise);
         }
     }
 }

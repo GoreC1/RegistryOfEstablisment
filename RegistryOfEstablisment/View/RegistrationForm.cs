@@ -95,7 +95,7 @@ namespace RegistryOfEstablisment.View
             this.Close();
         }
 
-        //Проверка заполнения формы
+        //Проверка заполнения формы с указанием неверных полей
         private bool CheckCompletion()
         {
             string regTel = @"^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$";

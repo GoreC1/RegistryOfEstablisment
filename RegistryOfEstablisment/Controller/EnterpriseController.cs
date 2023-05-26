@@ -20,7 +20,7 @@ namespace RegistryOfEstablisment.Controller
         {
             Logger.Trace($"Контроллер запрашивает создание организации у репозитория");
             _unit.Enterprises.Add(ent);
-            Logger.Info($"Организация [ID = {ent.Id}] успешно создана");
+            Logger.Info($"Организация [ID = {GetLastEnterprise().Id}] успешно создана");
         }
 
         public Enterprise GetEnterpriseByID(int enterpriseID)
@@ -41,10 +41,6 @@ namespace RegistryOfEstablisment.Controller
         public int GetCount()
         {
             return _unit.Enterprises.GetCount();
-        }
-        public void DeleteEnterprise(int enterpriseID)
-        {
-            _unit.Enterprises.Remove(GetEnterpriseByID(enterpriseID));
         }
 
         public List<ValueTuple<Enterprise, bool>> GetRegistryList(int index, int count)
@@ -69,7 +65,7 @@ namespace RegistryOfEstablisment.Controller
         {
             Logger.Trace($"Контроллер запрашивает удаление организации [ID = {enterpriseID}] у репозитория");
             _unit.Enterprises.Remove(GetEnterpriseByID(enterpriseID));
-            Logger.Info($"Организация успешно удаление");
+            Logger.Info($"Организация успешно удалена");
         }
     }
 }

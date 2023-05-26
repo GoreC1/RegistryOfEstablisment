@@ -3,7 +3,7 @@ using System;
 
 namespace RegistryOfEstablisment.Unit
 {
-    public interface IUnitOfWork : IDisposable
+    public interface IUnitOfWork 
     {
         public EnterpriseRepository Enterprises { get; }
         public RegistrationRepository Registrations { get; }

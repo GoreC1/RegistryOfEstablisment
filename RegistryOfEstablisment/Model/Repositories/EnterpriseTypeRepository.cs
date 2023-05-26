@@ -1,9 +1,6 @@
 ﻿using RegistryOfEstablisment.Model.Entities;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RegistryOfEstablisment.Model.Repositories
 {
@@ -35,13 +32,13 @@ namespace RegistryOfEstablisment.Model.Repositories
                     }
                 case "Оператор ВетСлужбы":
                     {
-                        List<string> accessedTypes = new() 
-                        { 
-                            "Исполнительный орган государственной власти", 
-                            "Орган местного самоуправления", 
-                            "Ветеринарная клиника: государственная" 
+                        List<string> accessedTypes = new()
+                        {
+                            "Исполнительный орган государственной власти",
+                            "Орган местного самоуправления",
+                            "Ветеринарная клиника: государственная"
                         };
-                        
+
                         types.AddRange(_context.EnterpriseTypes.Where(c => accessedTypes.Contains(c.Name)));
                         return types;
                     }

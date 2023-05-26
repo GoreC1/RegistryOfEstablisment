@@ -2,26 +2,23 @@
 using RegistryOfEstablisment.UnitControl;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Windows.Forms;
 
 namespace RegistryOfEstablisment.View
 {
     public partial class RegistryForm : Form
     {
-        //для динамического добавления созданной формы, в кэш
-        internal ValueTuple<Enterprise, bool> addedEnterprise = (default(Enterprise), default(bool));
         private readonly IUnitOfControl _unit;
-
-        //буль, для понимания внутри логики программы, с каким кэшем работать
-        private bool isFiltersApplied;
-        
-        //кэш без фильтра и с фильтром, для ускорения работы программы, за счёт меньшего количества запросов в БД
-        private List<ValueTuple<Enterprise, bool>> unfiltredCache = new();
-        private List<ValueTuple<Enterprise, bool>> filtredCache = new();
+        public bool isFiltersApplied;
+        public Expression<Func<Enterprise, bool>>[] filters;
+        public object[] filterCache = new object[]{"","","","","",null,""};
 
         public RegistryForm(IUnitOfControl unit)
         {
             InitializeComponent();
+            changeESButton.Enabled = false;
+            deleteButton.Enabled = false;
             _unit = unit;
         }
 
@@ -34,7 +31,12 @@ namespace RegistryOfEstablisment.View
 
             if (auth.DialogResult == DialogResult.OK)
             {
-                GetOrgsRegistry();
+                paginationBox.SelectedIndex = 0;
+                int shownEntries = Convert.ToInt32(paginationBox.SelectedItem);
+                List<ValueTuple<Enterprise, bool>> list = GetOrgsRegistry(0, shownEntries);
+                PopulatePageBox(_unit.EnterpriseController.GetCount(), shownEntries);
+                PopulateGridColumns();
+                PopulateGridRows(list);
                 return;
             }
 
@@ -42,12 +44,9 @@ namespace RegistryOfEstablisment.View
         }
 
         //получает список организаций
-        private void GetOrgsRegistry()
+        private List<ValueTuple<Enterprise, bool>> GetOrgsRegistry(int index, int count)
         {
-            unfiltredCache = _unit.EnterpriseController.GetRegistriesList();
-
-            PopulateGridColumns();
-            paginationBox.SelectedIndex = paginationBox.Items.Count - 1;
+            return _unit.EnterpriseController.GetRegistryList(index, count);
         }
 
         //заполняет столбцы DataGridView
@@ -60,37 +59,25 @@ namespace RegistryOfEstablisment.View
         }
 
         //заполняет строки в соответствии с источником и количеством строк
-        private void PopulateGridRows(List<ValueTuple<Enterprise, bool>> entList, int count)
+        private void PopulateGridRows(List<ValueTuple<Enterprise, bool>> entList)
         {
             dataGridView1.Rows.Clear();
-            int currentPage = Convert.ToInt32(pageBox.SelectedItem);
-            int startIndex = 0 + (currentPage - 1) * count;
-            int objectsLeft = entList.Count - (currentPage - 1) * count;
-
-            Enterprise ent = new();
-            bool isAccessible;
-
-
-            if (objectsLeft < count)
-                entList = entList.GetRange(startIndex, objectsLeft);
-            else
-                entList = entList.GetRange(startIndex, count);
 
             foreach (var item in entList)
             {
-                ent = item.Item1;
-                isAccessible = item.Item2;
+                Enterprise ent = item.Item1;
+                bool isAccessible = item.Item2;
                 dataGridView1.Rows.Add(ent.Id.ToString(), ent.Name, ent.ITN.ToString(), ent.Checkpoint.ToString(), ent.Address, ent.Type.Name,
                                        ent.LegalEntity, ent.RealAddress, ent.WebSite, ent.Email, ent.TelephoneNumber, isAccessible ? "Yes" : "No");
             }
         }
 
         //заполняет comboBox с количеством страниц, в зависимости от размера пагинации
-        public void PopulatePageBox(int count)
+        public void PopulatePageBox(int entriesCount, int shownEntries)
         {
-            int maxPages = Convert.ToInt32(Math.Ceiling(count / Convert.ToDouble(paginationBox.SelectedItem)));
+            int maxPages = Convert.ToInt32(Math.Ceiling(entriesCount / Convert.ToDouble(shownEntries)));
             pageBox.Items.Clear();
-            
+
             for (int i = 0; i < maxPages; i++)
             {
                 pageBox.Items.Add(i + 1);
@@ -105,74 +92,60 @@ namespace RegistryOfEstablisment.View
             if (dataGridView1.CurrentCell == null)
                 return;
 
-            Enterprise currentEnt = unfiltredCache.Find(c => c.Item1.Id == Convert.ToInt32(dataGridView1.CurrentRow.Cells["ID"].Value)).Item1;
-
-            if (currentEnt == default(Enterprise))
-                currentEnt = filtredCache.Find(c => c.Item1.Id == Convert.ToInt32(dataGridView1.CurrentRow.Cells["ID"].Value)).Item1;
-
-            if (currentEnt == default(Enterprise))
-                currentEnt = _unit.EnterpriseController.GetEnterprise(Convert.ToInt32(dataGridView1.CurrentRow.Cells["ID"].Value));
+            Enterprise currentEnt = _unit.EnterpriseController.GetEnterpriseByID(Convert.ToInt32(dataGridView1.CurrentRow.Cells["ID"].Value));
 
             Form entCard = new EstablishmentForm(_unit, currentEnt);
             entCard.ShowDialog();
         }
 
-        //меняет количество строк в DataGridView 
-        private void paginationBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            int paginationCount = Convert.ToInt32(paginationBox.SelectedItem);
-
-            if (isFiltersApplied == true)
-            {
-                PopulatePageBox(filtredCache.Count);
-                PopulateGridRows(filtredCache, paginationCount);
-                return;
-            }
-
-            PopulatePageBox(unfiltredCache.Count);
-            PopulateGridRows(unfiltredCache, paginationCount);
-        }
-
         //открывает форму добавления организации
         private void addESButton_Click(object sender, EventArgs e)
         {
-            EstablismentCreationForm esForm = new(_unit, this);
+            EstablismentCreationForm esForm = new(_unit);
             esForm.ShowDialog();
 
-            if (addedEnterprise != (default(Enterprise),default(bool)))
+            if (esForm.DialogResult == DialogResult.OK)
             {
-                unfiltredCache.Add(addedEnterprise);
-                PopulateGridRows(unfiltredCache, Convert.ToInt32(paginationBox.SelectedItem));
-                addedEnterprise = (default(Enterprise), default(bool));
+                int paginationCount = Convert.ToInt32(paginationBox.SelectedItem);
+                int currentPage = Convert.ToInt32(pageBox.SelectedItem) - 1;
+
+                if (isFiltersApplied == true)
+                {
+                    PopulatePageBox(_unit.EnterpriseController.GetFilteredCount(filters), paginationCount);
+                    PopulateGridRows(_unit.EnterpriseController.GetFilteredEnterprises(filters, currentPage, paginationCount));
+                    return;
+                }
+                PopulateGridRows(GetOrgsRegistry(currentPage * paginationCount, paginationCount));
             }
+
         }
 
         //открывает форму изменения организации
         private void changeESButton_Click(object sender, EventArgs e)
         {
-            EstablismentCreationForm esForm = new(_unit, this);
+            EstablismentCreationForm esForm = new(_unit);
             esForm.ShowDialog();
         }
 
         //открывает форму фильтров
         private void filterButton_Click(object sender, EventArgs e)
         {
-            FilterForm filterForm = new(_unit);
+            int currentPage = Convert.ToInt32(pageBox.SelectedItem);
+            int currentPagination = Convert.ToInt32(paginationBox.SelectedItem);
+
+            FilterForm filterForm = new(_unit, this);
             filterForm.ShowDialog();
-        }
 
-        //переходит на нужную страницу DataGridViewS
-        private void pageBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            int paginationCount = Convert.ToInt32(paginationBox.SelectedItem);
-
-            if (isFiltersApplied == true)
+            if (filterForm.DialogResult == DialogResult.OK)
             {
-                PopulateGridRows(filtredCache, paginationCount);
-                return;
+                PopulatePageBox(_unit.EnterpriseController.GetFilteredCount(filters), currentPagination);
+                PopulateGridRows(_unit.EnterpriseController.GetFilteredEnterprises(filters, 0, currentPagination));
             }
-
-            PopulateGridRows(unfiltredCache, paginationCount);
+            else if (isFiltersApplied == false)
+            {
+                PopulatePageBox(_unit.EnterpriseController.GetCount(), currentPagination);
+                PopulateGridRows(GetOrgsRegistry((currentPage - 1) * currentPagination, currentPagination));
+            }
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -187,6 +160,40 @@ namespace RegistryOfEstablisment.View
                 changeESButton.Enabled = false;
                 deleteButton.Enabled = false;
             }
+        }
+
+        //меняет количество строк в DataGridView 
+        private void paginationBox_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            int paginationCount = Convert.ToInt32(paginationBox.SelectedItem);
+            List<ValueTuple<Enterprise, bool>> list = new();
+
+            if (isFiltersApplied == true)
+            {
+                PopulatePageBox(_unit.EnterpriseController.GetFilteredCount(filters), paginationCount);
+                list = _unit.EnterpriseController.GetFilteredEnterprises(filters, 0, paginationCount);
+                PopulateGridRows(list);
+                return;
+            }
+
+            PopulatePageBox(_unit.EnterpriseController.GetCount(), paginationCount);
+            list = GetOrgsRegistry(0, paginationCount);
+            PopulateGridRows(list);
+        }
+
+        //переходит на нужную страницу DataGridView
+        private void pageBox_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            int paginationCount = Convert.ToInt32(paginationBox.SelectedItem);
+            int currentPage = Convert.ToInt32(pageBox.SelectedItem) - 1;
+
+            if (isFiltersApplied == true)
+            {
+                PopulateGridRows(_unit.EnterpriseController.GetFilteredEnterprises(filters, currentPage * paginationCount, paginationCount));
+                return;
+            }
+
+            PopulateGridRows(GetOrgsRegistry(currentPage * paginationCount, paginationCount));
         }
     }
 }

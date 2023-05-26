@@ -4,8 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RegistryOfEstablisment.Model.Repositories
 {
@@ -16,6 +14,48 @@ namespace RegistryOfEstablisment.Model.Repositories
         public new IEnumerable<Enterprise> Find(Expression<Func<Enterprise, bool>> expression)
         {
             return _context.Set<Enterprise>().Where(expression);
+        }
+
+        public IEnumerable<Enterprise> GetFilteredEnterprises(Expression<Func<Enterprise, bool>>[] filters, int index, int count)
+        {
+            var query = _context.Enterprises
+                                .AsQueryable()
+                                .AsNoTracking();
+
+            if (filters != null)
+            {
+                foreach (var filter in filters) query = query.Where(filter);
+            }
+
+            return query.Include(c => c.ManagementTerritory)
+                        .Include(c => c.Type)
+                        .Skip(index)
+                        .Take(count)
+                        .OrderBy(t => t.Id)
+                        .ToList();
+        }
+
+        public int GetFilteredCount(Expression<Func<Enterprise, bool>>[] filters)
+        {
+            var query = _context.Enterprises
+                    .AsQueryable()
+                    .AsNoTracking();
+
+            if (filters != null)
+            {
+                foreach (var filter in filters) query = query.Where(filter);
+            }
+
+            return query.Count();
+        }
+
+        public IEnumerable<Enterprise> GetSome(int index, int count)
+        {
+            return _context.Set<Enterprise>().Include(c => c.ManagementTerritory)
+                                             .Include(c => c.Type)
+                                             .Skip(index)
+                                             .Take(count)
+                                             .ToList();
         }
 
         public new IEnumerable<Enterprise> GetAll()
@@ -39,8 +79,17 @@ namespace RegistryOfEstablisment.Model.Repositories
             {
                 case "Оператор ОМСУ":
                     {
-                        List<string> accessedTypes = new() { "Приют", "Организация по отлову", "Организация по отлову и приют", "Организация по транспортировке", "Ветеринарная клиника: муниципальная"
-                        ,"Ветеринарная клиника: частная", "Благотворительный фонд", "Организации по продаже товаров и предоставлению услуг для животных"};
+                        List<string> accessedTypes = new()
+                        {
+                            "Приют",
+                            "Организация по отлову",
+                            "Организация по отлову и приют",
+                            "Организация по транспортировке",
+                            "Ветеринарная клиника: муниципальная",
+                            "Ветеринарная клиника: частная",
+                            "Благотворительный фонд",
+                            "Организации по продаже товаров и предоставлению услуг для животных"
+                        };
                         return accessedTypes.Contains(ent.Type.Name) && ent.ManagementTerritory.Name == CurrentUser.ManagementTerritory.Name;
                     }
                 case "Оператор ВетСлужбы":
@@ -64,24 +113,33 @@ namespace RegistryOfEstablisment.Model.Repositories
             }
         }
 
-        public List<ValueTuple<Enterprise,bool>> GetAccessedRegistries()
+        public List<ValueTuple<Enterprise, bool>> GetAccessedRegistry(List<Enterprise> list)
         {
-            List<Enterprise> list = GetAll().ToList();
-            List<ValueTuple<Enterprise,bool>> result = new();
+            List<ValueTuple<Enterprise, bool>> result = new();
             switch (CurrentUser.Role.Name)
             {
                 case "Оператор ОМСУ":
                     {
-                        List<string> accessedTypes = new() { "Приют", "Организация по отлову", "Организация по отлову и приют" };
+                        List<string> accessedTypes = new()
+                        {
+                            "Приют",
+                            "Организация по отлову",
+                            "Организация по отлову и приют",
+                            "Организация по транспортировке",
+                            "Ветеринарная клиника: муниципальная",
+                            "Ветеринарная клиника: частная",
+                            "Благотворительный фонд",
+                            "Организации по продаже товаров и предоставлению услуг для животных"
+                        };
                         foreach (Enterprise ent in list)
                         {
-                            result.Add((ent, ent.ManagementTerritory == CurrentUser.ManagementTerritory && accessedTypes.Contains(ent.Type.Name)));
+                            result.Add((ent, ent.ManagementTerritory.Name == CurrentUser.ManagementTerritory.Name && accessedTypes.Contains(ent.Type.Name)));
                         }
                         break;
                     }
                 case "Оператор ВетСлужбы":
                     {
-                        List<string> accessedTypes = new() { "Исполнительный орган государственной власти", "Орган местного самоуправления", "Ветеринарная клиника: государственная"};
+                        List<string> accessedTypes = new() { "Исполнительный орган государственной власти", "Орган местного самоуправления", "Ветеринарная клиника: государственная" };
                         foreach (Enterprise ent in list)
                         {
                             result.Add((ent, accessedTypes.Contains(ent.Type.Name)));
@@ -89,7 +147,7 @@ namespace RegistryOfEstablisment.Model.Repositories
                         break;
                     }
                 case "Куратор ВетСлужбы":
-                case "Куратор ОМСУ": 
+                case "Куратор ОМСУ":
                 case "Куратор по отлову":
                 case "Куратор приюта":
                 case "Подписант ВетСлужбы":

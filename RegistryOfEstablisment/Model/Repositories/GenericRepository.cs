@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RegistryOfEstablisment.Model.Repositories
 {
-    public class GenericRepository<T> : IGenericRepository<T> where T: class
+    public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
         protected readonly DataContext _context;
 
@@ -30,6 +28,11 @@ namespace RegistryOfEstablisment.Model.Repositories
         public IEnumerable<T> Find(Expression<Func<T, bool>> expression)
         {
             return _context.Set<T>().Where(expression);
+        }
+
+        public int GetCount()
+        {
+            return _context.Set<T>().Count();
         }
 
         public IEnumerable<T> GetAll()

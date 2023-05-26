@@ -10,19 +10,18 @@ using System.Threading.Tasks;
 
 namespace RegistryOfEstablisment.Controller
 {
-    public class RegistrationController
+    public class RegistrationController : BaseController
     {
-        private readonly IUnitOfWork _unit;
+        public RegistrationController(IUnitOfWork unit) : base(unit) { }
 
-        internal RegistrationController(IUnitOfWork unit)
+        public IEnumerable<Registration> GetRegistrationsByDayAndEnterprise(DateTime date, Enterprise ent)
         {
-            _unit = unit;
+            return _unit.Registrations.GetAllByDayAndEnterprise(date, ent);
         }
 
-        //public void AddNewRegistration(DateTime date, string petName, string petType)
-        //{
-        //    Registration re = new Registration();
-        //    RegistrationRepository.Add(re);
-        //}
+        public void AddNewRegistration(Registration reg)
+        {
+            _unit.Registrations.Add(reg);
+        }
     }
 }

@@ -12,6 +12,8 @@ namespace RegistryOfEstablisment.UnitControl
         AuthController AuthController { get; }
         EnterpriseController EnterpriseController { get; }
         RegistrationController RegistrationController { get; }
-        RegistryController RegistryController { get; }
+        UserController UserController { get; }
+        EnterpriseTypeController EnterpriseTypeController { get; }     
+        ManagementTerritoryController ManagementTerritoryController { get; }
     }
 }

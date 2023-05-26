@@ -16,14 +16,20 @@ namespace RegistryOfEstablisment.UnitControl
 
         public RegistrationController RegistrationController { get; init; }
 
-        public RegistryController RegistryController { get; init; }
+        public UserController UserController { get; init; }
+
+        public EnterpriseTypeController EnterpriseTypeController { get; init; }
+
+        public ManagementTerritoryController ManagementTerritoryController { get; init; }
 
         internal UnitOfControl(IUnitOfWork _unit)
         {
             AuthController = new(_unit);
             EnterpriseController = new(_unit);
             RegistrationController = new(_unit);
-            RegistryController = new(_unit);
+            UserController = new(_unit);
+            EnterpriseTypeController = new(_unit);
+            ManagementTerritoryController = new(_unit);
         }
     }
 }

@@ -10,8 +10,7 @@ namespace RegistryOfEstablisment.Model.Repositories
     {
         public RegistrationRepository(DataContext context) : base(context) { }
 
-        public IEnumerable<Registration> GetAllByDayAndEnterprise(DateTime date, Enterprise ent
-            )
+        public IEnumerable<Registration> GetAllByDayAndEnterprise(DateTime date, Enterprise ent)
         {
             return _context.Set<Registration>().Where(c => c.AppointmentTime.Day == date.Day && c.Enterprise == ent)
                                                .Include(c => c.Enterprise)

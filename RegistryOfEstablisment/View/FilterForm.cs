@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RegistryOfEstablisment.UnitControl;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,24 +13,11 @@ namespace RegistryOfEstablisment.View
 {
     public partial class FilterForm : Form
     {
-        public FilterForm()
+        private readonly IUnitOfControl _unit;
+        public FilterForm(IUnitOfControl unit)
         {
             InitializeComponent();
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void FilterForm_Load(object sender, EventArgs e)
-        {
-
+            _unit = unit;
         }
 
         private void acceptButton_Click(object sender, EventArgs e)

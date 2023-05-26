@@ -57,6 +57,7 @@ namespace RegistryOfEstablisment.View
             }
 
             this.Close();
+            Logger.Info("Приложение закрыто");
         }
 
         //получает список организаций

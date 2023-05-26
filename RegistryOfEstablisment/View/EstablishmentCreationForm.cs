@@ -41,15 +41,15 @@ namespace RegistryOfEstablisment.View
 
         }
 
-        public void AddNewEnterprise()
-        {
-            Enterprise e = new Enterprise();
-            EnterpriseController.AddEnterprise(e);
-        }
+        //public void AddNewEnterprise()
+        //{
+        //    Enterprise e = new Enterprise();
+        //    EnterpriseController.AddEnterprise(e);
+        //}
 
-        public void UpdateEnterprise(Enterprise enterprise)
-        {
-            EnterpriseController.UpdateEnterprise(enterprise);
-        }
+        //public void UpdateEnterprise(Enterprise enterprise)
+        //{
+        //    EnterpriseController.UpdateEnterprise(enterprise);
+        //}
     }
 }

@@ -5,14 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RegistryOfEstablisment.UnitOfWork
+namespace RegistryOfEstablisment.Unit
 {
     public interface IUnitOfWork : IDisposable
     {
-        EnterpriseRepository Products { get; }
-        RegistrationRepository Categories { get; }
-
+        EnterpriseRepository Enterprises { get; }
+        RegistrationRepository Registrations { get; }
         UserRepository Users { get; }
-        Task<int> Complete();
     }
 }

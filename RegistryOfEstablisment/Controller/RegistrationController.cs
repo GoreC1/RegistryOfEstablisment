@@ -11,10 +11,10 @@ namespace RegistryOfEstablisment.Controller
 {
     class RegistrationController
     {
-        public void AddNewRegistration(DateTime date, string petName, string petType)
-        {
-            Registration re = new Registration();
-            RegistrationRepository.Add(re);
-        }
+        //public void AddNewRegistration(DateTime date, string petName, string petType)
+        //{
+        //    Registration re = new Registration();
+        //    RegistrationRepository.Add(re);
+        //}
     }
 }

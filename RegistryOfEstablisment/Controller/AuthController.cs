@@ -1,32 +1,30 @@
 ﻿using RegistryOfEstablisment.Model.Entities;
 using RegistryOfEstablisment.Model.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using RegistryOfEstablisment.Unit;
 
 namespace RegistryOfEstablisment.Controller
 {
-    class AuthController
+    public class AuthController
     {
-        public bool Authentificate (string login, string password)
+        private readonly IUnitOfWork _unit;
+
+        public AuthController(IUnitOfWork unit)
         {
-            if (UserRepository.GetByAuth(login, password) == null) 
-            {
+            _unit = unit;
+        }
+        public bool Authentificate(string login, string password)
+        {
+            User authUser = _unit.Users.GetByAuth(login, password);
+            if (authUser == null)
                 return false;
-            }
-            else
-            {
-                User user = UserRepository.GetByAuth(login, password);
-                user.Role = CurrentUser.Role;
-                user.ManagementTerritory = CurrentUser.ManagementTerritory;
-                user.OwnedEnterprise = CurrentUser.OwnedEnterprise;
-                user.Login = CurrentUser.Login;
-                user.Password = CurrentUser.Password;
-                user.TelephoneNumber = CurrentUser.TelephoneNumber;
-                user.Address = CurrentUser.Address;
-                return true;
-            }
+            CurrentUser.Role = authUser.Role;
+            CurrentUser.ManagementTerritory = authUser.ManagementTerritory;
+            CurrentUser.OwnedEnterprise = authUser.OwnedEnterprise;
+            CurrentUser.Login = authUser.Login;
+            CurrentUser.Password = authUser.Password;
+            CurrentUser.TelephoneNumber = authUser.TelephoneNumber;
+            CurrentUser.Address = authUser.Address;
+            return true;
+        }
     }
 }

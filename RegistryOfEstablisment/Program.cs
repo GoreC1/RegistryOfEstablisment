@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using Microsoft.EntityFrameworkCore;
 using RegistryOfEstablisment.Model;
 using RegistryOfEstablisment.View;
+using RegistryOfEstablisment.Unit;
 
 namespace RegistryOfEstablisment
 {
@@ -20,7 +21,9 @@ namespace RegistryOfEstablisment
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new AuthorisationForm());
+            DataContext dataContext = new DataContext();
+            UnitOfWork unit = new UnitOfWork(dataContext);
+            Application.Run(new AuthorisationForm(unit));
         }
 
     }

@@ -8,15 +8,19 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using RegistryOfEstablisment.Controller;
+using RegistryOfEstablisment.Unit;
 using RegistryOfEstablisment.View;
 
 namespace RegistryOfEstablisment
 {
     public partial class AuthorisationForm : Form
     {
-        public AuthorisationForm()
+        private readonly IUnitOfWork _unit;
+        public AuthorisationForm(IUnitOfWork unit)
         {
             InitializeComponent();
+            InitializePasswordTextBox();
+            _unit = unit;
         }
 
         private void AuthorisationForm_Load(object sender, EventArgs e)
@@ -26,17 +30,20 @@ namespace RegistryOfEstablisment
 
         private void AuthButton_Click(object sender, EventArgs e)
         {
-            if (AuthController.Authentificate(LoginTextBox.Text, PasswordTextBox.Text) == true)
+            AuthController auth = new AuthController(_unit);
+            if (!auth.Authentificate(LoginTextBox.Text, PasswordTextBox.Text))
             {
-                //открывается форма
+                falseAuthLabel.Visible = true;
+                return;
             }
-            else
-            {
-                MessageBox.Show("Логин или пароль ввёдён неправильно!");
-            }
-            AuthController.Authentificate(LoginTextBox.Text, PasswordTextBox.Text);
-            this.DialogResult = DialogResult.OK;
-            this.Close();
+            return;
+        }
+
+        private void InitializePasswordTextBox()
+        {
+            PasswordTextBox.Text = "";
+            PasswordTextBox.PasswordChar = '*';
+            PasswordTextBox.MaxLength = 21;
         }
     }
 }

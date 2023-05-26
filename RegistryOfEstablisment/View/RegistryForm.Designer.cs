@@ -153,6 +153,8 @@ namespace RegistryOfEstablisment.View
             // paginationBox
             // 
             this.paginationBox.Dock = System.Windows.Forms.DockStyle.Left;
+            this.paginationBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.paginationBox.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.paginationBox.FormattingEnabled = true;
             this.paginationBox.Items.AddRange(new object[] {
             "5",
@@ -180,6 +182,8 @@ namespace RegistryOfEstablisment.View
             // pageBox
             // 
             this.pageBox.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pageBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.pageBox.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.pageBox.FormattingEnabled = true;
             this.pageBox.Location = new System.Drawing.Point(364, 0);
             this.pageBox.Name = "pageBox";

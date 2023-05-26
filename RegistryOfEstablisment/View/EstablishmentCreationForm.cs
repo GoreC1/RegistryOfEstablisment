@@ -5,16 +5,20 @@ using System.Drawing;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using NLog;
+using System.ComponentModel;
 
 namespace RegistryOfEstablisment.View
 {
     public partial class EstablismentCreationForm : Form
     {
         readonly IUnitOfControl _unit;
+        private static Logger Logger = LogManager.GetCurrentClassLogger();
         public EstablismentCreationForm(IUnitOfControl unit)
         {
             InitializeComponent();
             _unit = unit;
+            Logger.Debug("Открыта форма добавления организации");
         }
 
         private void EstablismentCreationForm_Load(object sender, EventArgs e)
@@ -32,6 +36,7 @@ namespace RegistryOfEstablisment.View
             if (!CheckCompletion())
             {
                 MessageBox.Show("Данные заполнены некорректно!");
+                Logger.Warn("Попытка создания провалена - данные заполнены некорректно");
                 return;
             }
 
@@ -49,14 +54,16 @@ namespace RegistryOfEstablisment.View
                 WebSite = webSiteBox.Text,
                 Email = mailBox.Text
             };
+            Logger.Trace($"Создан новый экземпляр класса Enterprise {ent.Name}");
 
             _unit.EnterpriseController.AddEnterprise(ent);
 
             this.DialogResult = DialogResult.OK;
             this.Close();
+            Logger.Trace("Форма добавления организации закрыта");
         }
 
-        //проверка заполнения
+        //проверка заполнения с указанием неверных полей
         private bool CheckCompletion()
         {
             string regTel = @"^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$";
@@ -84,6 +91,7 @@ namespace RegistryOfEstablisment.View
         {
             this.DialogResult = DialogResult.Cancel;
             this.Close();
+            Logger.Debug("Форма добавления организации закрыта");
         }
 
         //проверка ввода КПП
@@ -100,6 +108,7 @@ namespace RegistryOfEstablisment.View
                 e.Handled = true;
         }
 
+        //проверка и указанме на неверные поля
         private void ShowTextErrors(TextBox box, bool condition)
         {
             if (!condition)

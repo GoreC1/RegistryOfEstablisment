@@ -1,4 +1,5 @@
-﻿using RegistryOfEstablisment.Model.Entities;
+﻿using NLog;
+using RegistryOfEstablisment.Model.Entities;
 using RegistryOfEstablisment.UnitControl;
 using System;
 using System.Collections.Generic;
@@ -17,13 +18,16 @@ namespace RegistryOfEstablisment.View
     {
         readonly IUnitOfControl _unit;
         readonly int ID;
+        private static Logger Logger = LogManager.GetCurrentClassLogger();
         public EstablishmentChangingForm(IUnitOfControl unit, int enterpriseID)
         {
             InitializeComponent();
             _unit = unit;
             ID = enterpriseID;
+            Logger.Debug("Открыта форма изменения организации");
         }
 
+        //Заполнение всех полей данными
         private void EstablishmentChangingForm_Load(object sender, EventArgs e)
         {
             EnterpriseType[] types = _unit.EnterpriseTypeController.GetAccessedTypes().ToArray();
@@ -39,13 +43,16 @@ namespace RegistryOfEstablisment.View
         {
             DialogResult = DialogResult.Cancel;
             Close();
+            Logger.Debug("Форма изменения организации закрыта");
         }
 
+        //Изменение существующией записи
         private void changeButton_Click(object sender, EventArgs e)
         {
             if (!CheckCompletion())
             {
                 MessageBox.Show("Данные заполнены некорректно!");
+                Logger.Warn("Попытка изменения провалена - данные заполнены некорректно");
                 return;
             }
 
@@ -64,12 +71,16 @@ namespace RegistryOfEstablisment.View
                 WebSite = webSiteBox.Text,
                 Email = mailBox.Text
             };
+            Logger.Trace($"Создан новый экземпляр класса Enterprise {newEnterprise.Name}");
+
 
             _unit.EnterpriseController.UpdateEnterprise(newEnterprise);
             DialogResult = DialogResult.OK;
             Close();
+            Logger.Trace("Форма изменения организации закрыта");
         }
 
+        //проверка заполнения с указанием неверных полей
         private bool CheckCompletion()
         {
             string regTel = @"^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$";
@@ -108,20 +119,25 @@ namespace RegistryOfEstablisment.View
             telBox.Text = ent.TelephoneNumber;
             webSiteBox.Text = ent.WebSite;
             mailBox.Text = ent.Email;
+
+            Logger.Trace($"Данные организации [ID - {ent.Id}] подгружены");
         }
 
+        //проверка ввода КПП
         private void checkpointBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsDigit(e.KeyChar) || checkpointBox.Text.Length == 9)
                 e.Handled = true;
         }
 
+        //Проверка ввода ИНН
         private void ITNBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsDigit(e.KeyChar) || ITNBox.Text.Length == 12)
                 e.Handled = true;
         }
 
+        //проверка и указанме на неверные поля
         private void ShowTextErrors(TextBox box, bool condition)
         {
             if (!condition)

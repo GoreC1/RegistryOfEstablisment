@@ -107,7 +107,7 @@ namespace RegistryOfEstablisment.View
             this.ITNBox.Location = new System.Drawing.Point(151, 48);
             this.ITNBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ITNBox.Name = "ITNBox";
-            this.ITNBox.Size = new System.Drawing.Size(133, 23);
+            this.ITNBox.Size = new System.Drawing.Size(290, 23);
             this.ITNBox.TabIndex = 7;
             this.ITNBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ITNBox_KeyPress);
             // 
@@ -116,7 +116,7 @@ namespace RegistryOfEstablisment.View
             this.checkpointBox.Location = new System.Drawing.Point(151, 81);
             this.checkpointBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.checkpointBox.Name = "checkpointBox";
-            this.checkpointBox.Size = new System.Drawing.Size(133, 23);
+            this.checkpointBox.Size = new System.Drawing.Size(290, 23);
             this.checkpointBox.TabIndex = 8;
             this.checkpointBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkpointBox_KeyPress);
             // 
@@ -125,7 +125,7 @@ namespace RegistryOfEstablisment.View
             this.addressBox.Location = new System.Drawing.Point(151, 111);
             this.addressBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.addressBox.Name = "addressBox";
-            this.addressBox.Size = new System.Drawing.Size(133, 23);
+            this.addressBox.Size = new System.Drawing.Size(290, 23);
             this.addressBox.TabIndex = 9;
             // 
             // typeBox
@@ -134,7 +134,7 @@ namespace RegistryOfEstablisment.View
             this.typeBox.Location = new System.Drawing.Point(151, 170);
             this.typeBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.typeBox.Name = "typeBox";
-            this.typeBox.Size = new System.Drawing.Size(133, 23);
+            this.typeBox.Size = new System.Drawing.Size(290, 23);
             this.typeBox.TabIndex = 10;
             // 
             // legalEntityBox
@@ -142,39 +142,39 @@ namespace RegistryOfEstablisment.View
             this.legalEntityBox.Location = new System.Drawing.Point(151, 199);
             this.legalEntityBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.legalEntityBox.Name = "legalEntityBox";
-            this.legalEntityBox.Size = new System.Drawing.Size(133, 23);
+            this.legalEntityBox.Size = new System.Drawing.Size(290, 23);
             this.legalEntityBox.TabIndex = 11;
             // 
             // cancelButton
             // 
-            this.cancelButton.Location = new System.Drawing.Point(171, 236);
+            this.cancelButton.Location = new System.Drawing.Point(333, 235);
             this.cancelButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(52, 35);
+            this.cancelButton.Size = new System.Drawing.Size(108, 35);
             this.cancelButton.TabIndex = 13;
-            this.cancelButton.Text = "X";
+            this.cancelButton.Text = "Отмена";
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
             // clearButton
             // 
-            this.clearButton.Location = new System.Drawing.Point(98, 236);
+            this.clearButton.Location = new System.Drawing.Point(187, 235);
             this.clearButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.clearButton.Name = "clearButton";
-            this.clearButton.Size = new System.Drawing.Size(67, 35);
+            this.clearButton.Size = new System.Drawing.Size(95, 33);
             this.clearButton.TabIndex = 14;
-            this.clearButton.Text = "СБРОС";
+            this.clearButton.Text = "Сбросить";
             this.clearButton.UseVisualStyleBackColor = true;
             this.clearButton.Click += new System.EventHandler(this.clearButton_Click);
             // 
             // acceptButton
             // 
-            this.acceptButton.Location = new System.Drawing.Point(234, 236);
+            this.acceptButton.Location = new System.Drawing.Point(11, 236);
             this.acceptButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.acceptButton.Name = "acceptButton";
-            this.acceptButton.Size = new System.Drawing.Size(52, 35);
+            this.acceptButton.Size = new System.Drawing.Size(112, 33);
             this.acceptButton.TabIndex = 15;
-            this.acceptButton.Text = "V";
+            this.acceptButton.Text = "Применить";
             this.acceptButton.UseVisualStyleBackColor = true;
             this.acceptButton.Click += new System.EventHandler(this.acceptButton_Click);
             // 
@@ -192,21 +192,21 @@ namespace RegistryOfEstablisment.View
             this.realAddressBox.Location = new System.Drawing.Point(151, 140);
             this.realAddressBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.realAddressBox.Name = "realAddressBox";
-            this.realAddressBox.Size = new System.Drawing.Size(133, 23);
+            this.realAddressBox.Size = new System.Drawing.Size(290, 23);
             this.realAddressBox.TabIndex = 17;
             // 
             // nameBox
             // 
             this.nameBox.Location = new System.Drawing.Point(151, 13);
             this.nameBox.Name = "nameBox";
-            this.nameBox.Size = new System.Drawing.Size(133, 23);
+            this.nameBox.Size = new System.Drawing.Size(290, 23);
             this.nameBox.TabIndex = 18;
             // 
             // FilterForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(293, 280);
+            this.ClientSize = new System.Drawing.Size(453, 280);
             this.Controls.Add(this.nameBox);
             this.Controls.Add(this.realAddressBox);
             this.Controls.Add(this.label7);

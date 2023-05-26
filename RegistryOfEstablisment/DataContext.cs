@@ -1,10 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RegistryOfEstablisment.Model.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RegistryOfEstablisment.Model
 {
@@ -20,8 +15,8 @@ namespace RegistryOfEstablisment.Model
         public DbSet<ManagementTerritory> ManagementTerritories { get; set; }
         public DbSet<Registration> Registration { get; set; }
         public DbSet<Role> Roles { get; set; }
-        public DbSet<User> Users {get;set;}
-        
+        public DbSet<User> Users { get; set; }
+
     }
 
 }

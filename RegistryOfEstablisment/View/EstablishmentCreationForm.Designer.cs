@@ -58,7 +58,7 @@ namespace RegistryOfEstablisment.View
             // 
             // cancelButton
             // 
-            this.cancelButton.Location = new System.Drawing.Point(374, 186);
+            this.cancelButton.Location = new System.Drawing.Point(426, 228);
             this.cancelButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(136, 32);
@@ -69,7 +69,7 @@ namespace RegistryOfEstablisment.View
             // 
             // ITNBox
             // 
-            this.ITNBox.Location = new System.Drawing.Point(181, 107);
+            this.ITNBox.Location = new System.Drawing.Point(181, 147);
             this.ITNBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ITNBox.Name = "ITNBox";
             this.ITNBox.Size = new System.Drawing.Size(157, 23);
@@ -78,7 +78,7 @@ namespace RegistryOfEstablisment.View
             // 
             // telBox
             // 
-            this.telBox.Location = new System.Drawing.Point(9, 149);
+            this.telBox.Location = new System.Drawing.Point(8, 189);
             this.telBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.telBox.Name = "telBox";
             this.telBox.Size = new System.Drawing.Size(157, 23);
@@ -86,15 +86,15 @@ namespace RegistryOfEstablisment.View
             // 
             // mailBox
             // 
-            this.mailBox.Location = new System.Drawing.Point(353, 149);
+            this.mailBox.Location = new System.Drawing.Point(353, 189);
             this.mailBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.mailBox.Name = "mailBox";
-            this.mailBox.Size = new System.Drawing.Size(157, 23);
+            this.mailBox.Size = new System.Drawing.Size(209, 23);
             this.mailBox.TabIndex = 30;
             // 
             // webSiteBox
             // 
-            this.webSiteBox.Location = new System.Drawing.Point(181, 149);
+            this.webSiteBox.Location = new System.Drawing.Point(181, 189);
             this.webSiteBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.webSiteBox.Name = "webSiteBox";
             this.webSiteBox.Size = new System.Drawing.Size(157, 23);
@@ -102,23 +102,23 @@ namespace RegistryOfEstablisment.View
             // 
             // factAdressBox
             // 
-            this.factAdressBox.Location = new System.Drawing.Point(8, 66);
+            this.factAdressBox.Location = new System.Drawing.Point(7, 105);
             this.factAdressBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.factAdressBox.Name = "factAdressBox";
-            this.factAdressBox.Size = new System.Drawing.Size(157, 23);
+            this.factAdressBox.Size = new System.Drawing.Size(272, 23);
             this.factAdressBox.TabIndex = 28;
             // 
             // regAdressBox
             // 
-            this.regAdressBox.Location = new System.Drawing.Point(181, 66);
+            this.regAdressBox.Location = new System.Drawing.Point(291, 104);
             this.regAdressBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.regAdressBox.Name = "regAdressBox";
-            this.regAdressBox.Size = new System.Drawing.Size(157, 23);
+            this.regAdressBox.Size = new System.Drawing.Size(271, 23);
             this.regAdressBox.TabIndex = 27;
             // 
             // checkpointBox
             // 
-            this.checkpointBox.Location = new System.Drawing.Point(9, 107);
+            this.checkpointBox.Location = new System.Drawing.Point(8, 147);
             this.checkpointBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.checkpointBox.Name = "checkpointBox";
             this.checkpointBox.Size = new System.Drawing.Size(157, 23);
@@ -130,14 +130,14 @@ namespace RegistryOfEstablisment.View
             this.nameBox.Location = new System.Drawing.Point(8, 24);
             this.nameBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.nameBox.Name = "nameBox";
-            this.nameBox.Size = new System.Drawing.Size(248, 23);
+            this.nameBox.Size = new System.Drawing.Size(271, 23);
             this.nameBox.TabIndex = 25;
             this.nameBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(55, 132);
+            this.label8.Location = new System.Drawing.Point(56, 172);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(55, 15);
             this.label8.TabIndex = 24;
@@ -146,7 +146,7 @@ namespace RegistryOfEstablisment.View
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(406, 132);
+            this.label7.Location = new System.Drawing.Point(438, 172);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(41, 15);
             this.label7.TabIndex = 23;
@@ -155,7 +155,7 @@ namespace RegistryOfEstablisment.View
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(240, 132);
+            this.label6.Location = new System.Drawing.Point(246, 172);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(33, 15);
             this.label6.TabIndex = 22;
@@ -164,7 +164,7 @@ namespace RegistryOfEstablisment.View
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(30, 49);
+            this.label5.Location = new System.Drawing.Point(88, 88);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(113, 15);
             this.label5.TabIndex = 21;
@@ -173,7 +173,7 @@ namespace RegistryOfEstablisment.View
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(200, 49);
+            this.label4.Location = new System.Drawing.Point(376, 87);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(113, 15);
             this.label4.TabIndex = 20;
@@ -182,7 +182,7 @@ namespace RegistryOfEstablisment.View
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(69, 91);
+            this.label3.Location = new System.Drawing.Point(69, 130);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(32, 15);
             this.label3.TabIndex = 19;
@@ -191,7 +191,7 @@ namespace RegistryOfEstablisment.View
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(240, 90);
+            this.label2.Location = new System.Drawing.Point(246, 130);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(34, 15);
             this.label2.TabIndex = 18;
@@ -210,7 +210,7 @@ namespace RegistryOfEstablisment.View
             // 
             // createButton
             // 
-            this.createButton.Location = new System.Drawing.Point(8, 186);
+            this.createButton.Location = new System.Drawing.Point(12, 228);
             this.createButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.createButton.Name = "createButton";
             this.createButton.Size = new System.Drawing.Size(135, 32);
@@ -222,7 +222,7 @@ namespace RegistryOfEstablisment.View
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(390, 91);
+            this.label9.Location = new System.Drawing.Point(417, 129);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(72, 15);
             this.label9.TabIndex = 37;
@@ -231,7 +231,7 @@ namespace RegistryOfEstablisment.View
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(405, 49);
+            this.label10.Location = new System.Drawing.Point(271, 47);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(27, 15);
             this.label10.TabIndex = 38;
@@ -240,17 +240,17 @@ namespace RegistryOfEstablisment.View
             // territoryBox
             // 
             this.territoryBox.FormattingEnabled = true;
-            this.territoryBox.Location = new System.Drawing.Point(353, 109);
+            this.territoryBox.Location = new System.Drawing.Point(353, 147);
             this.territoryBox.Name = "territoryBox";
-            this.territoryBox.Size = new System.Drawing.Size(157, 23);
+            this.territoryBox.Size = new System.Drawing.Size(209, 23);
             this.territoryBox.TabIndex = 39;
             // 
             // typeBox
             // 
             this.typeBox.FormattingEnabled = true;
-            this.typeBox.Location = new System.Drawing.Point(353, 67);
+            this.typeBox.Location = new System.Drawing.Point(7, 62);
             this.typeBox.Name = "typeBox";
-            this.typeBox.Size = new System.Drawing.Size(157, 23);
+            this.typeBox.Size = new System.Drawing.Size(555, 23);
             this.typeBox.TabIndex = 40;
             // 
             // label11
@@ -264,17 +264,17 @@ namespace RegistryOfEstablisment.View
             // 
             // legalEntityBox
             // 
-            this.legalEntityBox.Location = new System.Drawing.Point(262, 24);
+            this.legalEntityBox.Location = new System.Drawing.Point(291, 24);
             this.legalEntityBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.legalEntityBox.Name = "legalEntityBox";
-            this.legalEntityBox.Size = new System.Drawing.Size(248, 23);
+            this.legalEntityBox.Size = new System.Drawing.Size(271, 23);
             this.legalEntityBox.TabIndex = 42;
             this.legalEntityBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(342, 7);
+            this.label12.Location = new System.Drawing.Point(396, 8);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(83, 15);
             this.label12.TabIndex = 43;
@@ -284,7 +284,7 @@ namespace RegistryOfEstablisment.View
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(521, 228);
+            this.ClientSize = new System.Drawing.Size(574, 271);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.legalEntityBox);
             this.Controls.Add(this.label11);

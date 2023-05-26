@@ -2,13 +2,8 @@
 using RegistryOfEstablisment.UnitControl;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace RegistryOfEstablisment.View
@@ -17,7 +12,8 @@ namespace RegistryOfEstablisment.View
     {
         private readonly IUnitOfControl _unit;
         private RegistryForm _registry;
-        public FilterForm(IUnitOfControl unit, RegistryForm registry, int currentPage, int currentPagination)
+
+        public FilterForm(IUnitOfControl unit, RegistryForm registry)
         {
             InitializeComponent();
             _registry = registry;
@@ -29,25 +25,47 @@ namespace RegistryOfEstablisment.View
             List<Expression<Func<Enterprise, bool>>> expressions = new();
 
             if (nameBox.Text != "")
+            {
                 expressions.Add((c => c.Name.StartsWith(nameBox.Text)));
+            }    
 
             if (ITNBox.Text != "")
+            {
                 expressions.Add((c => c.ITN.ToString().StartsWith(ITNBox.Text)));
+            }
 
             if (checkpointBox.Text != "")
+            {
                 expressions.Add((c => c.Checkpoint.ToString().StartsWith(checkpointBox.Text)));
+            }
 
             if (addressBox.Text != "")
+            {
                 expressions.Add((c => c.Address.StartsWith(addressBox.Text)));
+            }
 
             if (realAddressBox.Text != "")
+            {
                 expressions.Add((c => c.RealAddress.StartsWith(realAddressBox.Text)));
+            }
 
             if (typeBox.SelectedItem != null)
+            {
                 expressions.Add((c => c.Type == typeBox.SelectedItem));
+            }
 
             if (legalEntityBox.Text != "")
+            {
                 expressions.Add((c => c.LegalEntity.StartsWith(legalEntityBox.Text)));
+            }
+
+            _registry.filterCache[0] = nameBox.Text;
+            _registry.filterCache[1] = ITNBox.Text;
+            _registry.filterCache[2] = checkpointBox.Text;
+            _registry.filterCache[3] = addressBox.Text;
+            _registry.filterCache[4] = realAddressBox.Text;
+            _registry.filterCache[5] = typeBox.SelectedItem;
+            _registry.filterCache[6] = legalEntityBox.Text;
 
             return expressions.ToArray();
 
@@ -96,12 +114,22 @@ namespace RegistryOfEstablisment.View
         private void FilterForm_Load(object sender, EventArgs e)
         {
             typeBox.Items.AddRange(_unit.EnterpriseTypeController.GetAllTypes().ToArray());
+            nameBox.Text = _registry.filterCache[0].ToString();
+            ITNBox.Text = _registry.filterCache[1].ToString();
+            checkpointBox.Text = _registry.filterCache[2].ToString();
+            addressBox.Text = _registry.filterCache[3].ToString();
+            realAddressBox.Text = _registry.filterCache[4].ToString();
+            typeBox.SelectedItem = _registry.filterCache[5];
+            legalEntityBox.Text = _registry.filterCache[6].ToString();
+            
         }
 
         private void clearButton_Click(object sender, EventArgs e)
         {
             ClearFields();
             _registry.isFiltersApplied = false;
+            _registry.filters = new Expression<Func<Enterprise,bool>>[] { };
+            _registry.filterCache = new object[] { "", "", "", "", "", null, "" }; 
         }
     }
 }

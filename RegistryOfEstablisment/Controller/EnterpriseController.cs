@@ -12,12 +12,13 @@ namespace RegistryOfEstablisment.Controller
 {
     public class EnterpriseController : BaseController
     {
+        private static Logger Logger = LogManager.GetCurrentClassLogger();
 
         public EnterpriseController(IUnitOfWork unit) : base(unit) { }
         
         public void AddEnterprise(Enterprise ent)
         {
-            _logger.Trace($"Контроллер запрашивает создание организации у репозитория");
+            Logger.Trace($"Контроллер запрашивает создание организации у репозитория");
             _unit.Enterprises.Add(ent);
             Logger.Info($"Организация [ID = {GetLastEnterprise().Id}] успешно создана");
         }
@@ -50,9 +51,9 @@ namespace RegistryOfEstablisment.Controller
         public void UpdateEnterprise(Enterprise newEnterprise)
         {
             var oldEnt = GetEnterpriseByID(newEnterprise.Id);
-            Logger.Trace($"Контроллер запрашивает изменение организации [ID = {newEnterprise.Id}] у репозитория");
+            Logger.Trace($"{TypeDescriptor.GetClassName(this)} запрашивает изменение организации {oldEnt.Name} у EnterpriseRepository");
             _unit.Enterprises.Update(newEnterprise);
-            Logger.Info($"Организация успешно изменена");
+            Logger.Info($"Организация {oldEnt.Name} успешно изменена");
         }
 
         public Enterprise GetLastEnterprise()
@@ -62,9 +63,9 @@ namespace RegistryOfEstablisment.Controller
 
         public void DeleteEnterprise(int enterpriseID)
         {
-            _logger.Trace($"Контроллер запрашивает удаление организации [ID = {enterpriseID}] у репозитория");
+            Logger.Trace($"Контроллер запрашивает удаление организации [ID = {enterpriseID}] у репозитория");
             _unit.Enterprises.Remove(GetEnterpriseByID(enterpriseID));
-            _logger.Info($"Организация успешно удаление");
+            Logger.Info($"Организация успешно удалена");
         }
     }
 }

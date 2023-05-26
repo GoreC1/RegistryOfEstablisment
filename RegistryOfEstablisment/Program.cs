@@ -44,7 +44,6 @@ namespace RegistryOfEstablisment
             //User user = new User { Name = "Антонов Сергей Юрьевич", Role = role, ManagementTerritory = territory, Address = "Рязань, ул. Ленина 44, 161", TelephoneNumber = "89221937831", Login = "user3", Password = "user3" };
             //dataContext.Set<User>().Add(user);
             //dataContext.SaveChanges();
-            Logger.Info("Приложение запущено");
             try
             {
                 Application.Run(new RegistryForm(unitOfControl));

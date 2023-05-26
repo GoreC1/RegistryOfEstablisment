@@ -1,4 +1,5 @@
-﻿using RegistryOfEstablisment.Model.Entities;
+﻿using NLog;
+using RegistryOfEstablisment.Model.Entities;
 using RegistryOfEstablisment.UnitControl;
 using System;
 using System.Collections.Generic;
@@ -17,11 +18,13 @@ namespace RegistryOfEstablisment.View
     {
         readonly IUnitOfControl _unit;
         readonly int ID;
+        private static Logger Logger = LogManager.GetCurrentClassLogger();
         public EstablishmentChangingForm(IUnitOfControl unit, int enterpriseID)
         {
             InitializeComponent();
             _unit = unit;
             ID = enterpriseID;
+            Logger.Debug("Открыта форма изменения организации");
         }
 
         //Заполнение всех полей данными
@@ -40,6 +43,7 @@ namespace RegistryOfEstablisment.View
         {
             DialogResult = DialogResult.Cancel;
             Close();
+            Logger.Debug("Форма изменения организации закрыта");
         }
 
         //Изменение существующией записи
@@ -48,6 +52,7 @@ namespace RegistryOfEstablisment.View
             if (!CheckCompletion())
             {
                 MessageBox.Show("Данные заполнены некорректно!");
+                Logger.Warn("Попытка изменения провалена - данные заполнены некорректно");
                 return;
             }
 
@@ -66,10 +71,13 @@ namespace RegistryOfEstablisment.View
                 WebSite = webSiteBox.Text,
                 Email = mailBox.Text
             };
+            Logger.Trace($"Создан новый экземпляр класса Enterprise {newEnterprise.Name}");
+
 
             _unit.EnterpriseController.UpdateEnterprise(newEnterprise);
             DialogResult = DialogResult.OK;
             Close();
+            Logger.Trace("Форма изменения организации закрыта");
         }
 
         //проверка заполнения с указанием неверных полей
@@ -111,6 +119,8 @@ namespace RegistryOfEstablisment.View
             telBox.Text = ent.TelephoneNumber;
             webSiteBox.Text = ent.WebSite;
             mailBox.Text = ent.Email;
+
+            Logger.Trace($"Данные организации [ID - {ent.Id}]{ent.Name} подгружены");
         }
 
         //проверка ввода КПП

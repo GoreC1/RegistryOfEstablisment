@@ -1,4 +1,5 @@
-﻿using RegistryOfEstablisment.Model.Entities;
+﻿using NLog;
+using RegistryOfEstablisment.Model.Entities;
 using RegistryOfEstablisment.UnitControl;
 using System;
 using System.Windows.Forms;
@@ -9,11 +10,14 @@ namespace RegistryOfEstablisment.View
     {
         private readonly IUnitOfControl _unit;
         private readonly Enterprise _enterprise;
+        private static Logger Logger = LogManager.GetCurrentClassLogger();
+
         public EstablishmentForm(IUnitOfControl unit, Enterprise ent)
         {
             InitializeComponent();
             _unit = unit;
             _enterprise = ent;
+            Logger.Debug($"Открыта форма организации [ID - {ent.Id}]{ent.Name}");
 
             if (!_unit.EnterpriseTypeController.IsForRegistration(ent.Type))
             {
@@ -30,12 +34,15 @@ namespace RegistryOfEstablisment.View
             telBox.Text = _enterprise.TelephoneNumber;
             webSiteBox.Text = _enterprise.WebSite;
             mailBox.Text = _enterprise.Email;
+
+            Logger.Trace($"Данные организации [ID - {_enterprise.Id}]{_enterprise.Name} подгружены");
         }
 
         private void returnButton_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
             this.Close();
+            Logger.Debug("Форма организации закрыта");
         }
 
         private void registrationButton_Click(object sender, EventArgs e)

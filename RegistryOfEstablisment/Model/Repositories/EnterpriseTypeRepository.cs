@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RegistryOfEstablisment.Model.Repositories
 {
-    class EnterpriseTypeRepository : GenericRepository<EnterpriseType>
+    public class EnterpriseTypeRepository : GenericRepository<EnterpriseType>
     {
         public EnterpriseTypeRepository(DataContext context) : base(context) { }
     }

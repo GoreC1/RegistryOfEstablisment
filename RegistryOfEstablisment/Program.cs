@@ -45,7 +45,6 @@ namespace RegistryOfEstablisment
             //dataContext.Set<User>().Add(user);
             //dataContext.SaveChanges();
             Application.Run(new RegistryForm(unitOfControl));
-
         }
 
     }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace RegistryOfEstablisment.Unit
 {
-    class UnitOfWork : IUnitOfWork
+    public class UnitOfWork : IUnitOfWork
     {
         private readonly DataContext _context;
         public EnterpriseRepository Enterprises { get; init; }

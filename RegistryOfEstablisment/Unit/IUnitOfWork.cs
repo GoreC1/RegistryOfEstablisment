@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RegistryOfEstablisment.Unit
 {
-    internal interface IUnitOfWork : IDisposable
+    public interface IUnitOfWork : IDisposable
     {
         public EnterpriseRepository Enterprises { get; }
         public RegistrationRepository Registrations { get; }

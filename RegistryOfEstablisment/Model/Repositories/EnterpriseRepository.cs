@@ -67,7 +67,7 @@ namespace RegistryOfEstablisment.Model.Repositories
 
         public Enterprise GetLastEnterprise()
         {
-            return _context.Enterprises.LastOrDefault();
+            return _context.Enterprises.OrderBy(c=> c.Id).LastOrDefault();
         }
 
         public new Enterprise GetById(int id)

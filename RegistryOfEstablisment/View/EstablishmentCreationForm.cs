@@ -54,7 +54,7 @@ namespace RegistryOfEstablisment.View
                 WebSite = webSiteBox.Text,
                 Email = mailBox.Text
             };
-            Logger.Trace($"Создан новый экземпляр класса Enterprise {ent.Name}");
+            Logger.Trace($"{DateTime.Now.ToShortTimeString()}: Создан новый экземпляр класса Enterprise {ent.Name}");
 
             _unit.EnterpriseController.AddEnterprise(ent);
 
@@ -97,14 +97,14 @@ namespace RegistryOfEstablisment.View
         //проверка ввода КПП
         private void checkpointBox_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsDigit(e.KeyChar) || checkpointBox.Text.Length == 9)
+            if ((!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar)) || (checkpointBox.Text.Length == 9 && !char.IsControl(e.KeyChar)))
                 e.Handled = true;
         }
 
         //Проверка ввода ИНН
         private void ITNBox_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsDigit(e.KeyChar) || ITNBox.Text.Length == 12)
+            if ((!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar)) || (ITNBox.Text.Length == 12 && !char.IsControl(e.KeyChar)))
                 e.Handled = true;
         }
 

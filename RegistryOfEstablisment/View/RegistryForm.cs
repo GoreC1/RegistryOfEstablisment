@@ -223,13 +223,12 @@ namespace RegistryOfEstablisment.View
             PopulateGridRows(list);
         }
 
-        //Удаление организции
         private void deleteButton_Click(object sender, EventArgs e)
         {
             DialogResult dr = MessageBox.Show("Вы уверены что хотите продолжить??", "Удаление", MessageBoxButtons.YesNo);
             if (dr == DialogResult.Yes) 
             {
-                Logger.Debug($"Начато удаление организации [ID - {dataGridView1.CurrentRow.Cells[0].Value}]{dataGridView1.CurrentRow.Cells[1].Value}");
+                Logger.Debug($"Удаление организации [ID - {dataGridView1.CurrentRow.Cells[0].Value}]{dataGridView1.CurrentRow.Cells[1].Value}");
                 _unit.EnterpriseController.DeleteEnterprise(Convert.ToInt32(dataGridView1.CurrentRow.Cells[0].Value));
                 int paginationCount = Convert.ToInt32(paginationBox.SelectedItem);
                 int currentPage = Convert.ToInt32(pageBox.SelectedItem) - 1;
@@ -267,30 +266,25 @@ namespace RegistryOfEstablisment.View
             Logger.Debug($"Выполнен переход на {pageBox.SelectedItem} страницу");
         }
 
-        //экспорт в эксель
+        //экспорт в Excel
         private void ExportButton_Click(object sender, EventArgs e)
         {
             if (dataGridView1.Rows.Count == 0)
             {
                 MessageBox.Show("В таблице отсутствуют данные");
-                Logger.Warn("Таблица в экселе не может быть создана - реестр пуст");
+                Logger.Warn("Таблица в Microsoft Excel не может быть создана - реестр пуст");
                 return;
             }
 
             Microsoft.Office.Interop.Excel._Application app = new Microsoft.Office.Interop.Excel.Application();
-            // creating new WorkBook within Excel application  
             Microsoft.Office.Interop.Excel._Workbook workbook = app.Workbooks.Add(Type.Missing);
-            // creating new Excelsheet in workbook  
             Microsoft.Office.Interop.Excel._Worksheet worksheet = null;
-            // see the excel sheet behind the program  
+            
             app.Visible = true;
-            // get the reference of first sheet. By default its name is Sheet1.  
-            // store its reference to worksheet  
+            
             worksheet = (Microsoft.Office.Interop.Excel._Worksheet)workbook.Sheets["Лист1"];
             worksheet = (Microsoft.Office.Interop.Excel._Worksheet)workbook.ActiveSheet;
-            // changing the name of active sheet  
             worksheet.Name = $"Exported by {CurrentUser.Name}";
-            // storing header part in Excel  
 
             List<DataGridViewColumn> columns = new();
             for (int i = 0; i < dataGridView1.Columns.Count; i++)
@@ -309,18 +303,19 @@ namespace RegistryOfEstablisment.View
             // storing Each row and column value to excel sheet  
             for (int i = 0; i < dataGridView1.Rows.Count - 1; i++)
             {
-                for (int j = 0; j < columns.Count+1; j++)
+                for (int j = 1; j < columns.Count+1; j++)
                 {
                     if (j==2 || j==3)
                     {
-                        worksheet.Cells[i + 2, j + 1] =  $"\"{dataGridView1.Rows[i].Cells[j].Value.ToString()}\"";
+                        worksheet.Cells[i + 2, j + 1] =  $"\"{dataGridView1.Rows[i].Cells[j].Value}\"";
                         continue;
                     }
 
                     worksheet.Cells[i + 2, j + 1] = dataGridView1.Rows[i].Cells[j].Value.ToString();
                 }
             }
-            Logger.Info($"Реестр из {dataGridView1.Columns.Count} записей экспортирован в эксель пользователем [{CurrentUser.Id}]{CurrentUser.Name}");
+            
+            Logger.Info($"Реестр из {dataGridView1.Columns.Count} записей экспортирован в Microsoft Excel пользователем [{CurrentUser.Id}]{CurrentUser.Name}");
         }
 
         ////Сортировка столбцов

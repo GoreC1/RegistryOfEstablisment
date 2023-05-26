@@ -50,7 +50,7 @@ namespace RegistryOfEstablisment.View
         private void DateBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             List<Registration> regs = _unit.RegistrationController.GetRegistrationsByDayAndEnterprise(Convert.ToDateTime(DateBox.SelectedItem), _enterprise).ToList();
-            DateTime startOfWork = new DateTime(2022, 1, 1, 9, 0, 0);
+            DateTime startOfWork = new(2022, 1, 1, 9, 0, 0);
 
             List<string> currentAppointments = regs.Select(c => c.AppointmentTime.ToShortTimeString()).ToList();
 
@@ -99,7 +99,7 @@ namespace RegistryOfEstablisment.View
                 PetType = PetTypeTextBox.Text,
                 AppointmentTime = actualAppointmentTime
             };
-            Logger.Trace($"Создан новый экземпляр класса Registration");
+            Logger.Trace($"Создание новой записи регистрации");
 
             _unit.RegistrationController.AddNewRegistration(newReg);
             MessageBox.Show($"Вы были записаны на {appointmentDate.ToLongDateString()} {appointmentTime.ToShortTimeString()}");

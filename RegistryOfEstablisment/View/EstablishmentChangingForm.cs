@@ -26,10 +26,10 @@ namespace RegistryOfEstablisment.View
 
         private void EstablishmentChangingForm_Load(object sender, EventArgs e)
         {
-            EnterpriseType[] types = _unit.RegistryController.GetTypes().ToArray();
+            EnterpriseType[] types = _unit.EnterpriseTypeController.GetAccessedTypes().ToArray();
             typeBox.Items.AddRange(types);
 
-            ManagementTerritory[] territories = _unit.RegistryController.GetTerritories().ToArray();
+            ManagementTerritory[] territories = _unit.ManagementTerritoryController.GetAccessedTerritories().ToArray();
             territoryBox.Items.AddRange(territories);
 
             InsertValues();
@@ -95,7 +95,7 @@ namespace RegistryOfEstablisment.View
 
         private void InsertValues()
         {
-            Enterprise ent = _unit.EnterpriseController.GetEnterprise(ID);
+            Enterprise ent = _unit.EnterpriseController.GetEnterpriseByID(ID);
 
             nameBox.Text = ent.Name;
             legalEntityBox.Text = ent.LegalEntity;

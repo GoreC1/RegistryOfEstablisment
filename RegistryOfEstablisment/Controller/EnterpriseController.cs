@@ -35,7 +35,7 @@ namespace RegistryOfEstablisment.Controller
         }
         public void DeleteEnterprise(int enterpriseID)
         {
-            _unit.Enterprises.Remove(GetEnterprise(enterpriseID));
+            _unit.Enterprises.Remove(GetEnterpriseByID(enterpriseID));
         }
 
         public List<ValueTuple<Enterprise, bool>> GetRegistryList(int index, int count)

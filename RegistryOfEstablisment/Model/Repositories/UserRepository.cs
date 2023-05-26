@@ -23,7 +23,6 @@ namespace RegistryOfEstablisment.Model.Repositories
             {
                 return null;
             }
-
         }
     }
 }

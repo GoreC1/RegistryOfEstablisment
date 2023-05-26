@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RegistryOfEstablisment.Controller;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -24,6 +25,7 @@ namespace RegistryOfEstablisment.View
 
         private void acceptButton_Click(object sender, EventArgs e)
         {
+            AddNewRegistr();
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
@@ -32,6 +34,11 @@ namespace RegistryOfEstablisment.View
         {
             this.DialogResult = DialogResult.Cancel;
             this.Close();
+        }
+
+        private void AddNewRegistr(DateTime date, string petName, string petType)
+        {
+            RegistrationController.AddNewRegistration(date, petName, petType);
         }
     }
 }

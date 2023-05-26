@@ -23,22 +23,22 @@ namespace RegistryOfEstablisment.View
 
         }
 
-        private void acceptButton_Click(object sender, EventArgs e)
-        {
-            AddNewRegistr();
-            this.DialogResult = DialogResult.OK;
-            this.Close();
-        }
+        //private void acceptButton_Click(object sender, EventArgs e)
+        //{
+        //    AddNewRegistr();
+        //    this.DialogResult = DialogResult.OK;
+        //    this.Close();
+        //}
 
-        private void cancelButton_Click(object sender, EventArgs e)
-        {
-            this.DialogResult = DialogResult.Cancel;
-            this.Close();
-        }
+        //private void cancelButton_Click(object sender, EventArgs e)
+        //{
+        //    this.DialogResult = DialogResult.Cancel;
+        //    this.Close();
+        //}
 
-        private void AddNewRegistr(DateTime date, string petName, string petType)
-        {
-            RegistrationController.AddNewRegistration(date, petName, petType);
-        }
+        //private void AddNewRegistr(DateTime date, string petName, string petType)
+        //{
+        //    RegistrationController.AddNewRegistration(date, petName, petType);
+        //}
     }
 }

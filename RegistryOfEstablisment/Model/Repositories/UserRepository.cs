@@ -1,4 +1,5 @@
-﻿using RegistryOfEstablisment.Model.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using RegistryOfEstablisment.Model.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,22 +8,18 @@ using System.Threading.Tasks;
 
 namespace RegistryOfEstablisment.Model.Repositories
 {
-    public class UserRepository
+    class UserRepository : GenericRepository<User>
     {
-        DataContext DC = new DataContext();
+        public UserRepository(DataContext context) : base(context) { }
 
         public User GetByAuth(string login, string password)
         {
-            //Обращается к базе данных и получает нужного пользователя
-            if () //если нашёл 
-            {
-               User user = new User();
-               return user;
-            } 
-            else //если не нашёл
-            {
-                return null;
-            }
+            User user = _context.Users
+                                .Where(c => c.Login == login && c.Password == password)
+                                .Include(c => c.ManagementTerritory)
+                                .Include(c => c.Role)
+                                .FirstOrDefault();
+            return user;
         }
     }
 }

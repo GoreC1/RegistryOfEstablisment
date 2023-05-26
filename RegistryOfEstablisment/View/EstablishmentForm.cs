@@ -40,7 +40,7 @@ namespace RegistryOfEstablisment.View
 
         private void textBox5_DoubleClick(object sender, EventArgs e)
         {
-            RegistrationForm registrationForm = new RegistrationForm();
+            RegistrationForm registrationForm = new();
             registrationForm.ShowDialog();
         }
     }

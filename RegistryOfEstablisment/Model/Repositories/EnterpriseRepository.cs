@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RegistryOfEstablisment.Model.Repositories
 {
-    class EnterpriseRepository
+    public class EnterpriseRepository
     {
     }
 }

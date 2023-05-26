@@ -32,6 +32,11 @@ namespace RegistryOfEstablisment.Model.Repositories
             return _context.Set<T>().Where(expression);
         }
 
+        public int GetCount()
+        {
+            return _context.Set<T>().Count();
+        }
+
         public IEnumerable<T> GetAll()
         {
             return _context.Set<T>().ToList();

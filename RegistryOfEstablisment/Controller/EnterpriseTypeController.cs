@@ -16,6 +16,12 @@ namespace RegistryOfEstablisment.Controller
             return _unit.EnterpriseTypes.GetAccessedTypes();
         }
 
+        public IEnumerable<EnterpriseType> GetAllTypes()
+        {
+            return _unit.EnterpriseTypes.GetAll();
+        }
+
+
         public bool IsForRegistration(EnterpriseType type)
         {
             return _unit.EnterpriseTypes.IsForRegistration(type);

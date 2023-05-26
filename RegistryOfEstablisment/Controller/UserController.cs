@@ -15,5 +15,10 @@ namespace RegistryOfEstablisment.Controller
         {
             return _unit.Users.GetById(id);
         }
+
+        public bool IsAccessible(Enterprise ent)
+        {
+            return _unit.Enterprises.CheckAccess(ent);
+        }
     }
 }

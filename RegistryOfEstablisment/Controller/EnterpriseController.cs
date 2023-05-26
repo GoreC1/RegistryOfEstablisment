@@ -10,10 +10,12 @@ namespace RegistryOfEstablisment.Controller
     public class EnterpriseController : BaseController
     {
         public EnterpriseController(IUnitOfWork unit) : base(unit) { }
+        
         public void AddEnterprise(Enterprise ent)
         {
             _unit.Enterprises.Add(ent);
         }
+
         public Enterprise GetEnterpriseByID(int enterpriseID)
         {
             return _unit.Enterprises.GetById(enterpriseID);
